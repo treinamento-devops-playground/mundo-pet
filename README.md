@@ -5,6 +5,8 @@
 
 ## Mundo Pet
 ### Descrição 
+Protótipo de Tela:
+![Tela de Inicial](./images/main.png)
 
 O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades de registro e acesso para clientes e administradores. O sistema oferece um catálogo abrangente de produtos e serviços, permitindo que os clientes agendem serviços e adicionem itens ao carrinho de compras. A plataforma também integra um sistema de pagamento online, garantindo uma experiência de compra prática e segura.
 
@@ -23,6 +25,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 1. Como um cliente, quero poder criar uma conta no sistema para acessar os produtos e serviços oferecidos pelo petshop, registrando minhas informações pessoais, como nome, e-mail, telefone e endereço, para agilizar futuras compras e agendamentos. Para isso, na tela de login devo clicar em "Cadastre-se" logo abaixo do botão "Login". Ao clicar irá abrir o formulário de cadastro, no qual devo preencher todos os dados para concluir o cadastro.
  
  Protótipo de Tela:
+ ![Tela de Login Usuário](./images/cadastro.png)
  ![Tela de Cadastro]
 
  **RF02 - Login do Usuário e Administrador**
@@ -31,8 +34,8 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
  3. Como um administrador, quero entrar no sistema usando minhas credenciais administrativas, para gerenciar o catálogo de produtos, serviços e usuários. Para isso, devo clicar em "Administrador" abaixo de "Esqueci minha senha" que irá alterar o login de usuário para administrador.
  
  Protótipo de Tela: 
- ![Tela de Login Usuário](./images/Tela%20de%20Login.png)
- ![Tela de Login Admin]
+ ![Tela de Login Usuário](./images/login.png)
+ ![Tela de Login]
 
 **RF03 - Catálogo de Serviços/Produtos**
 
