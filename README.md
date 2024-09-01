@@ -50,16 +50,16 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 
 
 
-### Iteração 1:
-1.
-2.
-3.
-4.
-5.
+### Iteração 1 - Cadastro e Login:
+1. Cadastrar usuario: Implementar campos obrigatórios (nome, e-mail, senha, telefone).
+2. Formulário de Login: Implementar campos de e-mail e senha verificar credenciais e redirecionar para o dashboard.
+3. Recuperação de Senha: Implementar funcionalidade de recuperação de senha via e-mail.
+4.  Login via Redes Sociais: Permitir login usando contas do Google e Facebook.
+5. Sessão de Usuário: Implementar gerenciamento de sessão e logout seguro.
 
-### Iteração 2:
-1.
-2.
-3.
-4.
-5.
+### Iteração 2 - Catálogo de Produtos e Serviços:
+1. Página de Listagem: Exibir produtos e serviços com imagens e descrições.
+2. Filtros de Busca: Implementar filtros por categoria, preço e popularidade.
+3. Detalhes do Produto/Serviço: Página com informações detalhadas, avaliações e disponibilidade.
+4. Pesquisa por Palavra-chave: Barra de pesquisa para encontrar produtos/serviços específicos.
+5. Recomendações: Exibir produtos/serviços recomendados com base no histórico do usuário.
