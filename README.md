@@ -41,7 +41,9 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 
 
 **RF04 - Agendamento de Serviços**
+1. Como um cliente Logado, quero poder agendar serviços do petshop que estão listados no catálogo, para isso, devo selecionar o serviço desejado, escolher uma data e horário disponíveis, e confirmar o agendamento
 
+2. Como um administrador, quero gerenciar os agendamentos de serviços, para organizar a agenda do petshop. Para isso, devo acessar a área de adm e visualizar, editar ou cancelar agendamentos conforme necessário.
 
 **RF05 - Carrinho de Compras**
 
@@ -51,8 +53,9 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 
 ### Iteração 1 - Catálogo 
 *Objetivo da Sprint:* Permitir o usuário acessar o catálogo de produtos e serviços do petshop
+
 *Features:*
-1. Página de Listagem: Exibir produtos e serviços com imagens e descrições, somente para usuários cadastrados
+1. Página de Listagem: Exibir produtos e serviços com imagens e descrições, somente para usuários logados
 2. Filtros de Busca: Implementar filtros por categoria, preço e popularidade
 3. Detalhes do Produto/Serviço: Página com informações detalhadas, avaliações e disponibilidade
 4. Pesquisa por Palavra-chave: Barra de pesquisa para encontrar produtos/serviços específicos
@@ -60,6 +63,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 ### Iteração 2: Agendamento 
 
 *Objetivo da Sprint:* Permitir o usuário agendar algum serviço do petshop
+
 *Features:*
 1. Criar modelos de dados para agendamentos
 2. Desenvolver os endpoints da API para ler, atualizar e deletar agendamento
