@@ -52,7 +52,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 ### Iteração 1 - Catálogo 
 *Objetivo da Sprint:* Permitir o usuário acessar o catálogo de produtos e serviços do petshop
 *Features:*
-1. Página de Listagem: Exibir produtos e serviços com imagens e descrições
+1. Página de Listagem: Exibir produtos e serviços com imagens e descrições, somente para usuários cadastrados
 2. Filtros de Busca: Implementar filtros por categoria, preço e popularidade
 3. Detalhes do Produto/Serviço: Página com informações detalhadas, avaliações e disponibilidade
 4. Pesquisa por Palavra-chave: Barra de pesquisa para encontrar produtos/serviços específicos
