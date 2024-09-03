@@ -59,6 +59,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 2. Filtros de Busca: Implementar filtros por categoria, preço e popularidade
 3. Detalhes do Produto/Serviço: Página com informações detalhadas, avaliações e disponibilidade
 4. Pesquisa por Palavra-chave: Barra de pesquisa para encontrar produtos/serviços específicos
+5. Permitir o admin adicionar, editar ou remover produtos e serviços do catálogo
 
 ### Iteração 2: Agendamento 
 
@@ -68,6 +69,5 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 1. Criar modelos de dados para agendamentos
 2. Desenvolver os endpoints da API para ler, atualizar e deletar agendamento
 3. Implementar a tela de seleção de serviços para agendamento
-4.  Implementar a tela de seleção de datas e horários
-5. Sistema de notificação e lembretes automáticos dos agendamentos
-
+4. Implementar a tela de seleção de datas e horários
+5. Permitir o admin visualizar, editar ou cancelar agendamentos
