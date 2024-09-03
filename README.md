@@ -42,11 +42,19 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 
 2. Como um administrador, quero poder adicionar, editar ou remover produtos e serviços do catálogo, para que eu possa manter as informações atualizadas. Para isso, devo acessar a área de administração e utilizar as funcionalidades de gerenciamento do catálogo.
 
+Protótipo de Tela:
+ ![Tela de Login Usuário](./images/serviços.png)
+ ![Tela de Serviços]
+
 
 **RF04 - Agendamento de Serviços**
 1. Como um cliente Logado, quero poder agendar serviços do petshop que estão listados no catálogo, para isso, devo selecionar o serviço desejado, escolher uma data e horário disponíveis, e confirmar o agendamento
 
 2. Como um administrador, quero gerenciar os agendamentos de serviços, para organizar a agenda do petshop. Para isso, devo acessar a área de adm e visualizar, editar ou cancelar agendamentos conforme necessário.
+
+Protótipo de Tela:
+ ![Tela de Login Usuário](./images/agendamento.png)
+ ![Tela de Cadastro]
 
 **RF05 - Carrinho de Compras**
 1. Como um cliente logado, quero poder adicionar produtos ao carrinho de compras, para que eu possa revisar minhas escolhas antes de finalizar a compra. Para isso, devo clicar em "Adicionar ao carrinho" nos itens selecionados e acessar o carrinho para ver o resumo da minha compra. 
