@@ -56,7 +56,6 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 2. Filtros de Busca: Implementar filtros por categoria, preço e popularidade
 3. Detalhes do Produto/Serviço: Página com informações detalhadas, avaliações e disponibilidade
 4. Pesquisa por Palavra-chave: Barra de pesquisa para encontrar produtos/serviços específicos
-5. Recomendações: Exibir produtos/serviços recomendados com base no histórico do usuário
 
 ### Iteração 2: Agendamento 
 
