@@ -54,7 +54,7 @@ Protótipo de Tela:
 
 Protótipo de Tela:
  ![Tela de Login Usuário](./images/agendamento.png)
- ![Tela de Cadastro]
+ ![Tela de Agendamento]
 
 **RF05 - Carrinho de Compras**
 1. Como um cliente logado, quero poder adicionar produtos ao carrinho de compras, para que eu possa revisar minhas escolhas antes de finalizar a compra. Para isso, devo clicar em "Adicionar ao carrinho" nos itens selecionados e acessar o carrinho para ver o resumo da minha compra. 
@@ -63,13 +63,18 @@ Protótipo de Tela:
 
 3. Como um cliente logado, quero poder visualizar o total da minha compra, incluindo produtos e possíveis taxas, para que eu saiba o valor total antes de prosseguir para o pagamento. Para isso, ao acessar o carrinho, devo ver o valor total automaticamente calculado. 
 
+Protótipo de Tela:
+ ![Tela de Login Usuário](./images/Carrinho.png)
+ ![Tela de Carrinho]
 
 **RF06 - Pagamento Online**
 1. Como um cliente logado, quero poder finalizar a compra dos produtos no meu carrinho de forma segura, utilizando diferentes métodos de pagamento online, como cartão de crédito, débito ou outras opções disponíveis, para que eu possa concluir a transação com facilidade. Para isso, após revisar o carrinho, devo clicar em "Finalizar compra" e ser redirecionado para a página de pagamento. 
 
 2. Como um administrador, quero poder visualizar um relatório de todas as transações realizadas na plataforma, para que eu possa monitorar as vendas. Para isso, devo acessar a área de administração e ter a opção de gerar relatórios filtrados por data, método de pagamento, ou cliente. 
 
-
+Protótipo de Tela:
+![Tela de Login Usuário](./images/Pagamento.png)
+![Tela de Pagamento]
 
 ### Iteração 1 - Catálogo 
 *Objetivo da Sprint:* Permitir o usuário acessar o catálogo de produtos e serviços do petshop
