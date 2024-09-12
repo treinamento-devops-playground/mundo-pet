@@ -13,11 +13,15 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 ### Requisitos Funcionais do Projeto
 
 1.  RF01 - Cadastro do Usuário
-2.  RF02 - Login do Usuário e Admin
-3.  RF03 - Catálogo de Serviços/Produtos
-4.  RF04 - Agendamento de Serviços
-5.  RF05 - Carrinho de Compras
-6.  RF06 - Pagamento Online
+2.  RF02 - Login do Usuário 
+3.  RF03 - Login de admin
+4.  RF04 - Catálogo Geral (serviços/produtos)
+5.  RF05 - Catálogo de Produtos
+6.  RF06 - Agendamento de Serviços
+7.  RF07 - Checkout da compra do produto
+8.  RF08 - Método de pagamento Online
+9.  RF09 - Gerenciamento de agendamentos
+10. RF10 - Gerenciamento de Produtos no catálogo
 
 ### User Stories
 
@@ -76,23 +80,68 @@ Protótipo de Tela:
 ![Tela de Login Usuário](./images/Pagamento.png)
 ![Tela de Pagamento]
 
-### Iteração 1 - Catálogo 
-*Objetivo da Sprint:* Permitir o usuário acessar o catálogo de produtos e serviços do petshop
+### Iteração 1 - Catálogos
+*Valor da Sprint*: Permitir ao usuário acessar os catálogos de serviços e produtos oferecidos pelo petshop.
 
-*Features:*
-1. Página de Listagem: Exibir produtos e serviços com imagens e descrições, somente para usuários logados
-2. Filtros de Busca: Implementar filtros por categoria, preço e popularidade
-3. Detalhes do Produto/Serviço: Página com informações detalhadas, avaliações e disponibilidade
-4. Pesquisa por Palavra-chave: Barra de pesquisa para encontrar produtos/serviços específicos
-5. Permitir o admin adicionar, editar ou remover produtos e serviços do catálogo
+*Objetivo*: Como usuário, quero fazer login no sistema do petshop para acessar o cataálogo geral
+
+*Requisitos*:
+
+RF01 - Cadastro do Usuário
+RF02 - Login do Usuário
+
+*Features*:
+
+1. Tela de cadastro
+2. Lógica para cadastrar usuários no banco de dados
+3. Tela de login
+4. Lógica para autenticar usuários no sistema e redirecionar para o catálogo geral
+
+*Objetivo*: como usuário, quero acessar o catálogo de produtos/serviços.
+
+*Requisitos*:
+
+RF04 - Catálogo geral (Serviços/Produtos)
+
+*Features*:
+
+1. Página de Listagem Geral: Exibir opções para acessar o catálogo de produtos e serviços, acessivel apenas para usuários logados.
+2. Tela de Detalhes de cada Serviço: Informações detalhadas e disponibilidade dos serviços na listagem geral.
+
+*Objetivo*: Como administrador, quero gerenciar o catálogo de produtos.
+
+*Requisitos*:
+
+RF03 - Login de Administrador
+RF10 - Gerenciamento de Produtos no catálogo
+
+*Features*:
+
+1. Permitir ao administrador fazer login no perfil de superusuário
+2. Tela principal do administrador
+3. Permitir ao administrador adicionar, atualizar ou remover produtos no catálogo
 
 ### Iteração 2: Agendamento 
 
-*Objetivo da Sprint:* Permitir o usuário agendar algum serviço do petshop
+*Valor da Sprint:* Permitir o usuário agendar algum serviço do petshop, visando maior rentabilidade para o petshop e a satisfação do cliente
+
+*Objetivo*: Como usuário quero poder agendar serviços do petshop
+
+*Requisitos*:
+
+RF06 - Agendamento de Serviços
 
 *Features:*
 1. Criar modelos de dados para agendamentos
 2. Desenvolver os endpoints da API para ler, atualizar e deletar agendamento
 3. Implementar a tela de seleção de serviços para agendamento
-4. Implementar a tela de seleção de datas e horários
-5. Permitir o admin visualizar, editar ou cancelar agendamentos
+4. Implementar a tela de seleção de datas e horários 
+
+*Objetivo*: Como admin quero gerenciar os agendamentos de todos os usuários
+
+*Requisitos*: 
+
+RF09 - Gerenciamento de agendamentos
+
+*Features:*
+1. Permitir o admin visualizar, editar ou cancelar agendamentos
