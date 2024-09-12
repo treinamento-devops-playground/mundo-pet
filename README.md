@@ -6,18 +6,22 @@
 ## Mundo Pet
 ### Descrição 
 Protótipo de Tela:
-![Tela de Inicial](./images/main.png)
+![Tela de Inicial](./src/img/prototipos/index.png)
 
 O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades de registro e acesso para clientes e administradores. O sistema oferece um catálogo abrangente de produtos e serviços, permitindo que os clientes agendem serviços e adicionem itens ao carrinho de compras. A plataforma também integra um sistema de pagamento online, garantindo uma experiência de compra prática e segura.
 
 ### Requisitos Funcionais do Projeto
 
 1.  RF01 - Cadastro do Usuário
-2.  RF02 - Login do Usuário e Admin
-3.  RF03 - Catálogo de Serviços/Produtos
-4.  RF04 - Agendamento de Serviços
-5.  RF05 - Carrinho de Compras
-6.  RF06 - Pagamento Online
+2.  RF02 - Login do Usuário 
+3.  RF03 - Login de admin
+4.  RF04 - Catálogo Geral (serviços/produtos)
+5.  RF05 - Catálogo de Produtos
+6.  RF06 - Agendamento de Serviços
+7.  RF07 - Checkout da compra do produto
+8.  RF08 - Método de pagamento Online
+9.  RF09 - Gerenciamento de agendamentos
+10. RF10 - Gerenciamento de Produtos no catálogo
 
 ### User Stories
 
@@ -25,7 +29,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 1. Como um cliente, quero poder criar uma conta no sistema para acessar os produtos e serviços oferecidos pelo petshop, registrando minhas informações pessoais, como nome, e-mail, telefone e endereço, para agilizar futuras compras e agendamentos. Para isso, na tela de login devo clicar em "Cadastre-se" logo abaixo do botão "Login". Ao clicar irá abrir o formulário de cadastro, no qual devo preencher todos os dados para concluir o cadastro.
  
  Protótipo de Tela:
- ![Tela de Login Usuário](./images/cadastro.png)
+ ![Tela de Login Usuário](./src/img/prototipos/cadastro.png)
  ![Tela de Cadastro]
 
  **RF02 - Login do Usuário e Administrador**
@@ -34,7 +38,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
  3. Como um administrador, quero entrar no sistema usando minhas credenciais administrativas, para gerenciar o catálogo de produtos, serviços e usuários. Para isso, devo clicar em "Administrador" abaixo de "Esqueci minha senha" que irá alterar o login de usuário para administrador.
  
  Protótipo de Tela: 
- ![Tela de Login Usuário](./images/login.png)
+ ![Tela de Login Usuário](./src/img/prototipos/login.png)
  ![Tela de Login]
 
 **RF03 - Catálogo de Serviços/Produtos**
@@ -43,7 +47,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 2. Como um administrador, quero poder adicionar, editar ou remover produtos e serviços do catálogo, para que eu possa manter as informações atualizadas. Para isso, devo acessar a área de administração e utilizar as funcionalidades de gerenciamento do catálogo.
 
 Protótipo de Tela:
- ![Tela de Login Usuário](./images/serviços.png)
+ ![Tela de Login Usuário](./src/img/prototipos/serviços.png)
  ![Tela de Serviços]
 
 
@@ -53,7 +57,7 @@ Protótipo de Tela:
 2. Como um administrador, quero gerenciar os agendamentos de serviços, para organizar a agenda do petshop. Para isso, devo acessar a área de adm e visualizar, editar ou cancelar agendamentos conforme necessário.
 
 Protótipo de Tela:
- ![Tela de Login Usuário](./images/agendamento.png)
+ ![Tela de Login Usuário](./src/img/prototipos/Agendamento.png)
  ![Tela de Agendamento]
 
 **RF05 - Carrinho de Compras**
@@ -64,7 +68,7 @@ Protótipo de Tela:
 3. Como um cliente logado, quero poder visualizar o total da minha compra, incluindo produtos e possíveis taxas, para que eu saiba o valor total antes de prosseguir para o pagamento. Para isso, ao acessar o carrinho, devo ver o valor total automaticamente calculado. 
 
 Protótipo de Tela:
- ![Tela de Login Usuário](./images/Carrinho.png)
+ ![Tela de Login Usuário](./src/img/prototipos/Carrinho.png)
  ![Tela de Carrinho]
 
 **RF06 - Pagamento Online**
@@ -73,26 +77,71 @@ Protótipo de Tela:
 2. Como um administrador, quero poder visualizar um relatório de todas as transações realizadas na plataforma, para que eu possa monitorar as vendas. Para isso, devo acessar a área de administração e ter a opção de gerar relatórios filtrados por data, método de pagamento, ou cliente. 
 
 Protótipo de Tela:
-![Tela de Login Usuário](./images/Pagamento.png)
+![Tela de Login Usuário](./src/img/prototipos/Pagamento.png)
 ![Tela de Pagamento]
 
-### Iteração 1 - Catálogo 
-*Objetivo da Sprint:* Permitir o usuário acessar o catálogo de produtos e serviços do petshop
+### Iteração 1 - Catálogos
+*Valor da Sprint*: Permitir ao usuário acessar os catálogos de serviços e produtos oferecidos pelo petshop.
 
-*Features:*
-1. Página de Listagem: Exibir produtos e serviços com imagens e descrições, somente para usuários logados
-2. Filtros de Busca: Implementar filtros por categoria, preço e popularidade
-3. Detalhes do Produto/Serviço: Página com informações detalhadas, avaliações e disponibilidade
-4. Pesquisa por Palavra-chave: Barra de pesquisa para encontrar produtos/serviços específicos
-5. Permitir o admin adicionar, editar ou remover produtos e serviços do catálogo
+*Objetivo*: Como usuário, quero fazer login no sistema do petshop para acessar o cataálogo geral
+
+*Requisitos*:
+
+RF01 - Cadastro do Usuário
+RF02 - Login do Usuário
+
+*Features*:
+
+1. Tela de cadastro
+2. Lógica para cadastrar usuários no banco de dados
+3. Tela de login
+4. Lógica para autenticar usuários no sistema e redirecionar para o catálogo geral
+
+*Objetivo*: como usuário, quero acessar o catálogo de produtos/serviços.
+
+*Requisitos*:
+
+RF04 - Catálogo geral (Serviços/Produtos)
+
+*Features*:
+
+1. Página de Listagem Geral: Exibir opções para acessar o catálogo de produtos e serviços, acessivel apenas para usuários logados.
+2. Tela de Detalhes de cada Serviço: Informações detalhadas e disponibilidade dos serviços na listagem geral.
+
+*Objetivo*: Como administrador, quero gerenciar o catálogo de produtos.
+
+*Requisitos*:
+
+RF03 - Login de Administrador
+RF10 - Gerenciamento de Produtos no catálogo
+
+*Features*:
+
+1. Permitir ao administrador fazer login no perfil de superusuário
+2. Tela principal do administrador
+3. Permitir ao administrador adicionar, atualizar ou remover produtos no catálogo
 
 ### Iteração 2: Agendamento 
 
-*Objetivo da Sprint:* Permitir o usuário agendar algum serviço do petshop
+*Valor da Sprint:* Permitir o usuário agendar algum serviço do petshop, visando maior rentabilidade para o petshop e a satisfação do cliente
+
+*Objetivo*: Como usuário quero poder agendar serviços do petshop
+
+*Requisitos*:
+
+RF06 - Agendamento de Serviços
 
 *Features:*
 1. Criar modelos de dados para agendamentos
 2. Desenvolver os endpoints da API para ler, atualizar e deletar agendamento
 3. Implementar a tela de seleção de serviços para agendamento
-4. Implementar a tela de seleção de datas e horários
-5. Permitir o admin visualizar, editar ou cancelar agendamentos
+4. Implementar a tela de seleção de datas e horários 
+
+*Objetivo*: Como admin quero gerenciar os agendamentos de todos os usuários
+
+*Requisitos*: 
+
+RF09 - Gerenciamento de agendamentos
+
+*Features:*
+1. Permitir o admin visualizar, editar ou cancelar agendamentos
