@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&family=Sofadi+One&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #E8E8E8;
+  background-image: url("/img/background.png");
+  background-position: top right;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#nav-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+  height: 54px;
+  background-color: #6C5E9C;
+  border-radius: 15px;
+  margin: 25px auto;
+  padding: 3px 20px;
+}
+
+.list-nav {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  font-size: 20px;
+  padding-top: 3px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+ul > li > a {
+  text-decoration: none;
+  color: #000;
+  transition: .8s;
+}
+
+ul > .title > a:hover {
+  color: #fff;
+  transition: .8s;
+}
+
+#container {
+  display: flex;
+  width: 1000px;
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slogan {
+  font-size: 38px;
+  font-weight: 900;
+  justify-content: center;
+  align-items: center;
+  font-family: "Sofadi One", sans-serif;
+}
+
+.slogan > img {
+  width: 42px;
+  height: 42px;
+}
+
+.buttons {
+  display: flex;
+  gap: 30px;
+  margin-top: 25px;
+}
+
+.btn {
+  width: 180px;
+  height: 54px;
+  border-radius: 15px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #4F5B93;
+  transition: .8s;
+}
+.btn-primary:hover {
+  background-color: #2a40a5;
+  transition: .8s;
+}
+
+.btn-second {
+  background-color: #03C322;
+  transition: .8s;
+}
+.btn-second:hover {
+  background-color: #1b822c;
+  transition: .8s;
+}
+
+.btn > a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 900;
+  font-size: 20px;
+}
