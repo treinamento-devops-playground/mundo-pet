@@ -10,7 +10,7 @@
 <body>
   <nav id="nav-bar">
     <div class="logo">
-      <img src="./app/img/logo.png" alt="Logo Mundo Pet">
+      <img src="./img/logo.png" alt="Logo Mundo Pet">
     </div>
     <ul class="list-nav">
       <li class="title"><a href="#">Serviços</a></li>
