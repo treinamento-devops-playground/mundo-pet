@@ -45,20 +45,20 @@
       <div class="personal-info-section">
         <h3>Informações Pessoais</h3>
         <div class="input-container">
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" value="">
+      <img src="../img/icons/user-fill.png">
+      <input type="text" placeholder="Nome">
         </div>
         <div class="input-container">
-          <label for="email">Email</label>
-          <input type="email" id="email" value="">
+      <img src="../img/icons/email.png">
+      <input type="email" placeholder="Email">
         </div>
         <div class="input-container">
-          <label for="celular">Celular</label>
-          <input type="text" id="celular" value="">
+      <img src="../img/icons/phone-solid.png">
+      <input type="number_format" placeholder="Celular">
         </div>
         <div class="input-container">
-          <label for="senha">Senha</label>
-          <input type="password" id="senha" value="">
+      <img src="../img/icons/padlock.png">
+      <input type="password" placeholder="Senha">
         </div>
         <a href="#" class="edit-btn">Editar</a>
       </div>
