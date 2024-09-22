@@ -194,6 +194,7 @@ ul > li > a {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  gap: 10px; 
 }
 
 .add-product-btn {

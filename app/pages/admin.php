@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel Administrativo - Mundo Pet</title>
   <link rel="stylesheet" href="../css/admin.css">
 </head>
+
 <body>
   <header>
     <nav id="nav-bar">
@@ -44,9 +46,10 @@
 
       <div class="admin-options">
         <button class="admin-btn">Agendamento</button>
-        <button class="admin-btn">Gerenciar Produtos</button>
+        <button class="admin-btn" onclick="window.location.href='adminProdutos.php'">Gerenciar Produtos</button>
       </div>
     </section>
   </div>
 </body>
+
 </html>
