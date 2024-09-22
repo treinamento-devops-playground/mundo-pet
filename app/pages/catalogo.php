@@ -20,9 +20,6 @@
                 <li><a href="#">Sobre</a></li>
             </ul>
         </nav>
-        <div class="menu-icon">
-            <img src="menu-icon.png" alt="Menu">
-        </div>
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Pesquisar produtos...">
             <button onclick="searchProducts()">Pesquisar</button>
@@ -32,67 +29,64 @@
     <div class="container">
         <aside>
             <ul class="sidebar">
-                <li><a href="#" onclick="filterProducts('ração')">Ração</a></li>
-                <li><a href="#" onclick="filterProducts('remédios')">Remédios</a></li>
-                <li><a href="#" onclick="filterProducts('produtos')">Produtos</a></li>
+                <li><a href="#" onclick="filterProducts('petiscos')">Petiscos</a></li>
+                <li><a href="#" onclick="filterProducts('brinquedos')">Brinquedos</a></li>
+                <li><a href="#" onclick="filterProducts('acessorios')">Acessórios</a></li>
             </ul>
         </aside>
 
         <main>
-
             <div class="product-grid" id="product-grid">
             </div>
         </main>
     </div>
 
+    <?php
+    $dbFilePath = 'api/products.db';
+    try {
+        $pdo = new PDO('sqlite:' . $dbFilePath);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $pdo->query("SELECT * FROM products");
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo 'Erro ao conectar ao banco de dados: ' . $e->getMessage();
+        exit;
+    }
+    ?>
+
     <script>
-        const products = [{
-                name: 'Produto 1',
-                category: 'ração',
-                color: 'green'
-            },
-            {
-                name: 'Produto 2',
-                category: 'remédios',
-                color: 'purple'
-            },
-            {
-                name: 'Produto 3',
-                category: 'produtos',
-                color: 'green'
-            },
-            {
-                name: 'Produto 3',
-                category: 'ração',
-                color: 'green'
-            },
-            {
-                name: 'Produto 4',
-                category: 'remédios',
-                color: 'purple'
-            },
-            {
-                name: 'Produto 5',
-                category: 'produtos',
-                color: 'green'
-            },
-        ];
+        const products = <?php echo json_encode($products); ?>;
 
-        let currentCategory = '';
+        function getRandomImage() {
+            const images = [
+                '../img/logo.png',
+            ];
+            return images[Math.floor(Math.random() * images.length)];
+        }
 
+        // Função para exibir os produtos como cards
         function displayProducts(filteredProducts) {
             const productGrid = document.getElementById('product-grid');
-            productGrid.innerHTML = '';
+            productGrid.innerHTML = ''; // Limpar o grid antes de exibir os produtos
+
             filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.className = `product-card ${product.color}`;
-                productCard.innerHTML = `<div class="product-name">${product.name}</div>`;
+                productCard.className = 'product-card';
+
+                productCard.innerHTML = `
+                    <a href="single-product.php?id=${product.id}">
+                        <img src="${getRandomImage()}" alt="${product.name}" class="product-image">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-description">${product.description}</div>
+                        <div class="product-price">R$ ${parseFloat(product.price).toFixed(2)}</div>
+                    </a>
+                `;
                 productGrid.appendChild(productCard);
             });
         }
 
         function filterProducts(category) {
-            currentCategory = category;
             const filteredProducts = products.filter(product => product.category === category);
             displayProducts(filteredProducts);
         }
@@ -100,18 +94,14 @@
         function searchProducts() {
             const searchInput = document.getElementById('search-input').value.toLowerCase();
             const filteredProducts = products.filter(product =>
-                product.name.toLowerCase().includes(searchInput)
+                product.name.toLowerCase().includes(searchInput) ||
+                product.description.toLowerCase().includes(searchInput)
             );
-            const uniqueProducts = Array.from(new Set(filteredProducts.map(p => p.name)))
-                .map(name => {
-                    return filteredProducts.find(p => p.name === name);
-                });
-            displayProducts(uniqueProducts);
+            displayProducts(filteredProducts);
         }
-
-        // Exibir todos os produtos inicialmente
         displayProducts(products);
     </script>
+
 </body>
 
 </html>
