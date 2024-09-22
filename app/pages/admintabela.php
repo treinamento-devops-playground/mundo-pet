@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel Administrativo - Mundo Pet</title>
   <link rel="stylesheet" href="../css/admintabela.css">
 </head>
+
 <body>
   <header>
     <nav id="nav-bar">
@@ -43,9 +45,9 @@
       </div>
 
       <section class="personal-info-section">
-      <h3>Cadastro de Produtos</h3>
+        <h3>Cadastro de Produtos</h3>
 
-      <form action="cadastro_produto.php" method="POST">
+        <form action="cadastro_produto.php" method="POST">
           <div class="input-container">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
@@ -76,10 +78,12 @@
           </div>
           <div class="admin-options">
             <button type="submit" class="admin-btn">Salvar</button>
+            <button class="admin-btn" onclick="window.location.href='adminProdutos.php'">tabela de produtos</button>
           </div>
         </form>
-    </section>
+      </section>
 
-    
+
 </body>
+
 </html>
