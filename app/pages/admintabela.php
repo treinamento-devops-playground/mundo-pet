@@ -41,7 +41,7 @@
           <a href="login.php" class="logout-btn">Logout</a>
         </div>
       </div>
-
+      
       <section class="personal-info-section">
       <h3>Cadastro de Produtos</h3>
 
