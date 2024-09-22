@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel Administrativo - Mundo Pet</title>
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/adminProdutos.css">
 </head>
 
 <body>
@@ -43,13 +43,36 @@
           <a href="login.php" class="logout-btn">Logout</a>
         </div>
       </div>
+      <div>
+        <section class="product-list-section">
+          <h3>Lista de Produtos:</h3>
 
-      <div class="admin-options">
-        <button class="admin-btn">Agendamento</button>
-        <button class="admin-btn" onclick="window.location.href='adminProdutos.php'">Gerenciar Produtos</button>
-      </div>
+          <div class="product-item">
+            <div class="product-info">
+              <div class="product-image">
+                <img src="../img/icons/user.png" alt="Produto">
+              </div>
+              <div class="product-details">
+                <h4>Produto 1</h4>
+                <p>Descrição...</p>
+              </div>
+            </div>
+            <div class="product-actions">
+              <a href="#" class="edit-btn">editar</a>
+              <button class="delete-btn">&#128465;</button> <!-- Ícone de lixeira -->
+            </div>
+          </div>
+
+          <!-- Botão Adicionar Produto -->
+          <div class="add-product">
+            <a href="admintabela.php" class="add-product-btn">Adicionar Produto</a>
+            <a href="admin.php" class="add-product-btn">Painel Principal</a>
+          </div>
+        </section>
     </section>
-  </div>
+
+
+
 </body>
 
 </html>
