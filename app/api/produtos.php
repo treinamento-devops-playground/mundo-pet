@@ -98,6 +98,6 @@ class ProductController
     }
 }
 
-$dbFilePath = 'api/products.db';
+$dbFilePath = __DIR__ . '/products.db'; // Caminho absoluto para products.db
 $productController = new ProductController($dbFilePath);
 $productController->handleRequest();
