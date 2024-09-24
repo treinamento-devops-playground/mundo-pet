@@ -77,7 +77,7 @@ try {
             </div>
         </div>
         <div class="product-actions">
-            <a href="edit-product.php?id=<?php echo $product['id']; ?>" class="edit-btn">Editar</a>
+            <a href="../api/edit_produto.php?id=<?php echo $product['id'];?>" class="edit-btn">Editar</a>
             <button class="delete-btn" onclick="confirmDelete(<?php echo $product['id']; ?>)">&#128465;</button> <!-- Ícone de lixeira -->
         </div>
     </div>
