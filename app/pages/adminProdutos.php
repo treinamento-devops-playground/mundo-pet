@@ -72,8 +72,8 @@ try {
             <div class="product-details">
                 <h4><?php echo htmlspecialchars($product['name']); ?></h4>
                 <p><?php echo htmlspecialchars($product['description']); ?></p>
-                <p>R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></p>
-                <p>Estoque: <?php echo htmlspecialchars($product['estoque']); ?></p>
+                <p style="display:inline">R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></p>
+                <p style="display:inline">Estoque: <?php echo htmlspecialchars($product['estoque']); ?></p>
             </div>
         </div>
         <div class="product-actions">
