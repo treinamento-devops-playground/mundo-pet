@@ -135,7 +135,7 @@ if (isset($_GET['id'])) {
           </div>
           <div class="input-container">
             <label for="descricao">Descrição:</label>
-            <textarea id="descricao" name="descricao" required><?php echo htmlspecialchars($product['description']); ?></textarea>
+            <input id="descricao" name="descricao" required><?php echo htmlspecialchars($product['description']); ?> >
           </div>
           <div class="admin-options">
             <button type="submit" class="admin-btn">Atualizar Produto</button>
