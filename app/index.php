@@ -15,7 +15,7 @@
     </div>
     <ul class="list-nav">
       <li class="title"><a href="#">Serviços</a></li>
-      <li class="title"><a href="#">Loja</a></li>
+      <li class="title"><a href="./pages/catalogo.php">Loja</a></li>
       <li class="title"><a href="#">Contato</a></li>
       <li><a href="#"><img src="./img/icons/user.png"></a></li>
     </ul>
