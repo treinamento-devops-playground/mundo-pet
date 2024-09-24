@@ -14,7 +14,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 
 1.  RF01 - Cadastro do Usuário
 2.  RF02 - Login do Usuário 
-3.  RF03 - Login de admin
+3.  RF03 - Login de admin 
 4.  RF04 - Catálogo Geral (serviços/produtos)
 5.  RF05 - Catálogo de Produtos
 6.  RF06 - Agendamento de Serviços
@@ -81,51 +81,37 @@ Protótipo de Tela:
 ![Tela de Pagamento]
 
 ### Iteração 1 - Catálogos
-*Valor da Sprint*: Permitir ao usuário acessar os catálogos de serviços e produtos oferecidos pelo petshop.
+*Valor da Sprint*: Permitir que o administrador gerencie os produtos que serão oferecidos no catálogo do petshop, adicionando, removendo ou editando, além de permitir que o usuário acesse o catálogo de produtos.
 
-*Objetivo*: Como usuário, quero fazer login no sistema do petshop para acessar o cataálogo geral
-
-*Requisitos*:
-
-RF01 - Cadastro do Usuário
-RF02 - Login do Usuário
-
-*Features*:
-
-1. Tela de cadastro
-2. Lógica para cadastrar usuários no banco de dados
-3. Tela de login
-4. Lógica para autenticar usuários no sistema e redirecionar para o catálogo geral
-
-*Objetivo*: como usuário, quero acessar o catálogo de produtos/serviços.
+*Objetivo*: Como administrador, quero fazer login no sistema do petshop para gerenciar o catálogo geral.
+Como usuário, quero poder visualizar os produtos disponíveis no catálogo, com opção de pesquisa e filtros por categoria.
 
 *Requisitos*:
 
-RF04 - Catálogo geral (Serviços/Produtos)
+RF03 - Login de Admin
+RF05 - Catálogo de Produtos     
+RF10 - Gerenciamento de Produtos 
 
-*Features*:
+| Feature                                                                                              | Autor           | Revisor         |
+|------------------------------------------------------------------------------------------------------|-----------------|-----------------|
+| Tela Home                                                                                            | José Borges     | Henrique        |
+| Tela de Login                                                                                         | José Borges     | Lauro           |
+| Permitir ao administrador fazer login na plataforma                                                   | André Victor    | José Borges     |
+| Tela Principal do administrador                                                                       | Henrique Noronha| Lauro           |
+| Tela de Listagem de Produtos                                                                          | André Victor    | Vicente         |
+| Tela de Gerenciamento de Produtos                                                                     | André Victor    | Vicente         |
+| Permitir ao administrador adicionar produtos                                                          | Lauro           | Henrique Noronha|
+| Permitir ao administrador remover produtos                                                            | Vicente         | José Borges     |
+| Permitir ao administrador editar produtos                                                             | José Borges     | André Victor    |
+| Tela de Catálogo de Produtos Geral e individual                                                       | Lauro           |      André Victor     |
+| Permitir ao usuário visualizar o catálogo sem o login com pesquisa e filtragem                        | Lauro           | Henrique        |
+| Listagem de Produtos para o administrador                                                             | Henrique Noronha| Vicente         |
 
-1. Página de Listagem Geral: Exibir opções para acessar o catálogo de produtos e serviços, acessivel apenas para usuários logados.
-2. Tela de Detalhes de cada Serviço: Informações detalhadas e disponibilidade dos serviços na listagem geral.
+### Iteração 2: Login e agendamento do usuário.
 
-*Objetivo*: Como administrador, quero gerenciar o catálogo de produtos.
+*Valor da Sprint:* Permitir o usuário fazer login agendar algum serviço do petshop, visando maior rentabilidade para o petshop e a satisfação do cliente
 
-*Requisitos*:
-
-RF03 - Login de Administrador
-RF10 - Gerenciamento de Produtos no catálogo
-
-*Features*:
-
-1. Permitir ao administrador fazer login no perfil de superusuário
-2. Tela principal do administrador
-3. Permitir ao administrador adicionar, atualizar ou remover produtos no catálogo
-
-### Iteração 2: Agendamento 
-
-*Valor da Sprint:* Permitir o usuário agendar algum serviço do petshop, visando maior rentabilidade para o petshop e a satisfação do cliente
-
-*Objetivo*: Como usuário quero poder agendar serviços do petshop
+*Objetivo*: Como usuário quero poder fazr login e agendar serviços do petshop.
 
 *Requisitos*:
 
