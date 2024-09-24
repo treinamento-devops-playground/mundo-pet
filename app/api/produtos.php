@@ -50,16 +50,21 @@ class ProductTable
 
     public function insertProduct($name, $description, $price, $info, $category, $estoque)
     {
-        $sql = "INSERT INTO products (name, description, price, info, category, estoque) 
-                VALUES (:name, :description, :price, :info, :category, :estoque)";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':price', $price);
-        $stmt->bindParam(':info', $info);
-        $stmt->bindParam(':category', $category);
-        $stmt->bindParam(':estoque', $estoque);
-        return $stmt->execute();
+        try {
+            $sql = "INSERT INTO products (name, description, price, info, category, estoque) 
+                    VALUES (:name, :description, :price, :info, :category, :estoque)";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':info', $info);
+            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':estoque', $estoque);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erro ao cadastrar produto: " . $e->getMessage();
+            return false;
+        }
     }
 }
 
