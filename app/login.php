@@ -9,7 +9,7 @@
                             // Verifica se o usuário foi encontrado e se a senha está correta
                             if ($email === $adminEmail && password_verify($password, $adminSenha)) {
                                 // Redireciona para a página de administração
-                                header("Location: admin.php");
+                                header("Location:../pages/admin.php");
                                 exit();
                             } else {
                                 echo "<p>Email ou senha estão errados.</p>";
