@@ -77,7 +77,7 @@
           </div>
           <div class="admin-options">
             <button type="submit" name="cadastrar-produto" class="admin-btn">Salvar</button>
-            <button class="admin-btn" onclick="window.location.href='adminProdutos.php'">tabela de produtos</button>
+            <button class="admin-btn" onclick="window.location.href='adminProdutos.php'">Tabela de Produtos</button>
           </div>
         </form>
 
