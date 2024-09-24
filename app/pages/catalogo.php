@@ -42,7 +42,7 @@
     </div>
 
     <?php
-    $dbFilePath = 'api/products.db';
+    $dbFilePath = __DIR__ . '/../api/products.db';
     try {
         $pdo = new PDO('sqlite:' . $dbFilePath);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
