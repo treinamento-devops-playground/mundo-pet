@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['id'])) {
     try {
-       
+        
         $pdo = new PDO('sqlite:products.db');  
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
         $stmt->execute();
 
         
-        header('Location: admin.php');
+        header('Location: adminProdutos.php');
         exit;
     } catch (PDOException $e) {
         

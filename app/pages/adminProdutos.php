@@ -91,6 +91,14 @@ try {
         </section>
     </section>
 
+  <!-- Função de confirmação para deletar produto -->
+  <script>
+    function confirmDelete(productId) {
+        if (confirm('Tem certeza que deseja excluir este produto?')) {
+            window.location.href = 'delete.php?id=' + productId;
+        }
+    }
+  </script>
 </body>
 
 </html>
