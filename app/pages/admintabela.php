@@ -16,7 +16,7 @@
       </div>
       <ul class="list-nav">
         <li class="title"><a href="#">Serviços</a></li>
-        <li class="title"><a href="#">Loja</a></li>
+        <li class="title"><a href="catalogo.php">Loja</a></li>
         <li class="title"><a href="#">Sobre</a></li>
         <li><a href="#"><img src="../img/icons/user.png"></a></li>
       </ul>
@@ -42,7 +42,7 @@
           <a href="login.php" class="logout-btn">Logout</a>
         </div>
       </div>
-
+      
       <section class="personal-info-section">
         <h3>Cadastro de Produtos</h3>
 

@@ -14,8 +14,13 @@
       <img src="./img/logo.png" alt="Logo Mundo Pet">
     </div>
     <ul class="list-nav">
+<<<<<<< HEAD
       <li class="title"><a href="pages/servicos.php">Serviços</a></li>
       <li class="title"><a href="pages/catalogo.php">Loja</a></li>
+=======
+      <li class="title"><a href="#">Serviços</a></li>
+      <li class="title"><a href="./pages/catalogo.php">Loja</a></li>
+>>>>>>> 4f30e516fd96f9d6971b483de4b3d9e9473c2aed
       <li class="title"><a href="#">Contato</a></li>
       <li><a href="#"><img src="./img/icons/user.png"></a></li>
     </ul>
