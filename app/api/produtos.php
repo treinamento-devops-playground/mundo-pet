@@ -101,3 +101,4 @@ class ProductController
 $dbFilePath = __DIR__ . '/products.db'; // Caminho absoluto para products.db
 $productController = new ProductController($dbFilePath);
 $productController->handleRequest();
+
