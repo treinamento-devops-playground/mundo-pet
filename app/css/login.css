@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-image: url("../img/patas.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #E8E8E8;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  width: 500px;
+  height: 620px;
+  background-image: url("../img/patas.png");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8892BF;
+  flex-direction: column;
+  border-radius: 15px;
+  row-gap: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px; 
+}
+
+
+.logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(33, 33, 33, 0.8);
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 38px;
+  color: #333333;
+}
+
+.error-msg {
+  color: red;
+  font-size: 16px;
+  margin-top: 15px; /* Espaçamento acima da mensagem */
+  text-align: center; /* Centraliza o texto da mensagem */
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 320px;
+  margin-bottom: 15px;
+}
+
+.input-container img {
+  position: absolute;
+  left: 10px;
+  color: #aaa;
+}
+
+.input-container input {
+  width: 100%;
+  height: 45px;
+  border-radius: 15px;
+  padding: 25px 40px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+}
+
+.btn {
+  width: 180px;
+  height: 54px;
+  border-radius: 15px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #4F5B93;
+  transition: .8s;
+}
+
+.btn:hover {
+  background-color: #2a40a5;
+  transition: .8s;
+}
+
+.link-cadastro {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: .8s;
+}
+.link-cadastro:hover {
+  color: #fff;
+  transition: .8s;
+  font-size: 400;
+}
+
+.social-login {
+  display: flex;
+  gap: 20px;
+}
