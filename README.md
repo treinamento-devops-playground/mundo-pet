@@ -118,10 +118,10 @@ RF10 - Gerenciamento de Produtos
 RF06 - Agendamento de Serviços
 
 *Features:*
-1. Criar modelos de dados para agendamentos
-2. Desenvolver os endpoints da API para ler, atualizar e deletar agendamento
-3. Implementar a tela de seleção de serviços para agendamento
-4. Implementar a tela de seleção de datas e horários 
+1. Login e Cadastro de usuário
+2. Permitir o usuário ler, atualizar e deletar seus agendamento
+3. Implementar as telas de cada serviço para agendamento
+4. Implementar a tela de seleção de datas e horários
 
 *Objetivo*: Como admin quero gerenciar os agendamentos de todos os usuários
 
@@ -130,4 +130,4 @@ RF06 - Agendamento de Serviços
 RF09 - Gerenciamento de agendamentos
 
 *Features:*
-1. Permitir o admin visualizar, editar ou cancelar agendamentos
+1. Permitir o admin visualizar todos os agendamentos e editar ou cancelar agendamentos de um usuário específico
