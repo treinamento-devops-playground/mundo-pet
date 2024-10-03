@@ -1,3 +1,16 @@
+<?php
+// Verifica se a sessão já está ativa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Inicia a sessão se ainda não foi iniciada
+}
+
+
+if (!isset($_SESSION['admin'])) {
+    header('Location: login.php?message=login_required');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -40,7 +53,8 @@
         </div>
         <div class="user-info">
           <h2>Administrador</h2>
-          <a href="login.php" class="logout-btn">Logout</a>
+          <!-- Botão de logout -->
+          <a href="logout.php" class="logout-btn">Logout</a>
         </div>
       </div>
 

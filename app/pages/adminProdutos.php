@@ -2,6 +2,18 @@
 <html lang="pt-br">
 
 <?php
+// Verifica se a sessão já está ativa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Inicia a sessão se ainda não foi iniciada
+}
+
+// Verifica se o administrador está logado
+if (!isset($_SESSION['admin'])) {
+    // Se não estiver logado, redireciona para a página de login com uma mensagem
+    header('Location: login.php?message=login_required');
+    exit();
+}
+
 $dbFilePath = __DIR__ . '/../api/products.db';
 
 try {
@@ -56,32 +68,34 @@ try {
         </div>
         <div class="user-info">
           <h2>Administrador</h2>
-          <a href="login.php" class="logout-btn">Logout</a>
+          <!-- Botão de logout -->
+          <a href="logout.php" class="logout-btn">Logout</a>
         </div>
       </div>
+
       <div>
         <section class="product-list-section">
           <h3>Lista de Produtos:</h3>
 
           <?php foreach ($products as $product): ?>
-    <div class="product-item">
-        <div class="product-info">
-            <div class="product-image">
-            <img src="../img/logo.png" alt="Produto">
+            <div class="product-item">
+              <div class="product-info">
+                <div class="product-image">
+                  <img src="../img/logo.png" alt="Produto">
+                </div>
+                <div class="product-details">
+                  <h4><?php echo htmlspecialchars($product['name']); ?></h4>
+                  <p><?php echo htmlspecialchars($product['description']); ?></p>
+                  <p style="display:inline; margin-right:30px">R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></p>
+                  <p style="display:inline">Estoque: <?php echo htmlspecialchars($product['estoque']); ?></p>
+                </div>
+              </div>
+              <div class="product-actions">
+                <a href="../api/edit_produto.php?id=<?php echo $product['id']; ?>" class="edit-btn">Editar</a>
+                <button class="delete-btn" onclick="confirmDelete(<?php echo $product['id']; ?>)">&#128465;</button> <!-- Ícone de lixeira -->
+              </div>
             </div>
-            <div class="product-details">
-                <h4><?php echo htmlspecialchars($product['name']); ?></h4>
-                <p><?php echo htmlspecialchars($product['description']); ?></p>
-                <p style="display:inline">R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></p>
-                <p style="display:inline">Estoque: <?php echo htmlspecialchars($product['estoque']); ?></p>
-            </div>
-        </div>
-        <div class="product-actions">
-            <a href="../api/edit_produto.php?id=<?php echo $product['id'];?>" class="edit-btn">Editar</a>
-            <button class="delete-btn" onclick="confirmDelete(<?php echo $product['id']; ?>)">&#128465;</button> <!-- Ícone de lixeira -->
-        </div>
-    </div>
-<?php endforeach; ?>
+          <?php endforeach; ?>
 
           <!-- Botão Adicionar Produto -->
           <div class="add-product">
@@ -89,7 +103,9 @@ try {
             <a href="admin.php" class="add-product-btn">Painel Principal</a>
           </div>
         </section>
+      </div>
     </section>
+  </div>
 
   <!-- Função de confirmação para deletar produto -->
   <script>
