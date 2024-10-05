@@ -1,49 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Mundo Pet</title>
   <link rel="stylesheet" href="../css/login.css">
 </head>
+
 <body>
   <div id="container">
     <img src="../img/logo.png" alt="Logo Mundo Pet" class="logo">
     <h2>Login</h2>
 
     <?php
-    // Verifica se a sessão já está ativa
     if (session_status() === PHP_SESSION_NONE) {
-        session_start(); // Inicia a sessão se ainda não foi iniciada
+      session_start();
     }
 
-    // Exibe uma mensagem se o usuário foi redirecionado por não estar logado
+
     if (isset($_GET['message']) && $_GET['message'] === 'login_required') {
-        echo "<p style='color:red;'>É necessário fazer o login para acessar a página administrativa.</p>";
+      echo "<p style='color:red;'>É necessário fazer o login para acessar a página administrativa.</p>";
     }
 
-    // Processa o formulário de login
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+      $email = $_POST['email'];
+      $password = $_POST['password'];
 
-        // Credenciais do administrador
-        $adminEmail = 'admin.@mail.com';
-        $adminSenha = password_hash('12345678', PASSWORD_DEFAULT);
+      $adminEmail = 'admin.@mail.com';
+      $adminSenha = password_hash('12345678', PASSWORD_DEFAULT);
 
-        // Verifica se o email e a senha estão corretos
-        if ($email === $adminEmail && password_verify($password, $adminSenha)) {
-            // Inicia a sessão para o administrador
-            $_SESSION['admin'] = $adminEmail;
+      if ($email === $adminEmail && password_verify($password, $adminSenha)) {
+        $_SESSION['admin'] = $adminEmail;
 
-            // Redireciona para a página de administração
-            header("Location: admin.php");
+        header("Location: admin.php");
+        exit();
+      } else {
+        $conn = new SQLite3('products.db');
+
+        $stmt = $conn->prepare("SELECT id, email, senha FROM usuarios WHERE email = :email");
+        $stmt->bindValue(':email', $email, SQLITE3_TEXT);
+        $result = $stmt->execute();
+
+        $user = $result->fetchArray(SQLITE3_ASSOC);
+        if ($user) {
+
+          if (password_verify($password, $user['senha'])) {
+
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+
+
+            header("Location: home.php");
             exit();
-        } else {
+          } else {
             echo "<p style='color:red;'>Email ou senha inválidos.</p>";
+          }
+        } else {
+          echo "<p style='color:red;'>Email ou senha inválidos.</p>";
         }
+
+        $stmt->close();
+      }
     }
     ?>
+
 
     <form method="POST" action="">
       <div class="input-container">
@@ -56,7 +77,7 @@
       </div>
       <button class="btn" name="entrar">Entrar</button>
     </form>
-    
+
     <a href="./cadastro.php" class="link-cadastro">Cadastre-se</a>
     <div class="social-login">
       <a href="#"><img src="../img/icons/google.png" alt="Logo google"></a>
@@ -64,4 +85,5 @@
     </div>
   </div>
 </body>
+
 </html>
