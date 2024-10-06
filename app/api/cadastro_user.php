@@ -1,11 +1,19 @@
 <?php
 try {
     // Caminho para o banco de dados
-    $db_path = __DIR__ . '../products.db';
+    $db_path = __DIR__ . '/products.db';
 
     // Conexão usando PDO
     $db = new PDO('sqlite:' . $db_path);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $db->exec('CREATE TABLE IF NOT EXISTS user (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        email TEXT NOT NULL,
+        password TEXT NOT NULL,
+        telefone TEXT NOT NULL
+    )');
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = trim($_POST['username']);
