@@ -11,23 +11,28 @@
     <img src="../img/logo.png" alt="Logo Mundo Pet" class="logo">
     <h2>Cadastrar</h2>
     <form action="../api/cadastro_user.php" method="POST">
-    <div class="input-container">
-      <img src="../img/icons/user-fill.png">
-      <input type="text" placeholder="Nome" id="username" name="username" required>
-    </div>
-    <div class="input-container">
-      <img src="../img/icons/email.png">
-      <input type="email" placeholder="Email" id="email" name="email" required>
-    </div>
-    <div class="input-container">
-      <img src="../img/icons/padlock.png">
-      <input type="password" placeholder="Senha" id="password" name="password" required>
-    </div>
-    <div class="input-container">
-      <img src="../img/icons/phone-solid.png">
-      <input type="number_format" placeholder="Celular" id="telefone" name="telefone" required>
-    </div>
-    <button class="btn">Cadastrar</button>
+        <div class="input-container">
+          <img src="../img/icons/user-fill.png">
+          <input type="text" placeholder="Nome" id="username" name="username" required>
+        </div>
+
+        <div class="input-container">
+          <img src="../img/icons/email.png">
+          <input type="email" placeholder="Email" id="email" name="email" required>
+        </div>
+
+        <div class="input-container">
+          <img src="../img/icons/padlock.png">
+          <input type="password" placeholder="Senha" id="password" name="password" required>
+        </div>
+
+        <div class="input-container">
+          <img src="../img/icons/phone-solid.png">
+          <input type="number_format" placeholder="Celular" id="telefone" name="telefone" required>
+        </div>
+        <div class="button-container">
+          <button class="btn">Cadastrar</button>
+        </div>
     </form>
     <div class="social-login">
       <a href="#"><img src="../img/icons/google.png" alt="Logo google"></a>

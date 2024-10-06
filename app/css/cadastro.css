@@ -56,7 +56,7 @@ h2 {
 
 .input-container img {
   position: absolute;
-  left: 10px; /* Espaçamento para o ícone */
+  left: 15px; /* Espaçamento para o ícone */
   color: #aaa; /* Cor do ícone */
 }
 
@@ -67,6 +67,7 @@ h2 {
   padding: 10px 10px 10px 40px; /* Espaçamento para o ícone */
   border: 2px solid #ccc;
   font-size: 16px;
+  margin: 6px;
 }
 
 .btn {
@@ -79,6 +80,12 @@ h2 {
   font-size: 20px;
   background-color: #4F5B93;
   transition: .8s;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Espaçamento opcional */
 }
 
 .btn:hover {
