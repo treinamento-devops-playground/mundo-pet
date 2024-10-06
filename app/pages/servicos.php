@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_id'])) {
 $dbFilePath = realpath(__DIR__ . '/../api/products.db');
 $conn = new SQLite3($dbFilePath);
 
-// Obter o username a partir do user_id da sessão
 $userId = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT username FROM user WHERE id = :id");
 $stmt->bindValue(':id', $userId, SQLITE3_INTEGER);
@@ -33,11 +32,6 @@ $conn->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serviços - Mundo Pet</title>
   <link rel="stylesheet" href="../css/servicos.css">
-  <script>
-    window.onload = function() {
-      alert("Você está logado como: <?php echo htmlspecialchars($username); ?>");
-    }
-  </script>
 </head>
 
 <body>
@@ -49,7 +43,7 @@ $conn->close();
       <li class="title"><a href="#">Serviços</a></li>
       <li class="title"><a href="#">Loja</a></li>
       <li class="title"><a href="#">Contato</a></li>
-      <li><a href="#"><img src="../img/icons/user.png"></a></li>
+      <li><a href="usuario.php"><img src="../img/icons/user.png"></a></li>
     </ul>
   </nav>
 
@@ -58,7 +52,7 @@ $conn->close();
       <div class="card">
         <img src="../img/banho.png">
         <div>
-          <a href="#">
+          <a href="agendamento.php">
             <h3>Banho e Tosa</h3>
             <img src="../img/icons/click.png">
           </a>
@@ -67,7 +61,7 @@ $conn->close();
       <div class="card">
         <img src="../img/vacinação.png">
         <div>
-          <a href="#">
+          <a href="agendamento.php">
             <h3>Vacinação</h3>
             <img src="../img/icons/click.png">
           </a>
@@ -76,7 +70,7 @@ $conn->close();
       <div class="card">
         <img src="../img/consulta.png">
         <div>
-          <a href="#">
+          <a href="agendamento.php">
             <h3>Consulta Veterinaria</h3>
             <img src="../img/icons/click.png">
           </a>
@@ -88,7 +82,7 @@ $conn->close();
       <div class="card">
         <img src="../img/adestramento.png">
         <div>
-          <a href="#">
+          <a href="agendamento.php">
             <h3>Adestramento</h3>
             <img src="../img/icons/click.png">
           </a>
@@ -97,7 +91,7 @@ $conn->close();
       <div class="card">
         <img src="../img/dogWalter.png">
         <div>
-          <a href="#">
+          <a href="agendamento.php">
             <h3>Dog Walter</h3>
             <img src="../img/icons/click.png">
           </a>
@@ -106,7 +100,7 @@ $conn->close();
       <div class="card">
         <img src="../img/store.png">
         <div>
-          <a href="#">
+          <a href="catalogo.php">
             <h3>Lojinha</h3>
             <img src="../img/icons/click.png">
           </a>
@@ -114,6 +108,34 @@ $conn->close();
       </div>
     </div>
   </div>
+
+  <script>
+    window.onload = function() {
+      var notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerText = "Você está logado como: <?php echo htmlspecialchars($username); ?>";
+      document.body.appendChild(notification);
+
+      setTimeout(function() {
+        notification.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+
+  <style>
+    .notification {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      opacity: 0.9;
+      z-index: 1000;
+    }
+  </style>
+
 </body>
 
 </html>
