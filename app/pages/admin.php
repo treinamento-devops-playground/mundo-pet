@@ -1,13 +1,13 @@
 <?php
 // Verifica se a sessão já está ativa
 if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Inicia a sessão se ainda não foi iniciada
+  session_start(); // Inicia a sessão se ainda não foi iniciada
 }
 
 
 if (!isset($_SESSION['admin'])) {
-    header('Location: login.php?message=login_required');
-    exit();
+  header('Location: login.php?message=login_required');
+  exit();
 }
 ?>
 
@@ -59,7 +59,7 @@ if (!isset($_SESSION['admin'])) {
       </div>
 
       <div class="admin-options">
-        <button class="admin-btn">Agendamento</button>
+        <button class="admin-btn" onclick="window.location.href='adminAgendamentos.php'">Agendamento</button>
         <button class="admin-btn" onclick="window.location.href='adminProdutos.php'">Gerenciar Produtos</button>
       </div>
     </section>
