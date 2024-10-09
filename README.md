@@ -131,3 +131,21 @@ RF09 - Gerenciamento de agendamentos
 
 *Features:*
 1. Permitir o admin visualizar todos os agendamentos e editar ou cancelar agendamentos de um usuário específico
+
+### Iteração 3: Gerencimento do carrinho de compras 
+
+*Valor da Sprint*: Proporcionar aos usuários a capacidade de adicionar, remover e visualizar produtos em um carrinho de compras, facilitando o processo de compra e aumentando a satisfação do cliente.
+
+*Objetivo*: Como usuário, quero poder gerenciar meus itens em um carrinho de compras para facilitar a finalização da compra de produtos do pet shop.
+
+*Requisitos*:
+
+RF05 - Carrinho de Compras
+
+*Features:*
+
+1. Permitir ao usuário adicionar produtos ao carrinho de compras a partir do catálogo.
+2. Permitir ao usuário visualizar os itens em seu carrinho de compras com detalhes.
+3. Permitir ao usuário atualizar a quantidade de produtos no carrinho.
+4. Permitir ao usuário remover produtos do carrinho de compras.
+5. Implementar uma funcionalidade de checkout para finalizar a compra dos produtos.
