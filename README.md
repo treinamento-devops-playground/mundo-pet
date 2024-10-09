@@ -92,20 +92,7 @@ RF03 - Login de Admin
 RF05 - Catálogo de Produtos     
 RF10 - Gerenciamento de Produtos 
 
-| Feature                                                                                              | Autor           | Revisor         |
-|------------------------------------------------------------------------------------------------------|-----------------|-----------------|
-| Tela Home                                                                                            | José Borges     | Henrique        |
-| Tela de Login                                                                                         | José Borges     | Lauro           |
-| Permitir ao administrador fazer login na plataforma                                                   | André Victor    | José Borges     |
-| Tela Principal do administrador                                                                       | Henrique Noronha| Lauro           |
-| Tela de Listagem de Produtos                                                                          | André Victor    | Vicente         |
-| Tela de Gerenciamento de Produtos                                                                     | André Victor    | Vicente         |
-| Permitir ao administrador adicionar produtos                                                          | Lauro           | Henrique Noronha|
-| Permitir ao administrador remover produtos                                                            | Vicente         | José Borges     |
-| Permitir ao administrador editar produtos                                                             | José Borges     | André Victor    |
-| Tela de Catálogo de Produtos Geral e individual                                                       | Lauro           |      André Victor     |
-| Permitir ao usuário visualizar o catálogo sem o login com pesquisa e filtragem                        | Lauro           | Henrique        |
-| Listagem de Produtos para o administrador                                                             | Henrique Noronha| Vicente         |
+[Link para o Relatório](Relatorio.md)
 
 ### Iteração 2: Login e agendamento do usuário.
 
@@ -131,6 +118,8 @@ RF09 - Gerenciamento de agendamentos
 
 *Features:*
 1. Permitir o admin visualizar todos os agendamentos e editar ou cancelar agendamentos de um usuário específico
+
+[Link para o Relatório](Relatorio.md)
 
 ### Iteração 3: Gerencimento do carrinho de compras 
 
