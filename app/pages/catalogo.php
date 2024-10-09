@@ -60,7 +60,7 @@
 
         function getRandomImage() {
             const images = [
-                '../img/logo.png',
+                '../img/logoG.svg',
             ];
             return images[Math.floor(Math.random() * images.length)];
         }

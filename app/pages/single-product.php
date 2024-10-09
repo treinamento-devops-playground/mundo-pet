@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="../img/logo.png" alt="Logo">
+            <img src="../img/logoG.svg" alt="Logo">
         </div>
         <nav>
             <ul>
@@ -40,7 +40,7 @@
 
                 if ($product) {
                     echo '<div class="product-details">';
-                    echo '<img src="../img/logo.png" alt="' . htmlspecialchars($product['name']) . '" class="product-image">';
+                    echo '<img src="../img/logoG.svg" alt="' . htmlspecialchars($product['name']) . '" class="product-image">';
                     echo '<div class="product-info">';
                     echo '<h1 class="product-name">' . htmlspecialchars($product['name']) . '</h1>';
                     echo '<p class="product-description">' . htmlspecialchars($product['description']) . '</p>';

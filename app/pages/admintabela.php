@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); 
+}
+
+
+if (!isset($_SESSION['admin'])) {
+    header('Location: login.php?message=login_required');
+    exit();
+}
+?>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +51,7 @@
         </div>
         <div class="user-info">
           <h2>Administrador</h2>
-          <a href="login.php" class="logout-btn">Logout</a>
+          <a href="logout.php" class="logout-btn">Logout</a>
         </div>
       </div>
       

@@ -118,10 +118,10 @@ RF10 - Gerenciamento de Produtos
 RF06 - Agendamento de Serviços
 
 *Features:*
-1. Criar modelos de dados para agendamentos
-2. Desenvolver os endpoints da API para ler, atualizar e deletar agendamento
-3. Implementar a tela de seleção de serviços para agendamento
-4. Implementar a tela de seleção de datas e horários 
+1. Login e Cadastro de usuário
+2. Permitir o usuário ler, atualizar e deletar seus agendamento
+3. Implementar as telas de cada serviço para agendamento
+4. Implementar a tela de seleção de datas e horários
 
 *Objetivo*: Como admin quero gerenciar os agendamentos de todos os usuários
 
@@ -130,4 +130,22 @@ RF06 - Agendamento de Serviços
 RF09 - Gerenciamento de agendamentos
 
 *Features:*
-1. Permitir o admin visualizar, editar ou cancelar agendamentos
+1. Permitir o admin visualizar todos os agendamentos e editar ou cancelar agendamentos de um usuário específico
+
+### Iteração 3: Gerencimento do carrinho de compras 
+
+*Valor da Sprint*: Proporcionar aos usuários a capacidade de adicionar, remover e visualizar produtos em um carrinho de compras, facilitando o processo de compra e aumentando a satisfação do cliente.
+
+*Objetivo*: Como usuário, quero poder gerenciar meus itens em um carrinho de compras para facilitar a finalização da compra de produtos do pet shop.
+
+*Requisitos*:
+
+RF05 - Carrinho de Compras
+
+*Features:*
+
+1. Permitir ao usuário adicionar produtos ao carrinho de compras a partir do catálogo.
+2. Permitir ao usuário visualizar os itens em seu carrinho de compras com detalhes.
+3. Permitir ao usuário atualizar a quantidade de produtos no carrinho.
+4. Permitir ao usuário remover produtos do carrinho de compras.
+5. Implementar uma funcionalidade de checkout para finalizar a compra dos produtos.
