@@ -3,7 +3,7 @@
 if (isset($_GET['id'])) {
     $agendamentoId = $_GET['id'];
 
-    $dbFilePath = __DIR__ . '/agendamentos.db';
+    $dbFilePath = __DIR__ . '/../api/products.db';
 
     try {
        

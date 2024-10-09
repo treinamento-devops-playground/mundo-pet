@@ -90,7 +90,7 @@ try {
                                 </div>
                             </div>
                             <div class="agendamento-actions">
-                                <a href="../api/edit_agendamento.php?id=<?php echo $agendamento['id']; ?>" class="edit-btn">Editar</a>
+                                <a href="/pages/editAgendamentos.php?id=<?php echo $agendamento['id']; ?>" class="edit-btn">Editar</a>
                                 <button class="delete-btn" onclick="confirmDelete(<?php echo $agendamento['id']; ?>)">&#128465;</button> <!-- Ícone de lixeira -->
                             </div>
                         </div>
