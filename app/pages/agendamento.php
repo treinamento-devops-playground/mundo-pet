@@ -26,10 +26,11 @@ try {
     )');
 
     // Função para verificar se o horário está disponível para o mesmo usuário e serviço
-    function verificarDisponibilidade($db, $user_id, $data, $hora, $service_type) {
+    function verificarDisponibilidade($db, $user_id, $data, $hora, $service_type)
+    {
         // Adicionar depuração
-        echo "Verificando: user_id: $user_id, date: $data, time: $hora, service_type: $service_type<br>";
-    
+
+
         $stmt = $db->prepare("SELECT * FROM agendamentos 
                               WHERE user_id = :user_id 
                               AND date = :date 
@@ -40,13 +41,13 @@ try {
         $stmt->bindParam(':time', $hora);
         $stmt->bindParam(':service_type', $service_type);
         $stmt->execute();
-    
+
         // Depurar o número de linhas retornadas
-        echo "Número de agendamentos encontrados: " . $stmt->rowCount() . "<br>";
-    
-        return $stmt->rowCount() === 0; 
+
+
+        return $stmt->rowCount() === 0;
     }
-    
+
 
     // Verificar se o formulário foi enviado
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -61,9 +62,6 @@ try {
             exit();
         }
 
-        // Para depuração
-        echo "Dados recebidos: Tipo de pet: $petType, Tipo de serviço: $serviceType, Data: $data, Hora: $hora<br>";
-        echo verificarDisponibilidade($db, $_SESSION['user_id'], $data, $hora, $serviceType);
 
         // Verificar se o horário está dentro do intervalo de 08:00-12:00 e 14:00-18:00
         $horaSemMinutos = date('H:i', strtotime($hora));
