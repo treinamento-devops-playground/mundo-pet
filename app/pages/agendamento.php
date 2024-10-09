@@ -113,10 +113,10 @@ try {
             <img src="../img/logo.png" alt="Mundo Pet Logo" class="logo">
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#">Serviços</a></li>
+                    <li><a href="servicos.php">Serviços</a></li>
                     <li><a href="#">Loja</a></li>
                     <li><a href="#">Sobre</a></li>
-                    <li><a href="#"><img src="../img/icons/user.png"></a></li>
+                    <li><a href="usuario.php"><img src="../img/icons/user.png"></a></li>
                 </ul>
             </nav>
         </header>
