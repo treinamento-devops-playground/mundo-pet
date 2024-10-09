@@ -37,6 +37,7 @@ try {
 </head>
 
 <body>
+
     <header>
         <nav id="nav-bar">
             <div class="logo">
@@ -106,7 +107,7 @@ try {
     <script>
         function confirmDelete(agendamentoId) {
             if (confirm('Tem certeza que deseja excluir este agendamento?')) {
-                window.location.href = 'delete_agendamento.php?id=' + agendamentoId;
+                window.location.href = '../api/delete_agendamento.php?id=' + agendamentoId;
             }
         }
     </script>
