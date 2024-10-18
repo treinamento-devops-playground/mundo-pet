@@ -9,7 +9,7 @@
 
 body {
     background-color: #E8E8E8;
-    background-image: url("../img/patas.png");
+    background-image: url("/img/patas.png");
     background-position: 50% 50%;
     background-repeat: no-repeat;
     width: 100vw;
@@ -27,7 +27,6 @@ body {
     border-radius: 15px;
     margin: 25px auto;
     padding: 3px 20px;
-    
 }
 
 .logo {
@@ -108,7 +107,7 @@ select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: url('down-arrow.png') no-repeat right #fff; 
+    background: url('/img/down-arrow.png') no-repeat right #fff; 
     background-size: 15px;
     padding-right: 40px;
 }
@@ -132,7 +131,6 @@ button.submit-btn:hover {
     background-color: #5a4a84;
 }
 
-/* Responsividade */
 @media (max-width: 1024px) {
     .header, .container {
         width: 90%;
