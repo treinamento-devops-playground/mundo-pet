@@ -2,7 +2,7 @@
 
 namespace app\shared\support;
 
-use app\core\Request;
+use core\Request;
 use Exception;
 
 class Csrf

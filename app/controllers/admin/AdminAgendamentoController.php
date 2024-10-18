@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-use app\models\Agendamento;
-use app\core\Request;
+use app\database\models\Agendamento;
+use core\Request;
 use app\controllers\ContainerController;
 
 class AgendamentoController extends ContainerController

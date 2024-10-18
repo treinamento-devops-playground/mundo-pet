@@ -2,8 +2,7 @@
 
 namespace app\controllers\site;
 
-use app\models\Agendamento;
-use League\Plates\Engine;
+use app\database\models\Agendamento;
 use app\controllers\ContainerController;
 
 class AgendamentoController extends ContainerController

@@ -7,7 +7,7 @@ use League\Plates\Engine;
 
 class HomeController extends ContainerController
 {
-    public function index()
+    public function show()
     {
         $this->view('home', ['title' => 'home - Mundo Pet']);
     }

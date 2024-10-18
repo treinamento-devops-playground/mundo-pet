@@ -18,8 +18,8 @@
             em um clique!!! <img src="./img/icons/click.png">
         </p>
         <div class="buttons">
-            <button class="btn btn-primary"><a href="./pages/login.php">Login</a></button>
-            <button class="btn btn-second"><a href="./pages/cadastro.php">Cadastrar</a></button>
+            <button class="btn btn-primary"><a href="login">Login</a></button>
+            <button class="btn btn-second"><a href="register">Cadastrar</a></button>
         </div>
     </div>
 </body>

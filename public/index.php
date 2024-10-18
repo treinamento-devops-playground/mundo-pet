@@ -5,6 +5,11 @@ use Dotenv\Dotenv;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use app\database\Connection;
+
+
+Connection::createDatabase();
+
 session_start();
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');

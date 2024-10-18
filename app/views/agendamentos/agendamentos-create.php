@@ -2,7 +2,7 @@
 
 <?php $this->start('form-content') ?>
 <h2>Novo Agendamento</h2>
-<form action="/agendamento/create" method="post">
+<form action="/agendamentos/store" method="post">
     <div class="form-group">
         <label for="pet-type">Qual tipo de pet:</label>
         <select id="pet-type" name="pet_type" required>
