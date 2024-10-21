@@ -14,60 +14,48 @@ body {
   background-color: #E8E8E8;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #container {
-  width: 700px;
-  height: 620px;
-  background-image: url("../img/patas.png");
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 400px;
   background-color: #8892BF;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
   border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   row-gap: 15px;
-}
-
-.logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(33, 33, 33, 0.8);
 }
 
 h2 {
   font-weight: 900;
-  font-size: 28px;
+  font-size: 32px;
   color: #333333;
+  margin-bottom: 20px;
 }
 
 .input-container {
   position: relative;
-  display: flex;
-  align-items: center;
-  width: 360px;
-}
-
-.input-container img {
-  position: absolute;
-  left: 15px; /* Espaçamento para o ícone */
-  color: #aaa; /* Cor do ícone */
+  width: 100%;
 }
 
 .input-container input {
   width: 100%;
-  height: 54px;
+  height: 45px;
   border-radius: 15px;
-  padding: 10px 10px 10px 40px; /* Espaçamento para o ícone */
+  padding: 10px 15px;
   border: 2px solid #ccc;
   font-size: 16px;
-  margin: 6px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .btn {
@@ -79,21 +67,10 @@ h2 {
   cursor: pointer;
   font-size: 20px;
   background-color: #4F5B93;
-  transition: .8s;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px; /* Espaçamento opcional */
+  transition: background-color 0.8s;
+  align: center;
 }
 
 .btn:hover {
   background-color: #2a40a5;
-  transition: .8s;
-}
-
-.social-login {
-  display: flex;
-  gap: 20px;
 }

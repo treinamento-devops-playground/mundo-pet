@@ -19,9 +19,9 @@
             <div class="input-container">
                 <input type="password" placeholder="Senha" name="password" required>
             </div>
-            <button type="submit">Entrar</button>
+            <button type="submit" class="btn">Entrar</button>
         </form>
-        <a href="/register">Cadastre-se</a>
+        <a href="/register" class="link-cadastro">Cadastre-se</a>
     </div>
 </body>
 

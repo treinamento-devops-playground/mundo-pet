@@ -15,12 +15,15 @@ class Routes
                 '/agendamentos/create' => 'site\AgendamentoController@create',
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
-                '/services' => 'site\ServiceController@show'
+                '/services' => 'site\ServiceController@show',
+                '/agendamentos/edit/[0-9]+' => 'AdminAgendamentoController@edit',
+                '/admin' => 'admin\AdminController@show',
             ],
             'post' => [
                 '/agendamentos/store' => 'site\AgendamentoController@store',
                 '/login' => 'site\UserController@login',
-                '/register' => 'site\UserController@register'
+                '/register' => 'site\UserController@register',
+                '/agendamentos/update/[0-9]+' => 'AdminAgendamentoController@update'
             ],
         ];
     }

@@ -10,10 +10,10 @@
 
 <body>
     <div id="container">
-        <h2>Cadastrar</h2>
-        <form action="/register" method="POST">
+        <h2>Cadastro</h2>
+        <form method="POST" action="/register">
             <div class="input-container">
-                <input type="text" placeholder="Nome" name="username" required>
+                <input type="text" placeholder="Nome" name="name" required>
             </div>
             <div class="input-container">
                 <input type="email" placeholder="Email" name="email" required>
@@ -21,10 +21,9 @@
             <div class="input-container">
                 <input type="password" placeholder="Senha" name="password" required>
             </div>
-            <div class="input-container">
-                <input type="text" placeholder="Celular" name="telefone" required>
+            <div class="button-container">
+                <button type="submit" class="btn">Cadastrar</button>
             </div>
-            <button type="submit">Cadastrar</button>
         </form>
     </div>
 </body>

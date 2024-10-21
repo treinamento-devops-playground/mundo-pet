@@ -1,11 +1,12 @@
-<?php $this->layout('agendamento', ['title' => 'Novo Agendamento']) ?>
+<?php $this->layout('agendamentos', ['title' => 'Novo Agendamento']) ?>
 
-<?php $this->start('form-content') ?>
+<?php $this->start('agendamento-form') ?>
 <h2>Novo Agendamento</h2>
-<form action="/agendamentos/store" method="post">
+<h2>Preencha o Formulário abaixo:</h2>
+<form action="" method="post">
     <div class="form-group">
         <label for="pet-type">Qual tipo de pet:</label>
-        <select id="pet-type" name="pet_type" required>
+        <select id="pet-type" name="pet_type">
             <option value="" disabled selected>Selecione uma Opção</option>
             <option value="cachorro">Cachorro</option>
             <option value="gato">Gato</option>
@@ -15,7 +16,7 @@
 
     <div class="form-group">
         <label for="service-type">Tipo de Atendimento:</label>
-        <select id="service-type" name="service_type" required>
+        <select id="service-type" name="service_type">
             <option value="" disabled selected>Selecione uma Opção</option>
             <option value="consulta">Consulta</option>
             <option value="banho_tosa">Banho e Tosa</option>
@@ -25,12 +26,12 @@
 
     <div class="form-group">
         <label for="date">Data:</label>
-        <input type="date" id="date" name="date" required>
+        <input type="date" id="date" name="date">
     </div>
 
     <div class="form-group">
         <label for="time">Hora:</label>
-        <input type="time" id="time" name="time" required>
+        <input type="time" id="time" name="time">
     </div>
 
     <button type="submit" class="submit-btn">Agendar</button>

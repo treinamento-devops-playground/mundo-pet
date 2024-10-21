@@ -5,7 +5,7 @@ namespace app\controllers;
 use Exception;
 use League\Plates\Engine;
 
-abstract class ContainerController
+abstract class BaseController
 {
     protected function view(string $view, array $data = [])
     {

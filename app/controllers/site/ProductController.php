@@ -2,9 +2,9 @@
 
 namespace app\controllers;
 
-use app\controllers\ContainerController;
+use app\controllers\BaseController;
 
-class ProductController extends ContainerController
+class ProductController extends BaseController
 {
     public function index()
     {

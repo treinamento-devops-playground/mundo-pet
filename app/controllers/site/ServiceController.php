@@ -2,10 +2,10 @@
 
 namespace app\controllers\site;
 
-use app\database\models\User;
-use app\controllers\ContainerController;
+use app\database\models\UserModel;
+use app\controllers\BaseController;
 
-class ServiceController extends ContainerController
+class ServiceController extends BaseController
 {
     public function show()
     {
@@ -16,7 +16,7 @@ class ServiceController extends ContainerController
             exit();
         }
 
-        $userModel = new User();
+        $userModel = new UserModel();
         $username = $userModel->getUsernameById($_SESSION['user_id']);
 
         $welcomeMessage = "Usuário logado: " . $username;

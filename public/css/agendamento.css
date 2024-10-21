@@ -33,25 +33,6 @@ body {
     width: 60px;
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 900;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: #000;
-    transition: .8s;
-}
-
-.nav-links li a:hover {
-    color: #fff;
-}
-
 .user-icon img {
     display: flex;
     width: 40px;
@@ -138,10 +119,6 @@ button.submit-btn:hover {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        font-size: 18px;
-        gap: 15px;
-    }
 
     .submit-btn {
         padding: 12px;

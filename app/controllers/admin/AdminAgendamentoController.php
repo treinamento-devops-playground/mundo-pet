@@ -1,23 +1,23 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\admin;
 
-use app\database\models\Agendamento;
+use app\database\models\AgendamentoModel;
 use core\Request;
-use app\controllers\ContainerController;
+use app\controllers\BaseController;
 
-class AgendamentoController extends ContainerController
+class AdminAgendamentoController extends BaseController
 {
     public function edit($params)
     {
         $id = $params[0];
-        $agendamento = Agendamento::find($id);
+        $agendamento = AgendamentoModel::find($id);
 
         if (!$agendamento) {
             return $this->jsonResponse(['error' => 'Agendamento não encontrado'], 404);
         }
 
-        return $this->jsonResponse($agendamento);
+        return $this->view('admin/agendamentos/edit', ['agendamento' => $agendamento]);
     }
 
     public function update($params)
@@ -31,12 +31,12 @@ class AgendamentoController extends ContainerController
             'time'  => Request::input('time'),
         ];
 
-        $updated = Agendamento::update($id, $data);
+        $updated = AgendamentoModel::update($id, $data);
 
         if ($updated) {
-            return $this->jsonResponse(['message' => 'Agendamento atualizado com sucesso']);
+            return $this->view('admin/agendamentos/edit', ['message' => 'Agendamento atualizado com sucesso', 'agendamento' => AgendamentoModel::find($id)]);
         } else {
-            return $this->jsonResponse(['error' => 'Erro ao atualizar o agendamento'], 500);
+            return $this->view('admin/agendamentos/edit', ['error' => 'Erro ao atualizar o agendamento', 'agendamento' => AgendamentoModel::find($id)]);
         }
     }
 
