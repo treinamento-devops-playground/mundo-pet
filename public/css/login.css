@@ -45,7 +45,7 @@ form {
 .logo {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: 60%;
   box-shadow: 0 4px 8px rgba(33, 33, 33, 0.8);
 }
 
