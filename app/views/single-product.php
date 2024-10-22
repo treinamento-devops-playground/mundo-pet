@@ -4,165 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Produto</title>
-    <link rel="stylesheet" href="../css/single-product.css">
+    <title>Catálogo de Produtos</title>
+    <link rel="stylesheet" href="../css/catalogo.css">
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
+            padding: 20px;
+        }
+
+        .product-detail {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-detail h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .product-detail h2 {
+            color: #555;
+            font-size: 1.5em;
+            margin: 15px 0 5px;
+        }
+
+        .product-description p,
+        .product-info ul {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .product-info ul {
+            list-style-type: none;
             padding: 0;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
+        .product-info li {
+            margin-bottom: 5px;
         }
 
-        header .logo img {
-            width: 100px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .product-details {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+        .product-additional-info p {
+            margin: 10px 0;
         }
 
         .product-image {
-            width: 300px;
+            max-width: 100%;
             height: auto;
-            object-fit: cover;
-            border-radius: 8px;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
 
-        .product-info {
-            max-width: 600px;
-        }
-
-        .product-name {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .product-description {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .product-price {
-            font-size: 20px;
-            color: #e74c3c;
-            margin-bottom: 15px;
-        }
-
-        .product-category,
-        .product-stock {
-            font-size: 14px;
-            color: #555;
+        .error {
+            color: red;
+            font-size: 1.2em;
+            text-align: center;
         }
 
         .add-to-cart-btn {
+            display: inline-block;
             padding: 10px 20px;
-            background-color: #3498db;
+            background-color: #4CAF50;
             color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            margin-top: 20px;
         }
 
         .add-to-cart-btn:hover {
-            background-color: #2980b9;
+            background-color: #45a049;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <img src="../img/logoG.svg" alt="Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="catalogo.php">Catálogo</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Loja</a></li>
-                <li><a href="#">Sobre</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="product-detail">
+        <?php if (isset($error)): ?>
+            <h1 class="error"><?= htmlspecialchars($error) ?></h1>
+        <?php else: ?>
+            <img src="../img/logoG.svg" class="product-image" />
 
-    <div class="container">
-        <?php
-        $dbFilePath = __DIR__ . '/../api/products.db';
-        try {
-            $pdo = new PDO('sqlite:' . $dbFilePath);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            <h1><?= htmlspecialchars($product['name']) ?></h1>
 
-            if (isset($_GET['id'])) {
-                $productId = $_GET['id'];
+            <div class="product-description">
+                <h2>Descrição</h2>
+                <p><?= htmlspecialchars($product['description']) ?></p>
+            </div>
 
-                // Busca o produto pelo ID fornecido
-                $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
-                $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
-                $stmt->execute();
-                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            <div class="product-info">
+                <h2>Informações do Produto</h2>
+                <ul>
+                    <li><strong>Preço:</strong> R$ <?= number_format($product['price'], 2, ',', '.') ?></li>
+                    <li><strong>Categoria:</strong> <?= htmlspecialchars($product['category']) ?></li>
+                    <li><strong>Estoque:</strong> <?= htmlspecialchars($product['stock']) ?> disponível</li>
+                </ul>
+            </div>
 
-                if ($product) {
-                    // Exibe os detalhes do produto
-                    echo '<div class="product-details">';
-                    echo '<img src="../img/logoG.svg" alt="' . htmlspecialchars($product['name']) . '" class="product-image">'; // Substitua por uma URL real da imagem do produto
-                    echo '<div class="product-info">';
-                    echo '<h1 class="product-name">' . htmlspecialchars($product['name']) . '</h1>';
-                    echo '<p class="product-description">' . htmlspecialchars($product['description']) . '</p>';
-                    echo '<p class="product-price">R$ ' . number_format($product['price'], 2, ',', '.') . '</p>';
-                    echo '<p class="product-category">Categoria: ' . htmlspecialchars($product['category']) . '</p>';
-                    echo '<p class="product-stock">Estoque: ' . htmlspecialchars($product['estoque']) . '</p>';
-                    echo '<button class="add-to-cart-btn">Adicionar ao Carrinho</button>';
-                    echo '</div>';
-                    echo '</div>';
-                } else {
-                    echo '<p>Produto não encontrado.</p>';
-                }
-            } else {
-                echo '<p>ID do produto não especificado.</p>';
-            }
-        } catch (PDOException $e) {
-            echo 'Erro ao conectar ao banco de dados: ' . $e->getMessage();
-            exit;
-        }
-        ?>
+            <div class="product-additional-info">
+                <h2>Informações Adicionais</h2>
+                <p><?= htmlspecialchars($product['info']) ?></p>
+            </div>
+
+            <a href="/vcart<?= $product['id'] ?>" class="add-to-cart-btn">Adicionar ao Carrinho</a>
+        <?php endif; ?>
     </div>
-
 </body>
 
 </html>

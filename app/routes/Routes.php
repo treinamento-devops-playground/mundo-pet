@@ -12,6 +12,7 @@ class Routes
                 '/product' => 'site\ProductController@index',
                 '/product/filter' => 'site\ProductController@filterByCategoryJson',
                 '/product/search' => 'site\ProductController@searchJson',
+                '/product/[0-9]+' => 'site\ProductController@show',
                 '/agendamentos/create' => 'site\AgendamentoController@create',
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',

@@ -175,7 +175,7 @@
                 productCard.className = 'product-card';
 
                 productCard.innerHTML = `
-                    <a href="single-product.php?id=${product.id}">
+                    <a href="../product/${product.id}">
                         <img src="../img/logoG.svg" alt="${product.name}" class="product-image">
                         <div class="product-name">${product.name}</div>
                         <div class="product-description">${product.description}</div>

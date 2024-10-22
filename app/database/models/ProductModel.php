@@ -54,10 +54,20 @@ class ProductModel
     {
         $pdo = Connection::getConnection();
         $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        error_log("Consultando produto com ID: " . $id);
+
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$product) {
+            error_log("Produto não encontrado para ID: " . $id);
+        }
+
+        return $product;
     }
+
 
     public static function update($id, $name, $description, $price, $info, $category, $stock)
     {
