@@ -15,12 +15,14 @@ class Routes
                 '/agendamentos/create' => 'site\AgendamentoController@create',
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
-                '/services' => 'site\ServiceController@show'
+                '/services' => 'site\ServiceController@show',
+                '/vcart' => 'site\CartController@vcart'
             ],
             'post' => [
                 '/agendamentos/store' => 'site\AgendamentoController@store',
                 '/login' => 'site\UserController@login',
-                '/register' => 'site\UserController@register'
+                '/register' => 'site\UserController@register',
+                '/vcart' => 'site\CartController@rvcart'
             ],
         ];
     }
