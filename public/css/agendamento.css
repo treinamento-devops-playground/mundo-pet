@@ -111,6 +111,42 @@ button.submit-btn {
 button.submit-btn:hover {
     background-color: #5a4a84;
 }
+/* Estilo básico para a tabela */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove os espaçamentos entre as células da tabela */
+}
+
+thead th {
+    background-color: #6B6EAF;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+tbody tr {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f1f1f1; /* Linhas alternadas para melhor visualização */
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.agendamento-actions {
+    text-align: center; /* Centraliza os botões na célula */
+}
+
+.agendamento-actions .edit-btn,
+.agendamento-actions .delete-btn {
+    display: inline-block; /* Mantém os botões lado a lado */
+    margin: 0 5px; /* Adiciona espaço entre os botões */
+}
 
 @media (max-width: 1024px) {
     .header, .container {

@@ -1,4 +1,4 @@
-<?php $this->layout('base', $title); ?>
+<?php $this->layout('base', ['title' => 'Editar Agendamento']); ?>
 
 <?php $this->start('css'); ?>
 <link rel="stylesheet" href="../css/agendamento.css">
@@ -6,7 +6,7 @@
 
 <?php $this->start('main-content'); ?>
 <div class="form-container">
-    <form action="" method="post">
+    <form action="store" method="post">
         <div class="form-group">
             <label for="pet-type">Qual tipo de pet:</label>
             <select id="pet-type" name="pet_type">

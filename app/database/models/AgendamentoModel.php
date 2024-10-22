@@ -53,4 +53,11 @@ class AgendamentoModel
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public static function all()
+    {
+        $pdo = Connection::getConnection();
+        $stmt = $pdo->query('SELECT * FROM scheduling');
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

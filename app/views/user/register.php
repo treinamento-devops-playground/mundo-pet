@@ -11,15 +11,18 @@
 <body>
     <div id="container">
         <h2>Cadastro</h2>
-        <form method="POST" action="/register">
+        <form method="POST" action="/register" class="form-container">
             <div class="input-container">
-                <input type="text" placeholder="Nome" name="name" required>
+                <input type="text" placeholder="Nome" name="username" required>
             </div>
             <div class="input-container">
                 <input type="email" placeholder="Email" name="email" required>
             </div>
             <div class="input-container">
                 <input type="password" placeholder="Senha" name="password" required>
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="Telefone" name="phone" required>
             </div>
             <div class="button-container">
                 <button type="submit" class="btn">Cadastrar</button>

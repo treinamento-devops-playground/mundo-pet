@@ -48,7 +48,7 @@ class UserController extends BaseController
             $username = Request::input('username');
             $email = Request::input('email');
             $password = password_hash(Request::input('password'), PASSWORD_DEFAULT);
-            $telefone = Request::input('telefone');
+            $telefone = Request::input('phone');
 
             $userModel = new UserModel();
             $userModel->createUser($username, $email, $password, $telefone);

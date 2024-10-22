@@ -59,7 +59,8 @@ class Connection
                     price REAL NOT NULL,
                     description TEXT,
                     info TEXT,
-                    category TEXT
+                    category TEXT,
+                    stock INTEGER NOT NULL DEFAULT 0
                 );
             ";
 
