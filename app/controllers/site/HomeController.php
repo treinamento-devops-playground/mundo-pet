@@ -2,10 +2,10 @@
 
 namespace app\controllers\site;
 
-use app\controllers\ContainerController;
+use app\controllers\BaseController;
 use League\Plates\Engine;
 
-class HomeController extends ContainerController
+class HomeController extends BaseController
 {
     public function show()
     {

@@ -1,15 +1,49 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\site;
 
-use app\controllers\ContainerController;
+use app\database\models\ProductModel;
+use app\controllers\BaseController;
 
-class ProductController extends ContainerController
+class ProductController extends BaseController
 {
     public function index()
     {
-        dd('index');
+        $products = ProductModel::all();
+        return $this->view('catalog', ['products' => $products]);
     }
 
-    public function show($request) {}
+    public function filterByCategoryJson()
+    {
+        $category = $_GET['category'] ?? '';
+        $products = ProductModel::findByCategory($category);
+        return $this->json($products);
+    }
+
+    public function searchJson()
+    {
+        $searchTerm = $_GET['search'] ?? '';
+        $products = ProductModel::search($searchTerm);
+        return $this->json($products);
+    }
+    public function show($id)
+    {
+        error_log("ID do produto: " . $id);
+
+        $product = ProductModel::find($id);
+
+        if (!$product) {
+            error_log("Produto não encontrado para ID: " . $id);
+            return $this->view('single-product', ['error' => 'Produto não encontrado']);
+        }
+        return $this->view('single-product', ['product' => $product]);
+    }
+
+
+    private function json($data)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+    }
 }

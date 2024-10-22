@@ -2,11 +2,11 @@
 
 namespace app\controllers\site;
 
-use app\controllers\ContainerController;
-use app\database\models\User;
+use app\controllers\BaseController;
+use app\database\models\UserModel;
 use core\Request;
 
-class UserController extends ContainerController
+class UserController extends BaseController
 {
     public function login()
     {
@@ -20,21 +20,19 @@ class UserController extends ContainerController
             $email = Request::input('email');
             $password = Request::input('password');
 
-            $userModel = new User();
+            $userModel = new UserModel();
 
-            // Verificar se é admin
             if ($email === 'admin@mail.com' && password_verify($password, $userModel->getAdminPassword())) {
                 $_SESSION['admin'] = $email;
                 header("Location: /admin");
                 exit();
             }
 
-            // Tenta encontrar o usuário no banco
             $user = $userModel->getUserByEmail($email);
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['email'] = $user['email'];
-                header("Location: /servicos");
+                header("Location: /services");
                 exit();
             } else {
                 $message = "<p style='color:red;'>Email ou senha inválidos.</p>";
@@ -50,9 +48,9 @@ class UserController extends ContainerController
             $username = Request::input('username');
             $email = Request::input('email');
             $password = password_hash(Request::input('password'), PASSWORD_DEFAULT);
-            $telefone = Request::input('telefone');
+            $telefone = Request::input('phone');
 
-            $userModel = new User();
+            $userModel = new UserModel();
             $userModel->createUser($username, $email, $password, $telefone);
 
             header("Location: /login");

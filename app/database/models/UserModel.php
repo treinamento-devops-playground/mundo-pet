@@ -5,7 +5,7 @@ namespace app\database\models;
 use app\database\Connection;
 use PDO;
 
-class User
+class UserModel
 {
     private $db;
 

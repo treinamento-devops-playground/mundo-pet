@@ -2,18 +2,17 @@
 
 namespace app\controllers\site;
 
-use app\database\models\Agendamento;
-use app\controllers\ContainerController;
+use app\database\models\AgendamentoModel;
+use app\controllers\BaseController;
 
-class AgendamentoController extends ContainerController
+class AgendamentoController extends BaseController
 {
     public function create()
     {
         try {
-            // Renderiza a view de criação de agendamentos
             return $this->view('agendamentos/agendamentos-create');
         } catch (\Exception $e) {
-            echo $e->getMessage();  // Captura e exibe erros se a view não existir
+            echo $e->getMessage();
         }
     }
 
@@ -21,30 +20,26 @@ class AgendamentoController extends ContainerController
     {
         session_start();
 
-        // Verifica se o usuário está autenticado
         if (!isset($_SESSION['user_id'])) {
             header("Location: /login?message=login_required");
             exit();
         }
 
-        // Captura os dados enviados pelo formulário
         $userId = $_SESSION['user_id'];
         $petType = $_POST['pet_type'];
         $serviceType = $_POST['service_type'];
         $date = $_POST['date'];
         $time = $_POST['time'];
 
-        // Valida os dados obrigatórios
         if (empty($petType) || empty($serviceType) || empty($date) || empty($time)) {
             echo "Por favor, preencha todos os campos.";
             return;
         }
 
         try {
-            // Verifica a disponibilidade e cria o agendamento se possível
-            if (Agendamento::isAvailable($userId, $date, $time, $serviceType)) {
-                if (Agendamento::create($userId, $petType, $serviceType, $date, $time)) {
-                    echo "Agendamento realizado com sucesso!";
+            if (AgendamentoModel::isAvailable($userId, $date, $time, $serviceType)) {
+                if (AgendamentoModel::create($userId, $petType, $serviceType, $date, $time)) {
+                    return $this->view('agendamentos/agendamentos-create');
                 } else {
                     echo "Erro ao agendar. Tente novamente.";
                 }

@@ -10,7 +10,7 @@
 
 <body>
     <div id="container">
-    <img src="../img/logo.png" alt="Logo Mundo Pet" class="logo">
+        <img src="../img/logo.png" alt="Logo Mundo Pet" class="logo">
         <h2>Login</h2>
         <?= isset($message) ? $message : '' ?>
         <form method="POST" action="/login">
