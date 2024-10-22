@@ -28,18 +28,14 @@ class ProductController extends BaseController
     }
     public function show($id)
     {
-        // Debug: exibir o ID do produto
         error_log("ID do produto: " . $id);
 
         $product = ProductModel::find($id);
 
-        // Debug: verificar se o produto foi encontrado
         if (!$product) {
             error_log("Produto não encontrado para ID: " . $id);
             return $this->view('single-product', ['error' => 'Produto não encontrado']);
         }
-
-        // Retorna a view com o produto encontrado
         return $this->view('single-product', ['product' => $product]);
     }
 

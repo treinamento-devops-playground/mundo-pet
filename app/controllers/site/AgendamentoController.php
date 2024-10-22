@@ -39,7 +39,7 @@ class AgendamentoController extends BaseController
         try {
             if (AgendamentoModel::isAvailable($userId, $date, $time, $serviceType)) {
                 if (AgendamentoModel::create($userId, $petType, $serviceType, $date, $time)) {
-                    echo "Agendamento realizado com sucesso!";
+                    return $this->view('agendamentos/agendamentos-create');
                 } else {
                     echo "Erro ao agendar. Tente novamente.";
                 }

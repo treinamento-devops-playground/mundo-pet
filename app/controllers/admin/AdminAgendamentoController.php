@@ -29,12 +29,20 @@ class AdminAgendamentoController extends BaseController
     public function update($params)
     {
         $id = $params[0];
+
         $data = Request::only(['pet_type', 'service_type', 'date', 'time']);
+
+        if (empty($data['pet_type']) || empty($data['service_type']) || empty($data['date']) || empty($data['time'])) {
+            return $this->jsonResponse(['error' => 'Todos os campos são obrigatórios'], 400);
+        }
 
         $updated = AgendamentoModel::update($id, $data);
 
         if ($updated) {
-            return $this->jsonResponse(['message' => 'Agendamento atualizado com sucesso', 'agendamento' => AgendamentoModel::find($id)]);
+            return $this->jsonResponse([
+                'message' => 'Agendamento atualizado com sucesso',
+                'agendamento' => AgendamentoModel::find($id)
+            ]);
         } else {
             return $this->jsonResponse(['error' => 'Erro ao atualizar o agendamento'], 500);
         }
