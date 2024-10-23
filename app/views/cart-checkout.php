@@ -1,23 +1,3 @@
-<?php
-session_start();
-
-// Verifica se o usuário está logado
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /login.php");
-    exit("Você precisa estar logado para acessar o checkout.");
-}
-
-// Verifica se o total do carrinho está definido na sessão
-if (!isset($_SESSION['cart_total'])) {
-    die("Erro: Nenhum total de carrinho encontrado. Por favor, volte ao carrinho.");
-}
-
-$cartTotal = $_SESSION['cart_total'];
-$desconto = 10; // Definir o valor de desconto, se necessário
-$totalFinal = $cartTotal - $desconto;
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -83,19 +63,15 @@ $totalFinal = $cartTotal - $desconto;
             border-radius: 5px;
             text-decoration: none;
         }
-
-        .summary p {
-            margin: 10px 0;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- Formulário de Endereço -->
+
         <div class="form-section">
-            <h1>Dados de Endereço</h1>
-            <form action="checkout" method="POST">
+            <h1>Volte ao carrinho</h1>
+            <form action="/checkout/process" method="POST">
                 <label for="name">Nome Completo</label>
                 <input type="text" id="name" name="name" required>
 
@@ -113,6 +89,7 @@ $totalFinal = $cartTotal - $desconto;
             </form>
         </div>
 
+        <!-- Seção de Pagamento -->
         <div class="payment-section">
             <h1>Pagamento</h1>
             <div class="cards">
@@ -133,9 +110,9 @@ $totalFinal = $cartTotal - $desconto;
                 <input type="text" id="cvv" name="cvv" required>
 
                 <div class="summary">
-                    <p>Valor: R$ <?= number_format($cartTotal, 2, ',', '.') ?></p>
-                    <p>Desconto: R$ <?= number_format($desconto, 2, ',', '.') ?></p>
-                    <p>Total: R$ <?= number_format($totalFinal, 2, ',', '.') ?></p>
+                    <p>Valor: R$ 200</p>
+                    <p>Desconto: R$ 10</p>
+                    <p>Total: R$ 190</p>
                 </div>
 
                 <button type="submit" class="btn-finalizar">Finalizar</button>
