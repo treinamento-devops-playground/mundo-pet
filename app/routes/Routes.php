@@ -22,6 +22,7 @@ class Routes
                 '/admin/agendamentos' => 'admin\AdminAgendamentoController@show',
                 '/admin' => 'admin\AdminController@show',
 
+                '/checkout' => 'site\CheckoutController@show',
 
                 '/admin/products' => 'admin\AdminProductController@index',
                 '/admin/products/create' => 'admin\AdminProductController@create',
@@ -37,6 +38,8 @@ class Routes
                 '/admin/products/store' => 'admin\AdminProductController@store',
                 '/admin/products/update/[0-9]+' => 'admin\AdminProductController@update',
                 '/admin/products/delete/[0-9]+' => 'admin\AdminProductController@delete',
+
+                '/checkout/process' => 'site\CheckoutController@processPayment',
             ],
         ];
     }
