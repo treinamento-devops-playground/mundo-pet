@@ -20,7 +20,6 @@ class Connection
                 die('Erro ao conectar ao banco de dados: ' . $e->getMessage());
             }
         }
-
         return self::$pdo;
     }
 
@@ -70,6 +69,7 @@ class Connection
                     user_id INTEGER NOT NULL,
                     product_id INTEGER NOT NULL,
                     quantity INTEGER NOT NULL DEFAULT 1,
+                    total REAL NOT NULL DEFAULT 0.0,
                     FOREIGN KEY (user_id) REFERENCES users(id),
                     FOREIGN KEY (product_id) REFERENCES products(id)
                 );
@@ -94,6 +94,7 @@ class Connection
                     FOREIGN KEY (user_id) REFERENCES users(id)
                 );
             ";
+
             try {
                 $pdo->exec($schedulingTable);
                 $pdo->exec($usersTable);

@@ -63,12 +63,15 @@
             border-radius: 5px;
             text-decoration: none;
         }
+
+        .summary p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-
         <div class="form-section">
             <h1>Volte ao carrinho</h1>
             <form action="/checkout/process" method="POST">
@@ -89,14 +92,13 @@
             </form>
         </div>
 
-        <!-- Seção de Pagamento -->
         <div class="payment-section">
             <h1>Pagamento</h1>
             <div class="cards">
                 <img src="/img/mastercard.png" alt="MasterCard">
                 <img src="/img/visa.png" alt="Visa">
             </div>
-            <form action="/checkout" method="POST">
+            <form action="/checkout/process" method="POST">
                 <label for="card_name">Nome no cartão</label>
                 <input type="text" id="card_name" name="card_name" required>
 
@@ -110,9 +112,17 @@
                 <input type="text" id="cvv" name="cvv" required>
 
                 <div class="summary">
-                    <p>Valor: R$ 200</p>
-                    <p>Desconto: R$ 10</p>
-                    <p>Total: R$ 190</p>
+                    <?php
+                    // Aqui você deve recuperar o valor total do carrinho para exibir
+                    $cartTotal = 0; // Inicializa a variável total do carrinho
+                    if (isset($_SESSION['user_id'])) {
+                        $cartModel = new \app\database\models\CartModel();
+                        $cartTotal = $cartModel->getCartTotal($_SESSION['user_id']);
+                    }
+                    ?>
+                    <p>Valor: R$ <?php echo number_format($cartTotal, 2, ',', '.'); ?></p>
+                    <p>Desconto: R$ 0,00</p>
+                    <p>Total: R$ <?php echo number_format($cartTotal, 2, ',', '.'); ?></p>
                 </div>
 
                 <button type="submit" class="btn-finalizar">Finalizar</button>
