@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #E8E8E8;
+    background-image: url("/img/patas.png");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    height: 54px;
+    background-color: #6C5E9C;
+    border-radius: 15px;
+    margin: 25px auto;
+    padding: 3px 20px;
+}
+
+.logo {
+    width: 60px;
+}
+
+.user-icon img {
+    display: flex;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.container {
+    width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.agendamento-list-section {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse; 
+}
+
+thead th {
+    background-color: #6B6EAF;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+tbody tr {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f1f1f1; 
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.agendamento-actions {
+    text-align: center; 
+}
+
+.agendamento-actions .edit-btn,
+.agendamento-actions .delete-btn {
+    display: inline-block; 
+    margin: 0 5px; 
+}
+
+.add-agendamento {
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+.add-agendamento-btn {
+    background-color: #4F5B93;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.add-agendamento-btn:hover {
+    background-color: #5a4a84;
+}
+
+@media (max-width: 1024px) {
+    .header, .container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 22px;
+    }
+}

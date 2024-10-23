@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-image: url("../img/patas.png");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #E8E8E8;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  width: 400px;
+  background-color: #8892BF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 32px;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px; 
+}
+
+
+.logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 60%;
+  box-shadow: 0 4px 8px rgba(33, 33, 33, 0.8);
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 38px;
+  color: #333333;
+}
+
+.error-msg {
+  color: red;
+  font-size: 16px;
+  margin-top: 15px; /* Espaçamento acima da mensagem */
+  text-align: center; /* Centraliza o texto da mensagem */
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  height: 45px;
+  border-radius: 15px;
+  padding: 10px 15px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+}
+
+.btn {
+  width: 180px;
+  height: 54px;
+  border-radius: 15px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #4F5B93;
+  transition: background-color 0.8s;
+}
+
+.btn:hover {
+  background-color: #2a40a5;
+}
+
+.link-cadastro {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: color 0.8s;
+  margin-top: 15px;
+}
+
+.link-cadastro:hover {
+  color: #fff;
+}
