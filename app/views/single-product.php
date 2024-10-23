@@ -184,10 +184,9 @@ try {
             <div class="product-price">R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></div>
             <div class="product-stock">Estoque: <?php echo htmlspecialchars($product['stock']); ?></div>
 
-            <!-- Formulário para adicionar ao carrinho -->
             <form action="/cart/add" method="POST">
-            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
-            <button type="submit" class="add-to-cart-btn">Adicionar ao Carrinho</button>
+                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                <button type="submit" class="add-to-cart-btn">Adicionar ao Carrinho</button>
             </form>
         </div>
     </div>
