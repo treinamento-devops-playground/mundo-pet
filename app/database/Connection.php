@@ -64,10 +64,22 @@ class Connection
                 );
             ";
 
+            $cartsTable = "
+                CREATE TABLE IF NOT EXISTS cart (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    product_id INTEGER NOT NULL,
+                    quantity INTEGER NOT NULL DEFAULT 1,
+                    FOREIGN KEY (user_id) REFERENCES users(id),
+                    FOREIGN KEY (product_id) REFERENCES products(id)
+                );
+            ";
+
             try {
                 $pdo->exec($schedulingTable);
                 $pdo->exec($usersTable);
                 $pdo->exec($productsTable);
+                $pdo->exec($cartsTable);
                 echo "Banco de dados e tabelas criados com sucesso.";
             } catch (PDOException $e) {
                 die('Erro ao criar tabelas: ' . $e->getMessage());

@@ -27,7 +27,7 @@
             </div>
             <div class="input-container">
                 <img src="../img/icons/phone-solid.png">
-                <input type="text" placeholder="Celular" name="telefone" required>
+                <input type="text" placeholder="Celular" name="phone" required>
             </div>
             <div class="button-container">
                 <button class="btn">Cadastrar</button>

@@ -26,6 +26,7 @@ class ProductController extends BaseController
         $products = ProductModel::search($searchTerm);
         return $this->json($products);
     }
+
     public function show($id)
     {
         error_log("ID do produto: " . $id);
@@ -36,9 +37,9 @@ class ProductController extends BaseController
             error_log("Produto não encontrado para ID: " . $id);
             return $this->view('single-product', ['error' => 'Produto não encontrado']);
         }
+
         return $this->view('single-product', ['product' => $product]);
     }
-
 
     private function json($data)
     {
