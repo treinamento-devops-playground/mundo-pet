@@ -143,7 +143,9 @@ try {
         <?php endif; ?>
     </div>
 
+
     <a href="/product" class="back-link">Continuar Comprando</a>
+    <a href="/checkout" class="back-link">Checkout</a>
 </body>
 
 </html>

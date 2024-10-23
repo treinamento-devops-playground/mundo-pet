@@ -20,7 +20,6 @@ class Connection
                 die('Erro ao conectar ao banco de dados: ' . $e->getMessage());
             }
         }
-
         return self::$pdo;
     }
 
@@ -70,8 +69,29 @@ class Connection
                     user_id INTEGER NOT NULL,
                     product_id INTEGER NOT NULL,
                     quantity INTEGER NOT NULL DEFAULT 1,
+                    total REAL NOT NULL DEFAULT 0.0,
                     FOREIGN KEY (user_id) REFERENCES users(id),
                     FOREIGN KEY (product_id) REFERENCES products(id)
+                );
+            ";
+
+            $checkoutTable = "
+                CREATE TABLE IF NOT EXISTS checkout (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    name TEXT NOT NULL,
+                    address TEXT NOT NULL,
+                    city TEXT NOT NULL,
+                    cep TEXT NOT NULL,
+                    complement TEXT,
+                    card_name TEXT NOT NULL,
+                    card_number TEXT NOT NULL,
+                    expiration_date TEXT NOT NULL,
+                    cvv TEXT NOT NULL,
+                    total_amount REAL NOT NULL,
+                    discount REAL DEFAULT 0,
+                    payment_status TEXT NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
                 );
             ";
 
@@ -80,6 +100,7 @@ class Connection
                 $pdo->exec($usersTable);
                 $pdo->exec($productsTable);
                 $pdo->exec($cartsTable);
+                $pdo->exec($checkoutTable);
                 echo "Banco de dados e tabelas criados com sucesso.";
             } catch (PDOException $e) {
                 die('Erro ao criar tabelas: ' . $e->getMessage());
