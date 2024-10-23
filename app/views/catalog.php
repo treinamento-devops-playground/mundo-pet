@@ -7,7 +7,6 @@
     <title>Catálogo de Produtos</title>
     <link rel="stylesheet" href="../css/catalogo.css">
     <style>
-        /* Estilização básica para o layout */
         body {
             font-family: Arial, sans-serif;
             margin: 0;

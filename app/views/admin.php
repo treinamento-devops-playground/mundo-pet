@@ -17,6 +17,6 @@
 
 <div class="admin-options">
     <button class="admin-btn" onclick="window.location.href='admin/agendamentos'">Agendamentos</button>
-    <button class="admin-btn" onclick="window.location.href='adminProdutos.php'">Gerenciar Produtos</button>
+    <button class="admin-btn" onclick="window.location.href='admin/products'">Gerenciar Produtos</button>
 </div>
 <?php $this->stop(); ?>

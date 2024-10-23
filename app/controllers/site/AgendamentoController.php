@@ -39,12 +39,13 @@ class AgendamentoController extends BaseController
         try {
             if (AgendamentoModel::isAvailable($userId, $date, $time, $serviceType)) {
                 if (AgendamentoModel::create($userId, $petType, $serviceType, $date, $time)) {
+                    header('Location: /agendamentos/create?success=store_success');
                     return $this->view('agendamentos/agendamentos-create');
                 } else {
-                    echo "Erro ao agendar. Tente novamente.";
+                    header('Location: /agendamentos/create?error=store_error');
                 }
             } else {
-                echo "Você já tem um agendamento para esse serviço na mesma data e horário.";
+                header('Location: /agendamentos/create?error=unavailable');
             }
         } catch (\Exception $e) {
             echo "Ocorreu um erro ao processar o agendamento: " . $e->getMessage();
