@@ -4,7 +4,7 @@ namespace app\controllers\site;
 
 use app\controllers\BaseController;
 use app\database\models\CheckoutModel;
-use app\database\models\CartModel; // Certifique-se de que este modelo está incluído
+use app\database\models\CartModel;
 
 class CheckoutController extends BaseController
 {
@@ -31,7 +31,8 @@ class CheckoutController extends BaseController
         }
 
         try {
-            $cartTotal = CartModel::getCartTotal($userId); // Obtenha o total do carrinho
+            $cartModel = new CartModel();
+            $cartTotal = $cartModel->getCartTotal($userId);
 
             $data = [
                 'user_id' => $userId,
@@ -44,7 +45,7 @@ class CheckoutController extends BaseController
                 'card_number' => $_POST['card_number'],
                 'expiration_date' => $_POST['expiration_date'],
                 'cvv' => $_POST['cvv'],
-                'total_amount' => $cartTotal, // Use o total do carrinho
+                'total_amount' => $cartTotal,
                 'discount' => $_POST['discount'] ?? 0,
                 'payment_status' => 'pending'
             ];
