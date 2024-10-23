@@ -36,6 +36,7 @@ class ProductController extends BaseController
             error_log("Produto não encontrado para ID: " . $id);
             return $this->view('single-product', ['error' => 'Produto não encontrado']);
         }
+
         return $this->view('single-product', ['product' => $product]);
     }
 

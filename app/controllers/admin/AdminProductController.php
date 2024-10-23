@@ -20,17 +20,18 @@ class AdminProductController extends BaseController
 
     public function store()
     {
-        $name = $_POST['nome'];
-        $description = $_POST['descricao'];
-        $price = $_POST['preco'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
         $info = $_POST['info'];
-        $category = $_POST['categoria'];
-        $estoque = $_POST['estoque'];
+        $category = $_POST['category'];
+        $estoque = $_POST['stock'];
 
         $success = ProductModel::create($name, $description, $price, $info, $category, $estoque);
 
         if ($success) {
             header('Location: /admin/products?success=Produto cadastrado com sucesso');
+            return $this->view('admin-create-products');
         } else {
             return $this->view('admin-create-products', ['error' => 'Erro ao cadastrar produto']);
         }

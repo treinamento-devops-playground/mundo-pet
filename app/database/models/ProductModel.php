@@ -7,6 +7,13 @@ use app\database\Connection;
 
 class ProductModel
 {
+    private $db;
+
+    public function __construct()
+    {
+        $this->db = Connection::getConnection();
+    }
+
     public static function all()
     {
         $pdo = Connection::getConnection();

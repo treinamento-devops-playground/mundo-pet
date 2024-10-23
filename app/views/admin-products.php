@@ -1,26 +1,108 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<?php $this->layout('admin-base', ['title' => 'Adicionar Produto']); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo - Produtos</title>
-    <link rel="stylesheet" href="/css/adminProdutos.css">
-</head>
+<?php $this->start('css'); ?>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    #nav-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #6B6EAF;
+        padding: 10px 20px;
+    }
+
+    .logo img {
+        max-width: 150px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #333;
+        text-align: center;
+    }
+
+    .success,
+    .error {
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 10px 0;
+        background-color: #6B6EAF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #5a5d8b;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px 15px;
+        border-radius: 5px;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+</style>
+<?php $this->stop(); ?>
+
+<?php $this->start('admin-content'); ?>
 
 <body>
-    <header>
-        <nav id="nav-bar">
-            <div class="logo">
-                <img src="/img/logo.png" alt="Logo Mundo Pet">
-            </div>
-            <ul class="list-nav">
-                <li><a href="/admin">Painel</a></li>
-                <li><a href="/admin/products">Produtos</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <main>
         <div class="container">
@@ -68,5 +150,4 @@
         </div>
     </main>
 </body>
-
-</html>
+<?php $this->stop(); ?>
