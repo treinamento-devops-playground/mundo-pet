@@ -64,6 +64,17 @@ class Connection
                 );
             ";
 
+            $cartsTable = "
+                CREATE TABLE IF NOT EXISTS cart (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    product_id INTEGER NOT NULL,
+                    quantity INTEGER NOT NULL DEFAULT 1,
+                    FOREIGN KEY (user_id) REFERENCES users(id),
+                    FOREIGN KEY (product_id) REFERENCES products(id)
+                );
+            ";
+
             $checkoutTable = "
                 CREATE TABLE IF NOT EXISTS checkout (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -87,6 +98,7 @@ class Connection
                 $pdo->exec($schedulingTable);
                 $pdo->exec($usersTable);
                 $pdo->exec($productsTable);
+                $pdo->exec($cartsTable);
                 $pdo->exec($checkoutTable);
                 echo "Banco de dados e tabelas criados com sucesso.";
             } catch (PDOException $e) {

@@ -25,9 +25,9 @@ class AdminProductController extends BaseController
         $price = $_POST['price'];
         $info = $_POST['info'];
         $category = $_POST['category'];
-        $estoque = $_POST['stock'];
+        $stock = $_POST['stock'];
 
-        $success = ProductModel::create($name, $description, $price, $info, $category, $estoque);
+        $success = ProductModel::create($name, $description, $price, $info, $category, $stock);
 
         if ($success) {
             header('Location: /admin/products?success=Produto cadastrado com sucesso');

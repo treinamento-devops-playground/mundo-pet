@@ -16,7 +16,6 @@ try {
     $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
     $stmt->execute();
 
-
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$product) {
@@ -50,13 +49,11 @@ try {
             align-items: center;
             padding: 20px;
             background-color: #333;
-
             color: white;
         }
 
         header .logo img {
             width: 120px;
-
         }
 
         nav ul {
@@ -84,35 +81,27 @@ try {
             padding: 40px;
             justify-content: center;
             max-width: 1200px;
-
             margin: auto;
-
         }
 
         .product-details {
             max-width: 600px;
             text-align: center;
             background-color: white;
-
             border-radius: 8px;
-
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
             padding: 20px;
-
             transition: transform 0.3s;
         }
 
         .product-details:hover {
             transform: scale(1.02);
-
         }
 
         .product-image {
             width: 100%;
             height: auto;
             border-radius: 8px;
-
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
         }
 
@@ -127,7 +116,6 @@ try {
             color: #666;
             margin: 10px 0;
             line-height: 1.5;
-
         }
 
         .product-price {
@@ -146,7 +134,6 @@ try {
         .back-link {
             text-decoration: none;
             color: #0073BB;
-            /* Azul */
             font-weight: bold;
             margin-top: 20px;
             display: inline-block;
@@ -196,11 +183,16 @@ try {
             <div class="product-description">Descrição: <?php echo htmlspecialchars($product['description']); ?></div>
             <div class="product-price">R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></div>
             <div class="product-stock">Estoque: <?php echo htmlspecialchars($product['stock']); ?></div>
-            <a href="/vcart" class="add-to-cart-btn">Adicionar ao Carrinho</a>
+
+            <!-- Formulário para adicionar ao carrinho -->
+            <form action="/cart/add" method="POST">
+            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+            <button type="submit" class="add-to-cart-btn">Adicionar ao Carrinho</button>
+            </form>
         </div>
     </div>
-    <a href="/product" class="back-link">Voltar ao Catálogo</a>
 
+    <a href="/product" class="back-link">Voltar ao Catálogo</a>
 </body>
 
 </html>
