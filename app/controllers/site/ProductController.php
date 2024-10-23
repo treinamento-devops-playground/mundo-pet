@@ -26,6 +26,7 @@ class ProductController extends BaseController
         $products = ProductModel::search($searchTerm);
         return $this->json($products);
     }
+
     public function show($id)
     {
         error_log("ID do produto: " . $id);
@@ -39,7 +40,6 @@ class ProductController extends BaseController
 
         return $this->view('single-product', ['product' => $product]);
     }
-
 
     private function json($data)
     {

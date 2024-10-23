@@ -25,11 +25,7 @@ class AdminProductController extends BaseController
         $price = $_POST['price'];
         $info = $_POST['info'];
         $category = $_POST['category'];
-<<<<<<< HEAD
         $stock = $_POST['stock'];
-=======
-        $estoque = $_POST['stock'];
->>>>>>> 7d3ff057d92edb1faa9904782d58629f4ab4f6be
 
         $success = ProductModel::create($name, $description, $price, $info, $category, $stock);
 
