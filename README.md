@@ -22,6 +22,7 @@ O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades
 8.  RF08 - Método de pagamento Online
 9.  RF09 - Gerenciamento de agendamentos
 10. RF10 - Gerenciamento de Produtos no catálogo
+11. RF11 - Gerenciamento dos dados do usuário
 
 ### User Stories
 
@@ -138,3 +139,28 @@ RF05 - Carrinho de Compras
 3. Permitir ao usuário atualizar a quantidade de produtos no carrinho.
 4. Permitir ao usuário remover produtos do carrinho de compras.
 5. Implementar uma funcionalidade de checkout para finalizar a compra dos produtos.
+
+### Iteração 4: Gerenciamento de Usuários
+
+**Valor da Sprint:** Permitir que os usuários atualizem suas informações pessoais e gerenciem suas consultas marcadas, garantindo que os dados estejam corretos e melhorando a experiência do cliente.
+
+*Objetivo*
+Como usuário, quero poder atualizar minhas informações pessoais e gerenciar minhas consultas marcadas para garantir que minha conta e agendamentos estejam sempre atualizados.
+
+*Requisitos*
+
+- RF11 - Gerenciamento dos dados do usuário.
+
+*Features*
+
+1. Tela de Atualização de Dados: Criar uma tela onde os usuários podem facilmente editar suas informações pessoais, como nome, e-mail e telefone.
+
+2. Visualização de Informações: Implementar uma funcionalidade que permita aos usuários visualizar suas informações antes de confirmar qualquer alteração.
+
+3. Gerenciar Consultas Marcadas: Criar uma área onde os usuários possam visualizar suas consultas marcadas, com opções para cancelar ou solicitar mudanças.
+
+4. Permitir o usuário cancelar um agendamento dentro da area de gerenciamento de consultas marcadas
+
+5. Notificações por E-mail: Enviar um e-mail de confirmação aos usuários após qualquer atualização em suas informações ou consultas.
+
+
