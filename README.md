@@ -18,7 +18,7 @@ RF01 - Cadastro do Usuário
 
 RF02 - Login do Usuário e Administrador
 
-RF03 - Catálogo de Serviços/Produtos
+RF03 - Catálogo de Serviços
 
 RF04 - Agendamento de Serviços
 
@@ -30,7 +30,7 @@ RF07 - Catálogo de Produtos
 
 RF08 - Gerenciamento de Produtos
 
-RF9 - Gerenciamento de Agendamentos
+RF09 - Gerenciamento de Agendamentos
 
 RF10 - Gerenciamento dos Dados do Usuário pelo usuário 
 
@@ -56,10 +56,8 @@ Protótipo de Tela:
 Protótipo de Tela: 
  ![Tela de Login Usuário](./prototipos/login.png)
 
-**RF03 - Catálogo de Serviços/Produtos**
-1. Como um cliente logado, quero poder visualizar o catálogo completo de produtos e serviços oferecidos pelo petshop, para que eu possa escolher o que desejo comprar ou agendar. Para isso, na tela principal, devo ter acesso a uma lista organizada com descrições, preços, e imagens dos produtos e serviços. 
-
-2. Como um administrador, quero poder adicionar, editar ou remover produtos e serviços do catálogo, para que eu possa manter as informações atualizadas. Para isso, devo acessar a área de administração e utilizar as funcionalidades de gerenciamento do catálogo.
+**RF03 - Catálogo de Serviços**
+1. Como um cliente logado, quero poder visualizar o catálogo completo de serviços oferecidos pelo petshop, para que eu possa escolher o que desejo comprar ou agendar. Para isso, na tela principal, devo ter acesso a uma lista organizada com descrições e imagens dos serviços. 
 
 Protótipo de Tela:
  ![Tela de Login Usuário](./prototipos/serviços.png)
@@ -143,11 +141,17 @@ Como usuário, quero poder visualizar os produtos disponíveis no catálogo, com
 
 *Requisitos*:
 
-RF03 - Login de Admin
-RF05 - Catálogo de Produtos     
-RF10 - Gerenciamento de Produtos 
+RF02 - Login do Usuário e Administrador    
+
+RF03 - Catálogo de Serviços
+
+RF08 - Gerenciamento de Produtos
+
+RF07 - Catálogo de Produtos
 
 [Link para o Relatório](Relatorio.md)
+
+---
 
 ### Iteração 2: Login e agendamento do usuário.
 
@@ -157,24 +161,31 @@ RF10 - Gerenciamento de Produtos
 
 *Requisitos*:
 
-RF06 - Agendamento de Serviços
+RF01 - Cadastro do Usuário
 
 *Features:*
 1. Login e Cadastro de usuário
+
+*Requisito*:
+RF04 - Agendamento de Serviços
+
+*Features:*
 2. Permitir o usuário ler, atualizar e deletar seus agendamento
 3. Implementar as telas de cada serviço para agendamento
 4. Implementar a tela de seleção de datas e horários
 
 *Objetivo*: Como admin quero gerenciar os agendamentos de todos os usuários
 
-*Requisitos*: 
+*Requisito*: 
 
-RF09 - Gerenciamento de agendamentos
+RF09 - Gerenciamento de Agendamentos
 
 *Features:*
 1. Permitir o admin visualizar todos os agendamentos e editar ou cancelar agendamentos de um usuário específico
 
 [Link para o Relatório](Relatorio.md)
+
+---
 
 ### Iteração 3: Gerencimento do carrinho de compras 
 
@@ -182,7 +193,7 @@ RF09 - Gerenciamento de agendamentos
 
 *Objetivo*: Como usuário, quero poder gerenciar meus itens em um carrinho de compras para facilitar a finalização da compra de produtos do pet shop.
 
-*Requisitos*:
+*Requisito*:
 
 RF05 - Carrinho de Compras
 
@@ -192,7 +203,16 @@ RF05 - Carrinho de Compras
 2. Permitir ao usuário visualizar os itens em seu carrinho de compras com detalhes.
 3. Permitir ao usuário atualizar a quantidade de produtos no carrinho.
 4. Permitir ao usuário remover produtos do carrinho de compras.
+
+*Requisito*:
+
+RF06 - Pagamento Online
+
+*Features:*
+
 5. Implementar uma funcionalidade de checkout para finalizar a compra dos produtos.
+
+---
 
 ### Iteração 4: Gerenciamento de Usuários
 
@@ -203,7 +223,7 @@ Como usuário, quero poder atualizar minhas informações pessoais e gerenciar m
 
 *Requisito*
 
-- RF11 - Gerenciamento dos dados do usuário.
+RF10 - Gerenciamento dos Dados do Usuário pelo usuário 
 
 *Features*
 
@@ -213,7 +233,7 @@ Como usuário, quero poder atualizar minhas informações pessoais e gerenciar m
 
 *Requisito*
 
-RF12 - Gerenciamento dos agendamentos pelo usuário
+RF11 - Gerenciamento dos agendamentos pelo usuário
 
 *Features*
 
