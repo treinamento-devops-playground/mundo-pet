@@ -51,4 +51,10 @@ class AgendamentoController extends BaseController
             echo "Ocorreu um erro ao processar o agendamento: " . $e->getMessage();
         }
     }
+
+    public function vis_agen(){
+        session_start();
+        return $this->view('vis_agen');
+
+    }
 }
