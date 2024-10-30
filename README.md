@@ -10,19 +10,33 @@ Protótipo de Tela:
 
 O Mundo Pet consiste em uma plataforma online para petshops, com funcionalidades de registro e acesso para clientes e administradores. O sistema oferece um catálogo abrangente de produtos e serviços, permitindo que os clientes agendem serviços e adicionem itens ao carrinho de compras. A plataforma também integra um sistema de pagamento online, garantindo uma experiência de compra prática e segura.
 
+---
+
 ### Requisitos Funcionais do Projeto
 
 RF01 - Cadastro do Usuário
+
 RF02 - Login do Usuário e Administrador
+
 RF03 - Catálogo de Serviços/Produtos
+
 RF04 - Agendamento de Serviços
+
 RF05 - Carrinho de Compras
+
 RF06 - Pagamento Online
+
 RF07 - Catálogo de Produtos
+
 RF08 - Gerenciamento de Produtos
+
 RF9 - Gerenciamento de Agendamentos
+
 RF10 - Gerenciamento dos Dados do Usuário pelo usuário 
+
 RF11 - Gerenciamento dos agendamentos pelo usuário
+
+---
 
 ### User Stories
 
@@ -118,6 +132,8 @@ Para isso, ao acessar meus agendamentos, devo ver opções de cancelamento.
 
 Protótipo de Tela:
  ![Tela de Login Usuário](./prototipos/User-Agendamentos.png)
+
+---
 
 ### Iteração 1 - Catálogos
 *Valor*: Permitir que o administrador gerencie os produtos que serão oferecidos no catálogo do petshop, adicionando, removendo ou editando, além de permitir que o usuário acesse o catálogo de produtos.
