@@ -136,16 +136,19 @@ Protótipo de Tela:
 ### Iteração 1 - Catálogos
 *Valor*: Permitir que o administrador gerencie os produtos que serão oferecidos no catálogo do petshop, adicionando, removendo ou editando, além de permitir que o usuário acesse o catálogo de produtos.
 
-*Objetivo*: Como administrador, quero fazer login no sistema do petshop para gerenciar o catálogo geral.
-Como usuário, quero poder visualizar os produtos disponíveis no catálogo, com opção de pesquisa e filtros por categoria.
+*Objetivo*: Como administrador, quero fazer login no sistema do petshop para gerenciar o catálogo de serviços.
 
 *Requisitos*:
 
 RF02 - Login do Usuário e Administrador    
 
-RF03 - Catálogo de Serviços
-
 RF08 - Gerenciamento de Produtos
+
+*Objetivo*: Como usuário, quero poder visualizar os produtos disponíveis no catálogo, com opção de pesquisa e filtros por categoria.
+
+*Requisitos*:
+
+RF03 - Catálogo de Serviços
 
 RF07 - Catálogo de Produtos
 
@@ -167,6 +170,7 @@ RF01 - Cadastro do Usuário
 1. Login e Cadastro de usuário
 
 *Requisito*:
+
 RF04 - Agendamento de Serviços
 
 *Features:*
@@ -227,9 +231,9 @@ RF10 - Gerenciamento dos Dados do Usuário pelo usuário
 
 *Features*
 
-1. Tela de Atualização de Dados: Criar uma tela onde os usuários podem facilmente editar suas informações pessoais, como nome, e-mail e telefone.
+1. Visualização de Informações: Implementar uma funcionalidade que permita aos usuários visualizar suas informações antes de confirmar qualquer alteração.
 
-2. Visualização de Informações: Implementar uma funcionalidade que permita aos usuários visualizar suas informações antes de confirmar qualquer alteração.
+2. Funcionalidade de edição dos dados da tela de visualização de informações
 
 *Requisito*
 
@@ -237,10 +241,10 @@ RF11 - Gerenciamento dos agendamentos pelo usuário
 
 *Features*
 
-3. Gerenciar Consultas Marcadas: Criar uma área onde os usuários possam visualizar suas consultas marcadas, com opções para cancelar ou solicitar mudanças.
+3. Gerenciar Consultas Marcadas: Criar uma área onde os usuários possam visualizar suas consultas marcadas, com opção para cancelar consulta marcada
 
 4. Permitir o usuário cancelar um agendamento dentro da area de gerenciamento de consultas marcadas
 
-5. Notificações por E-mail: Enviar um e-mail de confirmação aos usuários após qualquer atualização em suas informações ou consultas.
+5. Notificações por E-mail: Enviar um e-mail de notificação aos usuários após o cancelamento de suas consultas, constando o motivo do cancelamento.
 
 
