@@ -4,6 +4,8 @@ namespace app\controllers\site;
 
 use app\database\models\AgendamentoModel;
 use app\controllers\BaseController;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class AgendamentoController extends BaseController
 {
@@ -52,9 +54,48 @@ class AgendamentoController extends BaseController
         }
     }
 
-    public function vis_agen(){
+    public function cancelForm($id)
+    {
         session_start();
-        return $this->view('vis_agen');
 
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /login?message=login_required");
+            exit();
+        }
+
+        return $this->view('user-scheduling-cancel', ['agendamento_id' => $id]);
+    }
+
+    private function enviarEmailCancelamento($email, $motivo)
+    {
+        require_once 'vendor/autoload.php';
+
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'sandbox.smtp.mailtrap.io';
+            $mail->SMTPAuth = true;
+            $mail->Username = '71f21970161a51';
+            $mail->Password = '67d7c514be9767';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('no-reply@mundopet.com', 'mundopet');
+            $mail->addAddress($email);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Agendamento Cancelado';
+            $mail->Body    = "
+                <h1>Agendamento Cancelado</h1>
+                <p>Seu agendamento foi cancelado com sucesso.</p>
+                <p><strong>Motivo do cancelamento:</strong> " . htmlspecialchars($motivo) . "</p>
+            ";
+            $mail->AltBody = 'Seu agendamento foi cancelado com sucesso. Motivo do cancelamento: ' . $motivo;
+
+            $mail->send();
+        } catch (\Exception $e) {
+            error_log("Erro ao enviar e-mail: {$mail->ErrorInfo}");
+        }
     }
 }
