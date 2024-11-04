@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color:#d9d9d9;
 }
 
 /* Cabeçalho */
@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1042px;
+    width: 1000px;
     height: 54px;
     background-color: #6C5E9C;
     border-radius: 19px;
@@ -44,6 +44,14 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+
+}
+
+.titulo {
+font-size: large;
+margin: 10px;
+color: black;
 
 }
 
@@ -56,6 +64,11 @@ body {
 /* Container principal */
 .container {
     display: flex;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
 }
 
 /* Barra lateral */
@@ -66,15 +79,19 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border-radius: 15px;
 }
 
 .sidebar button {
-    background-color: white;
+    background-color: #e8e8e8;
     border: none;
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
 }
+
 
 /* Conteúdo principal */
 .content {
@@ -83,12 +100,14 @@ body {
 }
 
 .user-card {
-    display: flex;
-    align-items: center;
-    background-color: #e3e3e3;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  background-color: #D9D9D9;
+  display: flex;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .user-avatar {
@@ -117,9 +136,9 @@ body {
     align-items: center;
     justify-content: space-between;
     background-color: white;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    padding: 1px;
+    margin-bottom: 40px;
+    border-radius: 30px;
 }
 
 .more {
@@ -133,4 +152,5 @@ body {
     padding: 5px;
     border-radius: 50%;
     cursor: pointer;
+    margin: 10px;
 }
