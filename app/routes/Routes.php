@@ -2,6 +2,8 @@
 
 namespace app\routes;
 
+use app\controllers\site\AgendamentoController;
+
 class Routes
 {
     public static function get()
@@ -31,6 +33,7 @@ class Routes
                 '/admin/products' => 'admin\AdminProductController@index',
                 '/admin/products/create' => 'admin\AdminProductController@create',
                 '/admin/products/edit/[0-9]+' => 'admin\AdminProductController@edit',
+                '/vis_agen' => 'site\AgendamentoController@vis_agen',
 
                 '/checkout' => 'site\CheckoutController@show',
             ],

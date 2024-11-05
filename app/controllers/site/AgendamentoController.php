@@ -6,6 +6,7 @@ use app\database\models\AgendamentoModel;
 use app\controllers\BaseController;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use app\database\Connection;
 
 class AgendamentoController extends BaseController
 {
@@ -64,6 +65,22 @@ class AgendamentoController extends BaseController
         }
 
         return $this->view('user-scheduling-cancel', ['agendamento_id' => $id]);
+    }
+
+    public function vis_agen(){
+        session_start();
+        $userId = $_SESSION['user_id'] ?? null;
+
+        if (!$userId) {
+            return $this->view('login', ['error' => 'Faça login.']);
+        }
+
+        $pdo = Connection::getConnection();
+        $stmt = $pdo->prepare('SELECT * FROM scheduling WHERE user_id = :user_id');
+        $stmt->execute(['user_id' => $userId]);
+        $appointments = $stmt->fetchAll();
+
+        return $this->view('vis_agen', ['agendamentos' => $appointments]);
     }
 
     private function enviarEmailCancelamento($email, $motivo)

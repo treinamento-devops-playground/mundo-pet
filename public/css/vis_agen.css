@@ -1,0 +1,156 @@
+/* Estilo geral */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color:#d9d9d9;
+}
+
+/* Cabeçalho */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    height: 54px;
+    background-color: #6C5E9C;
+    border-radius: 19px;
+    margin: 25px auto;
+    padding: 3px 20px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.list-nav {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    font-size: 20px;
+    padding-top: 3px;
+    font-weight: 900;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+
+.nav a {
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+
+}
+
+.titulo {
+font-size: large;
+margin: 10px;
+color: black;
+
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+}
+
+/* Barra lateral */
+.sidebar {
+    width: 200px;
+    background-color: #8b8fb5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 15px;
+}
+
+.sidebar button {
+    background-color: #e8e8e8;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
+/* Conteúdo principal */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.user-card {
+  background-color: #D9D9D9;
+  display: flex;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name {
+    flex: 1;
+}
+
+.edit-btn {
+    background-color: #6a5aa3;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Agendamentos */
+.appointment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 1px;
+    margin-bottom: 40px;
+    border-radius: 30px;
+}
+
+.more {
+    margin: 10px;
+
+}
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 10px;
+}
