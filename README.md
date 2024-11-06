@@ -250,6 +250,8 @@ RF11 - Gerenciamento dos agendamentos pelo usuário
 
 5. Notificações por E-mail: Enviar um e-mail de notificação aos usuários após o cancelamento de suas consultas, constando o motivo do cancelamento.
 
+---
+
 ### Iteração 5: Notificações e Feedback dos Serviços
 
 **Valor**: Melhorar a experiência do usuário e a eficiência do petshop ao implementar notificações automáticas e um sistema de feedback, promovendo maior engajamento e possibilitando melhorias nos serviços oferecidos.
