@@ -9,7 +9,9 @@ class CartController extends BaseController
 {
     public function vcart()
     {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $userId = $_SESSION['user_id'] ?? null;
 
         if (!$userId) {

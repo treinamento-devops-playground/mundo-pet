@@ -7,6 +7,8 @@ use app\controllers\BaseController;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+
+
 class AgendamentoController extends BaseController
 {
     public function create()
@@ -54,6 +56,7 @@ class AgendamentoController extends BaseController
         }
     }
 
+
     public function cancelForm($id)
     {
         session_start();
@@ -63,29 +66,76 @@ class AgendamentoController extends BaseController
             exit();
         }
 
-        return $this->view('user-scheduling-cancel', ['agendamento_id' => $id]);
+        $agendamento = AgendamentoModel::find($id);
+
+        if (!$agendamento || $agendamento['user_id'] != $_SESSION['user_id']) {
+            header("Location: /agendamentos?error=not_found");
+            exit();
+        }
+
+        return $this->view('user-scheduling-cancel', ['agendamento' => $agendamento]);
+    }
+
+    public function confirmCancel($id)
+    {
+        session_start();
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /login?message=login_required");
+            exit();
+        }
+
+        $userId = $_SESSION['user_id'];
+        $userEmail = $_SESSION['user_email'];
+        $motivo = $_POST['motivo'] ?? '';
+
+        if (empty($motivo)) {
+            header("Location: /agendamentos/cancelar/$id?error=empty_reason");
+            exit();
+        }
+
+        $agendamento = AgendamentoModel::find($id);
+
+        if (!$agendamento || $agendamento['user_id'] != $userId) {
+            header("Location: /agendamentos?error=not_found");
+            exit();
+        }
+
+        try {
+            if (AgendamentoModel::cancel($id, $userId, $motivo)) {
+                $this->enviarEmailCancelamento($userEmail, $motivo);
+                header("Location: /agendamentos/cancelar/$id?success=canceled");
+                exit();
+            } else {
+                header("Location: /agendamentos/cancelar/$id?error=cancel_failed");
+                exit();
+            }
+        } catch (\Exception $e) {
+            header("Location: /agendamentos/cancelar/$id?error=exception");
+            exit();
+        }
     }
 
     private function enviarEmailCancelamento($email, $motivo)
     {
-        require_once 'vendor/autoload.php';
+        require_once __DIR__ . '/../../../vendor/autoload.php';
 
         $mail = new PHPMailer(true);
 
         try {
+            $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->Host = 'sandbox.smtp.mailtrap.io';
+            $mail->Host = 'smtp.mailtrap.io';
             $mail->SMTPAuth = true;
-            $mail->Username = '71f21970161a51';
-            $mail->Password = '67d7c514be9767';
-            $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
+            $mail->Username = 'api';
+            $mail->Password = '********1336';
 
-            $mail->setFrom('no-reply@mundopet.com', 'mundopet');
+            $mail->setFrom('no-reply@demomailtrap.com', 'MundoPet');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Agendamento Cancelado';
+            $mail->Subject = 'Confirmação de Cancelamento de Agendamento';
             $mail->Body    = "
                 <h1>Agendamento Cancelado</h1>
                 <p>Seu agendamento foi cancelado com sucesso.</p>
@@ -93,8 +143,10 @@ class AgendamentoController extends BaseController
             ";
             $mail->AltBody = 'Seu agendamento foi cancelado com sucesso. Motivo do cancelamento: ' . $motivo;
 
+            $mail->SMTPDebug = 2;
             $mail->send();
-        } catch (\Exception $e) {
+            echo 'Email enviado com sucesso!';
+        } catch (Exception $e) {
             error_log("Erro ao enviar e-mail: {$mail->ErrorInfo}");
         }
     }

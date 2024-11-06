@@ -36,8 +36,11 @@ class Routes
             ],
             'post' => [
                 '/agendamentos/store' => 'site\AgendamentoController@store',
+                '/agendamentos/cancelar/confirmar/[0-9]+' => 'site\AgendamentoController@confirmCancel',
+
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
+
                 '/admin/agendamentos/update/[0-9]+' => 'admin\AdminAgendamentoController@update',
 
                 '/admin/products/store' => 'admin\AdminProductController@store',

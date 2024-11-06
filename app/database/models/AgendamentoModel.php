@@ -60,4 +60,18 @@ class AgendamentoModel
         $stmt = $pdo->query('SELECT * FROM scheduling');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function cancel($id, $userId, $motivo)
+    {
+        $pdo = Connection::getConnection();
+
+        $sql = "UPDATE scheduling SET status = 'cancelado', motivo_cancelamento = :motivo WHERE id = :id AND user_id = :user_id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':motivo', $motivo, PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }

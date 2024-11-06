@@ -5,7 +5,7 @@
 <?php $this->stop(); ?>
 
 <?php $this->start('main-content'); ?>
-<div class="form-container">
+<div class="container">
     <form action="store" method="post">
         <div class="form-group">
             <label for="pet-type">Qual tipo de pet:</label>

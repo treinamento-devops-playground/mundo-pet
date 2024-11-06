@@ -1,182 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
-body {
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 header {
-    width: 100%;
-    background-color: #6C5E9C;
-    padding: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #333;
+    color: white;
 }
 
 header .logo img {
-    height: 50px;
-    margin-left: 20px;
+    width: 100px;
 }
 
-header nav ul {
+nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
 
-header nav ul li {
+nav ul li {
     display: inline;
 }
 
-header nav ul li a {
+nav ul li a {
+    color: white;
     text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
 }
 
-header nav ul li a:hover {
-    background-color: #575BA7;
-    border-radius: 5px;
-}
-
-header .search-bar {
+.search-bar {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    gap: 10px;
 }
 
-header .search-bar input {
-    padding: 10px;
-    border: none;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-}
-
-header .search-bar button {
-    padding: 10px;
-    border: none;
-    background-color: #575BA7;
-    color: #fff;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-header .search-bar button:hover {
-    background-color: #4F5B93;
+.search-bar input {
+    padding: 8px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
 .container {
     display: flex;
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px;
-}
-
-.sidebar {
-    flex: 1;
-    background-color: #8892BF;
     padding: 20px;
-    border-radius: 10px;
-    margin-right: 20px;
 }
 
-.sidebar ul {
+aside {
+    width: 20%;
+}
+
+aside ul {
     list-style: none;
     padding: 0;
 }
 
-.sidebar ul li {
+aside ul li {
     margin-bottom: 10px;
 }
 
-.sidebar ul li a {
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-    display: block;
-    padding: 10px;
-    background-color: #ccc;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.sidebar ul li a:hover {
-    background-color: #bbb;
-}
-
 main {
-    flex: 3;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 }
 
 .product-card {
-    background-color: #fff;
-    padding: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
     text-align: center;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.product-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.product-name {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.product-description {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 15px;
-}
-
-.product-price {
-    font-size: 1.2rem;
-    color: #007BFF;
-    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
 .product-card a {
     text-decoration: none;
-    color: inherit;
+    color: #333;
 }
 
-.product-card a:hover .product-name {
-    color: #0056b3;
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-name {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.product-price {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #e74c3c;
+    font-weight: bold;
 }
