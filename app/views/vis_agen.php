@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,15 +18,19 @@
 
     <div class="container">
         <aside class="sidebar">
-            <button>Meu Perfil</button>
+            <a href="/user/edit"><button>Meu Perfil</button></a>
             <button>Agendamentos</button>
         </aside>
 
         <main class="content">
             <div class="user-card">
-                <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
-                <span class="user-name"><?= htmlspecialchars($username) ?></span>
-                <button class="edit-btn">Editar</button>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
+                    <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span> <!-- Exibe o email ou username do usuário -->
+                    <button class="edit-btn">Editar</button>
+                <?php else: ?>
+                    <p>Você não está logado.</p>
+                <?php endif; ?>
             </div>
 
             <?php if (!empty($agendamentos)): ?>

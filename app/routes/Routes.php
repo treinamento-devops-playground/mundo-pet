@@ -3,6 +3,7 @@
 namespace app\routes;
 
 use app\controllers\site\AgendamentoController;
+use app\controllers\site\UserController;
 
 class Routes
 {
@@ -19,10 +20,10 @@ class Routes
 
                 '/agendamentos/create' => 'site\AgendamentoController@create',
                 '/agendamentos/cancelar/[0-9]+' => 'site\AgendamentoController@cancelForm',
-
+                '/user/edit' => 'site\UserController@editProfile', 
                 '/vis_agen' => 'site\AgendamentoController@vis_agen',
 
-                'user/[0-9]+/perfil/editar' => 'site\UserController@editar',
+                '/user/[0-9]+/perfil/editar' => 'site\UserController@editProfile', 
 
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',

@@ -10,6 +10,8 @@ class UserController extends BaseController
 {
     public function login()
     {
+        session_start();
+
         $message = "";
 
         if (isset($_GET['message']) && $_GET['message'] === 'login_required') {
@@ -27,7 +29,6 @@ class UserController extends BaseController
                 header("Location: /admin");
                 exit();
             }
-
             $user = $userModel->getUserByEmail($email);
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
@@ -44,19 +45,67 @@ class UserController extends BaseController
 
     public function register()
     {
+        session_start();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = Request::input('username');
             $email = Request::input('email');
             $password = password_hash(Request::input('password'), PASSWORD_DEFAULT);
-            $telefone = Request::input('phone');
+            $phone = Request::input('phone');
 
             $userModel = new UserModel();
-            $userModel->createUser($username, $email, $password, $telefone);
+            $userModel->createUser($username, $email, $password, $phone);
 
             header("Location: /login");
             exit();
         }
 
         return $this->view('user/register');
+    }
+
+    public function editProfile($id)
+    {
+        session_start();
+
+        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != $id) {
+            header("Location: /login?message=login_required");
+            exit();
+        }
+
+        $userModel = new UserModel();
+        $user = $userModel->getUserById($id);
+
+        if (!$user) {
+            header("Location: /login?message=user_not_found");
+            exit();
+        }
+
+        return $this->view('user/edit', ['user' => $user]);
+    }
+
+    public function updateProfile()
+    {
+        session_start();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_SESSION['user_id'];
+            $data = [
+                'username' => Request::input('username'),
+                'email' => Request::input('email'),
+                'phone' => Request::input('phone'),
+                'city' => Request::input('city'),
+                'state' => Request::input('state'),
+                'street' => Request::input('street'),
+                'number' => Request::input('number'),
+                'postal_code' => Request::input('postal_code'),
+                'complement' => Request::input('complement'),
+            ];
+
+            $userModel = new UserModel();
+            $userModel->updateUser($userId, $data);
+
+            header("Location: /profile");
+            exit();
+        }
     }
 }
