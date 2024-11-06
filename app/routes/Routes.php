@@ -23,8 +23,6 @@ class Routes
                 '/user/edit' => 'site\UserController@editProfile', 
                 '/vis_agen' => 'site\AgendamentoController@vis_agen',
 
-                '/user/[0-9]+/perfil/editar' => 'site\UserController@editProfile', 
-
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
                 '/services' => 'site\ServiceController@show',
@@ -56,6 +54,8 @@ class Routes
 
                 '/cart/add' => 'site\CartController@addToCart',
                 '/cart/remove' => 'site\CartController@removeFromCart',
+
+                '/update-profile' => 'site\UserController@updateProfile', 
             ],
         ];
     }

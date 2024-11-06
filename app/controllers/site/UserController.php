@@ -63,11 +63,13 @@ class UserController extends BaseController
         return $this->view('user/register');
     }
 
-    public function editProfile($id)
+    public function editProfile()
     {
         session_start();
 
-        if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != $id) {
+        $id = $_SESSION['user_id'] ?? null;
+
+        if (!$id) {
             header("Location: /login?message=login_required");
             exit();
         }
@@ -80,7 +82,7 @@ class UserController extends BaseController
             exit();
         }
 
-        return $this->view('user/edit', ['user' => $user]);
+        return $this->view('user-edit', ['user' => $user]);
     }
 
     public function updateProfile()
