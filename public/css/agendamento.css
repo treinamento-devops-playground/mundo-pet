@@ -107,3 +107,28 @@ body {
 .popup.error .popup-content {
     border-color: #f44336;
 }
+
+.button-group {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+    background-color: #45a049;
+}

@@ -87,7 +87,7 @@ class AgendamentoController extends BaseController
         }
 
         $userId = $_SESSION['user_id'];
-        $userEmail = $_SESSION['user_email'];
+        $userEmail = $_SESSION['email'];
         $motivo = $_POST['motivo'] ?? '';
 
         if (empty($motivo)) {
@@ -148,11 +148,11 @@ class AgendamentoController extends BaseController
         try {
             $mail = new PHPMailer();
             $mail->isSMTP();
-            $mail->Host = 'smtp.mailtrap.io';
+            $mail->Host = 'sandbox.smtp.mailtrap.io';
             $mail->SMTPAuth = true;
-            $mail->Port = 587;
-            $mail->Username = 'api';
-            $mail->Password = '********1336';
+            $mail->Port = 2525;
+            $mail->Username = '71f21970161a51';
+            $mail->Password = '67d7c514be9767';
 
             $mail->setFrom('no-reply@demomailtrap.com', 'MundoPet');
             $mail->addAddress($email);
