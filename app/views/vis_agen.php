@@ -1,48 +1,3 @@
-<?php
-session_start();
-require_once __DIR__ . '/../database/Connection.php';
-
-use app\database\Connection;
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /login.php");
-    exit("Você precisa estar logado para acessar!.");
-}
-
-$userId = $_SESSION['user_id'];
-
-try {
-    $pdo = Connection::getConnection();
-
-    // Consulta os dados do usuário logado, incluindo o username
-    $stmt = $pdo->prepare(
-        'SELECT username FROM users WHERE id = :user_id'
-    );
-    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    $username = $user['username']; // Pega o nome de usuário
-
-    // Consulta os agendamentos feitos pelo usuário logado
-    $stmt = $pdo->prepare(
-        'SELECT  
-            scheduling.id,
-            scheduling.service_type,
-            scheduling.date,
-            scheduling.time
-        FROM scheduling
-        WHERE scheduling.user_id = :user_id'
-    );
-    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $agendItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Erro ao exibir lista de agendamentos: " . $e->getMessage());
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -70,8 +25,8 @@ try {
                 <button class="edit-btn">Editar</button>
             </div>
 
-            <?php if (!empty($agendItems)): ?>
-                <?php foreach ($agendItems as $item): ?>
+            <?php if (!empty($agendamentos)): ?>
+                <?php foreach ($agendamentos as $item): ?>
                 <div class="appointment">
                     <div class="titulo">
                         <p> <?= htmlspecialchars($item['service_type']) ?></p>

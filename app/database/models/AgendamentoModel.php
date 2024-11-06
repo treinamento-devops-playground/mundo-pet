@@ -42,6 +42,32 @@ class AgendamentoModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function getUserById($userId)
+    {
+        $pdo = Connection::getConnection();
+        $stmt = $pdo->prepare('SELECT username FROM users WHERE id = :user_id');
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAgendamentosByUserId($userId)
+    {
+        $pdo = Connection::getConnection();
+        $stmt = $pdo->prepare(
+            'SELECT  
+                scheduling.id,
+                scheduling.service_type,
+                scheduling.date,
+                scheduling.time
+            FROM scheduling
+            WHERE scheduling.user_id = :user_id'
+        );
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function update($id, $data)
     {
         $pdo = Connection::getConnection();
