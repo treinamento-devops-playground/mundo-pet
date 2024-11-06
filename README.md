@@ -36,6 +36,9 @@ RF10 - Gerenciamento dos Dados do Usuário pelo usuário
 
 RF11 - Gerenciamento dos agendamentos pelo usuário
 
+RF12 - Notificações de Agendamentos e Compras
+
+RF13 - Sistema de Feedback dos Serviços
 ---
 
 ### User Stories
@@ -247,4 +250,20 @@ RF11 - Gerenciamento dos agendamentos pelo usuário
 
 5. Notificações por E-mail: Enviar um e-mail de notificação aos usuários após o cancelamento de suas consultas, constando o motivo do cancelamento.
 
+### Iteração 5: Notificações e Feedback dos Serviços
 
+**Valor**: Melhorar a experiência do usuário e a eficiência do petshop ao implementar notificações automáticas e um sistema de feedback, promovendo maior engajamento e possibilitando melhorias nos serviços oferecidos.
+
+#### Objetivo
+Como usuário, quero receber notificações sobre agendamentos e compras e fornecer feedback sobre os serviços do petshop, para que eu possa acompanhar meus pedidos e contribuir com sugestões de melhorias.
+
+#### Requisitos Funcionais e Features
+
+**RF12 - Notificações de Agendamentos e Compras**
+1. **Notificações de Agendamento**: Enviar notificações para os usuários, confirmando novos agendamentos.
+2. **Notificações de Compras**: Enviar confirmações e atualizações do status das compras realizadas, como confirmação de pagamento e previsão de entrega.
+
+**RF13 - Sistema de Feedback dos Serviços**
+1. **Avaliação de Serviços**: Permitir que o usuário avalie os serviços do petshop após a realização de um agendamento, facilitando o acesso ao feedback de clientes na página de cada serviço.
+3. **Visualização de Avaliações nos produtos**: Exibir avaliações de clientes para ajudar novos usuários a tomar decisões informadas sobre os produtos da loja.
+4. **Lógica de comentários das avaliações dos produtos**: Criar a lógica para que o as avialiações persistam no sistema com o relacionamento de entidades correto.
