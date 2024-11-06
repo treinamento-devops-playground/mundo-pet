@@ -67,7 +67,8 @@ class AgendamentoController extends BaseController
         return $this->view('user-scheduling-cancel', ['agendamento_id' => $id]);
     }
 
-    public function vis_agen(){
+    public function vis_agen()
+    {
         session_start();
         $userId = $_SESSION['user_id'] ?? null;
 
@@ -75,12 +76,17 @@ class AgendamentoController extends BaseController
             return $this->view('login', ['error' => 'Faça login.']);
         }
 
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare('SELECT * FROM scheduling WHERE user_id = :user_id');
-        $stmt->execute(['user_id' => $userId]);
-        $appointments = $stmt->fetchAll();
+        $user = AgendamentoModel::getUserById($userId);
+        if (!$user) {
+            return $this->view('login', ['error' => 'Usuário não encontrado.']);
+        }
 
-        return $this->view('vis_agen', ['agendamentos' => $appointments]);
+        $appointments = AgendamentoModel::getAgendamentosByUserId($userId);
+
+        return $this->view('vis_agen', [
+            'username' => $user['username'],
+            'agendamentos' => $appointments
+        ]);
     }
 
     private function enviarEmailCancelamento($email, $motivo)
