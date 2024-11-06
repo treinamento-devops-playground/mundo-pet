@@ -67,8 +67,7 @@ class AgendamentoController extends BaseController
         return $this->view('user-scheduling-cancel', ['agendamento_id' => $id]);
     }
 
-    public function vis_agen()
-    {
+    public function vis_agen(){
         session_start();
         $userId = $_SESSION['user_id'] ?? null;
 
@@ -82,67 +81,6 @@ class AgendamentoController extends BaseController
         $appointments = $stmt->fetchAll();
 
         return $this->view('vis_agen', ['agendamentos' => $appointments]);
-    }
-
-    public function edit($id)
-    {
-        session_start();
-        $userId = $_SESSION['user_id'] ?? null;
-
-        if (!$userId) {
-            header("Location: /login?message=login_required");
-            exit();
-        }
-
-        $agendamento = AgendamentoModel::find($id);
-
-        if ($agendamento && $agendamento['user_id'] == $userId) {
-            return $this->view('agendamentos/agendamentos-edit', ['agendamento' => $agendamento]);
-        } else {
-            header("Location: /vis_agen?error=not_found");
-            exit();
-        }
-    }
-
-    public function update($id)
-    {
-        session_start();
-        $userId = $_SESSION['user_id'] ?? null;
-
-        if (!$userId) {
-            header("Location: /login?message=login_required");
-            exit();
-        }
-
-        $date = $_POST['date'];
-        $time = $_POST['time'];
-
-        $agendamentoData = AgendamentoModel::find($id);
-        if ($agendamentoData && $agendamentoData['user_id'] == $userId) {
-            $currentDate = new \DateTime();
-            $agendamentoDate = new \DateTime($date);
-
-            $diff = $currentDate->diff($agendamentoDate);
-            if ($diff->days > 3) {
-                echo "Você pode alterar o agendamento somente até 3 dias de antecedência.";
-                return;
-            }
-
-            $data = [
-                'pet_type' => $_POST['pet_type'],
-                'service_type' => $_POST['service_type'],
-                'date' => $date,
-                'time' => $time
-            ];
-
-            if (AgendamentoModel::update($id, $data)) {
-                header("Location: /vis_agen?success=update_success");
-            } else {
-                echo "Erro ao atualizar agendamento.";
-            }
-        } else {
-            echo "Agendamento não encontrado.";
-        }
     }
 
     private function enviarEmailCancelamento($email, $motivo)
@@ -165,7 +103,7 @@ class AgendamentoController extends BaseController
 
             $mail->isHTML(true);
             $mail->Subject = 'Agendamento Cancelado';
-            $mail->Body = "
+            $mail->Body    = "
                 <h1>Agendamento Cancelado</h1>
                 <p>Seu agendamento foi cancelado com sucesso.</p>
                 <p><strong>Motivo do cancelamento:</strong> " . htmlspecialchars($motivo) . "</p>
@@ -173,7 +111,7 @@ class AgendamentoController extends BaseController
             $mail->AltBody = 'Seu agendamento foi cancelado com sucesso. Motivo do cancelamento: ' . $motivo;
 
             $mail->send();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log("Erro ao enviar e-mail: {$mail->ErrorInfo}");
         }
     }
