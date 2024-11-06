@@ -39,5 +39,10 @@
 
         <button type="submit" class="submit-btn">Agendar</button>
     </form>
+
+  
+    <div class="button-group">
+        <a href="/vis_agen" class="view-btn">Ver Meus Agendamentos</a>
+    </div>
 </div>
 <?php $this->stop(); ?>

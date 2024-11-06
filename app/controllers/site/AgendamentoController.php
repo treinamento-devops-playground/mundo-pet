@@ -6,6 +6,7 @@ use app\database\models\AgendamentoModel;
 use app\controllers\BaseController;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use app\database\Connection;
 
 
 
@@ -114,6 +115,28 @@ class AgendamentoController extends BaseController
             header("Location: /agendamentos/cancelar/$id?error=exception");
             exit();
         }
+    }
+
+    public function vis_agen()
+    {
+        session_start();
+        $userId = $_SESSION['user_id'] ?? null;
+
+        if (!$userId) {
+            return $this->view('login', ['error' => 'Faça login.']);
+        }
+
+        $user = AgendamentoModel::getUserById($userId);
+        if (!$user) {
+            return $this->view('login', ['error' => 'Usuário não encontrado.']);
+        }
+
+        $appointments = AgendamentoModel::getAgendamentosByUserId($userId);
+
+        return $this->view('vis_agen', [
+            'username' => $user['username'],
+            'agendamentos' => $appointments
+        ]);
     }
 
     private function enviarEmailCancelamento($email, $motivo)

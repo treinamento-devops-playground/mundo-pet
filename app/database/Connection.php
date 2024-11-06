@@ -49,9 +49,15 @@ class Connection
                     username TEXT NOT NULL,
                     email TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL,
-                    phone TEXT NOT NULL
+                    phone TEXT NOT NULL,
+                    city TEXT,
+                    state TEXT,
+                    street TEXT,
+                    number TEXT,
+                    postal_code TEXT,
+                    complement TEXT
                 );
-            ";
+";
 
             $productsTable = "
                 CREATE TABLE IF NOT EXISTS products (
