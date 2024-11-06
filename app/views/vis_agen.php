@@ -4,6 +4,7 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@ session_start();
     <link rel="icon" href="/img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/vis_agen.css">
 </head>
+
 <body>
     <div id="nav-bar">
         <?php $this->insert('partials/nav-bar'); ?>
@@ -26,7 +28,7 @@ session_start();
             <div class="user-card">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
-                    <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span> <!-- Exibe o email ou username do usuário -->
+                    <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span>
                     <button class="edit-btn">Editar</button>
                 <?php else: ?>
                     <p>Você não está logado.</p>
@@ -35,16 +37,17 @@ session_start();
 
             <?php if (!empty($agendamentos)): ?>
                 <?php foreach ($agendamentos as $item): ?>
-                <div class="appointment">
-                    <div class="titulo">
-                        <p> <?= htmlspecialchars($item['service_type']) ?></p>
-                        <p> <?= htmlspecialchars($item['date']) ?></p>
-                        <p>Horário: <?= htmlspecialchars($item['time']) ?></p>
+                    <div class="appointment">
+                        <div class="titulo">
+                            <p> <?= htmlspecialchars($item['service_type']) ?></p>
+                            <p> <?= htmlspecialchars($item['date']) ?></p>
+                            <p>Horário: <?= htmlspecialchars($item['time']) ?></p>
+                        </div>
+                        <div class="button-group">
+                            <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item['id']) ?>" class="cancel-link">✖</a></button>
+
+                        </div>
                     </div>
-                    <div class="button-group">
-                        <button class="delete-btn">✖</button>
-                    </div>
-                </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Você não tem agendamentos no momento.</p>
@@ -52,4 +55,5 @@ session_start();
         </main>
     </div>
 </body>
+
 </html>

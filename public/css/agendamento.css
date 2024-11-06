@@ -9,25 +9,22 @@
 
 body {
     background-color: #f4f4f4;
-    display: flex;
     justify-content: center;
-    align-items: center;
+
     height: 100vh;
 }
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 70%;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
+    display: flex;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
 }
 
 .form-group {
@@ -109,4 +106,29 @@ h2 {
 
 .popup.error .popup-content {
     border-color: #f44336;
+}
+
+.button-group {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+    background-color: #45a049;
 }

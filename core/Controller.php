@@ -35,6 +35,6 @@ class Controller
         $params = new Parameters;
         $params = $params->get($router);
 
-        $controller->$method($params);
+        call_user_func_array([$controller, $method], $params);
     }
 }

@@ -37,7 +37,9 @@ class Connection
                     pet_type TEXT NOT NULL,
                     service_type TEXT NOT NULL,
                     date TEXT NOT NULL,
-                    time TEXT NOT NULL
+                    time TEXT NOT NULL,
+                    status TEXT NOT NULL DEFAULT 'ativo',
+                    motivo_cancelamento TEXT
                 );
             ";
 

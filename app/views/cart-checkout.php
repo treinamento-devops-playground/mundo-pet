@@ -113,8 +113,7 @@
 
                 <div class="summary">
                     <?php
-                    // Aqui você deve recuperar o valor total do carrinho para exibir
-                    $cartTotal = 0; // Inicializa a variável total do carrinho
+                    $cartTotal = 0;
                     if (isset($_SESSION['user_id'])) {
                         $cartModel = new \app\database\models\CartModel();
                         $cartTotal = $cartModel->getCartTotal($_SESSION['user_id']);
