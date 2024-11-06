@@ -29,7 +29,7 @@ session_start();
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
                     <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span>
-                    <button class="edit-btn">Editar</button>
+                    <button class="edit-btn">Logout</button>
                 <?php else: ?>
                     <p>Você não está logado.</p>
                 <?php endif; ?>
