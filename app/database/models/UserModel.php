@@ -55,4 +55,34 @@ class UserModel
 
         return $result['username'] ?? '';
     }
+
+    public function getUserById(int $userId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+        if ($stmt === false) {
+            die("Erro ao preparar a consulta: " . implode(", ", $this->db->errorInfo()));
+        }
+        $stmt->bindValue(':id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateUser(int $userId, array $data)
+    {
+        $stmt = $this->db->prepare("UPDATE users SET username = :username, email = :email, phone = :phone, city = :city, state = :state, street = :street, postal_code = :postal_code, number = :number, complement = :complement WHERE id = :id");
+        if ($stmt === false) {
+            die("Erro ao preparar a consulta: " . implode(", ", $this->db->errorInfo()));
+        }
+        $stmt->bindValue(':username', $data['username'], PDO::PARAM_STR);
+        $stmt->bindValue(':email', $data['email'], PDO::PARAM_STR);
+        $stmt->bindValue(':phone', $data['phone'], PDO::PARAM_STR);
+        $stmt->bindValue(':city', $data['city'], PDO::PARAM_STR);
+        $stmt->bindValue(':state', $data['state'], PDO::PARAM_STR);
+        $stmt->bindValue(':street', $data['street'], PDO::PARAM_STR);
+        $stmt->bindValue(':postal_code', $data['postal_code'], PDO::PARAM_STR);
+        $stmt->bindValue(':number', $data['number'], PDO::PARAM_INT);
+        $stmt->bindValue(':complement', $data['complement'], PDO::PARAM_STR);
+        $stmt->bindValue(':id', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }

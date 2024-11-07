@@ -5,7 +5,7 @@
 <?php $this->stop(); ?>
 
 <?php $this->start('main-content'); ?>
-<div class="form-container">
+<div class="container">
     <form action="store" method="post">
         <div class="form-group">
             <label for="pet-type">Qual tipo de pet:</label>
@@ -39,5 +39,10 @@
 
         <button type="submit" class="submit-btn">Agendar</button>
     </form>
+
+  
+    <div class="button-group">
+        <a href="/vis_agen" class="view-btn">Ver Meus Agendamentos</a>
+    </div>
 </div>
 <?php $this->stop(); ?>

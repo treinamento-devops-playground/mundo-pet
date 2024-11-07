@@ -37,7 +37,9 @@ class Connection
                     pet_type TEXT NOT NULL,
                     service_type TEXT NOT NULL,
                     date TEXT NOT NULL,
-                    time TEXT NOT NULL
+                    time TEXT NOT NULL,
+                    status TEXT NOT NULL DEFAULT 'ativo',
+                    motivo_cancelamento TEXT
                 );
             ";
 
@@ -47,9 +49,15 @@ class Connection
                     username TEXT NOT NULL,
                     email TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL,
-                    phone TEXT NOT NULL
+                    phone TEXT NOT NULL,
+                    city TEXT,
+                    state TEXT,
+                    street TEXT,
+                    number TEXT,
+                    postal_code TEXT,
+                    complement TEXT
                 );
-            ";
+";
 
             $productsTable = "
                 CREATE TABLE IF NOT EXISTS products (
