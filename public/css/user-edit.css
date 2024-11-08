@@ -4,52 +4,61 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
     background-color: #f3f4f6;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #7b5ca9;
-    padding: 10px 20px;
-}
-
-.nav a {
-    margin-right: 20px;
-    color: white;
-    text-decoration: none;
 }
 
 .sidebar {
     width: 200px;
     padding: 20px;
-    background-color: #b0b8cc;
+    background-color: #8892BF;
+    border-radius: 10px;
+    margin-right: 20px;
 }
 
-.sidebar-btn {
-    width: 100%;
-    padding: 10px;
+.sidebar h3 {
+    color: #000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
     margin-bottom: 10px;
-    background-color: #fff;
-    border: 1px solid #d1d5db;
-    cursor: pointer;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #bbb;
 }
 
 .main-content {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    background-color: #f9fafb;
+    border-radius: 10px;
 }
 
 .profile-section, .info-section, .address-section {
-    background-color: #e5e7eb;
+    background-color: #f9fafb;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -101,4 +110,8 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.edit-btn button:hover {
+    background-color: #5a5d8b;
 }

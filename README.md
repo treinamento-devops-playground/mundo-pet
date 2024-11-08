@@ -265,6 +265,9 @@ Como usuário, quero receber notificações sobre agendamentos e compras e forne
 1. **Notificações de Agendamento**: Enviar notificações para os usuários, confirmando novos agendamentos.
 2. **Notificações de Compras**: Enviar confirmações e atualizações do status das compras realizadas, como confirmação de pagamento e previsão de entrega.
 
+#### Objetivo 
+Como usuário quero poder consumir os produtos com melhor qualidade e poder enviar feedbacks da minha satisfação com produtos e serviços que consumo no PetShop
+
 **RF13 - Sistema de Feedback dos Serviços**
 1. **Avaliação de Serviços**: Permitir que o usuário avalie os serviços do petshop após a realização de um agendamento, facilitando o acesso ao feedback de clientes na página de cada serviço.
 3. **Visualização de Avaliações nos produtos**: Exibir avaliações de clientes para ajudar novos usuários a tomar decisões informadas sobre os produtos da loja.

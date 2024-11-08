@@ -77,12 +77,12 @@ class UserController extends BaseController
         $userModel = new UserModel();
         $user = $userModel->getUserById($id);
 
-        if (!$user) {
-            header("Location: /login?message=user_not_found");
-            exit();
+        $message = "";
+        if (isset($_GET['message']) && $_GET['message'] === 'success') {
+            $message = "<p style='color:green;'>Alterações salvas com sucesso</p>";
         }
 
-        return $this->view('user-edit', ['user' => $user]);
+        return $this->view('user-edit', ['user' => $user, 'message' => $message]);
     }
 
     public function updateProfile()
@@ -107,7 +107,19 @@ class UserController extends BaseController
             $userModel->updateUser($userId, $data);
 
             header("Location: /user/edit");
+            header("Location: /user/edit?message=success");
             exit();
         }
+    }
+
+
+    public function logout()
+    {
+        session_start();
+        session_unset();
+        session_destroy();
+
+        header('Location: /login');
+        exit();
     }
 }

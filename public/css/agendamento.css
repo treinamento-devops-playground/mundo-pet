@@ -10,7 +10,6 @@
 body {
     background-color: #f4f4f4;
     justify-content: center;
-
     height: 100vh;
 }
 
@@ -119,7 +118,7 @@ body {
 }
 
 .button-group button {
-    padding: 10px 20px;
+    padding: 8px 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -131,4 +130,20 @@ body {
 
 .button-group button:hover {
     background-color: #45a049;
+}
+
+.view-btn {
+    text-decoration: none;
+    padding: 8px 10px;
+    background-color: #45a049;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    
+    transition: background-color 0.3s;
+}
+
+.view-btn:hover {
+    background-color: #4CAF50;
+    color: white;
 }
