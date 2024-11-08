@@ -12,7 +12,6 @@ class Routes
         return [
             'get' => [
                 '/' => 'site\HomeController@show',
-
                 '/product' => 'site\ProductController@index',
                 '/product/filter' => 'site\ProductController@filterByCategoryJson',
                 '/product/search' => 'site\ProductController@searchJson',
@@ -20,7 +19,7 @@ class Routes
 
                 '/agendamentos/create' => 'site\AgendamentoController@create',
                 '/agendamentos/cancelar/[0-9]+' => 'site\AgendamentoController@cancelForm',
-                '/user/edit' => 'site\UserController@editProfile', 
+                '/user/edit' => 'site\UserController@editProfile',
                 '/vis_agen' => 'site\AgendamentoController@vis_agen',
 
                 '/login' => 'site\UserController@login',
@@ -55,7 +54,9 @@ class Routes
                 '/cart/add' => 'site\CartController@addToCart',
                 '/cart/remove' => 'site\CartController@removeFromCart',
 
-                '/update-profile' => 'site\UserController@updateProfile', 
+                '/update-profile' => 'site\UserController@updateProfile',
+
+                '/logout' => 'site\UserController@logout', 
             ],
         ];
     }

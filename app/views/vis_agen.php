@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+// Lógica para realizar o logout
+if (isset($_POST['logout'])) {
+    // Destroi a sessão
+    session_unset();
+    session_destroy();
+
+    // Redireciona para a página de login
+    header('Location: /login');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +40,11 @@ session_start();
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
                     <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span>
-                    <button class="edit-btn">Logout</button>
+                    
+                    <!-- Formulário de logout -->
+                    <form action="/logout" method="post">
+                        <button type="submit" name="logout" class="edit-btn">Logout</button>
+                    </form>
                 <?php else: ?>
                     <p>Você não está logado.</p>
                 <?php endif; ?>
@@ -45,7 +60,6 @@ session_start();
                         </div>
                         <div class="button-group">
                             <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item['id']) ?>" class="cancel-link">✖</a></button>
-
                         </div>
                     </div>
                 <?php endforeach; ?>
