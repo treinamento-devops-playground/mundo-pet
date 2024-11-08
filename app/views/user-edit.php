@@ -26,6 +26,8 @@ if (!$user) {
 <?php $this->start('main-content') ?>
 
 <main class="main-content">
+    <?php if (isset($message)) echo $message; ?>
+
     <section class="profile-section">
         <div class="profile-header">
             <img src="../img/icons/user.png" alt="Avatar" class="avatar">

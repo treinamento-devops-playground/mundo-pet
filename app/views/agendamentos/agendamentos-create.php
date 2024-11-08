@@ -35,5 +35,7 @@
     </div>
 
     <button type="submit" class="submit-btn">Agendar</button>
+    
 </form>
+
 <?php $this->stop() ?>
