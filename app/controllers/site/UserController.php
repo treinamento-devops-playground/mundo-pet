@@ -106,7 +106,7 @@ class UserController extends BaseController
             $userModel = new UserModel();
             $userModel->updateUser($userId, $data);
 
-            header("Location: /profile");
+            header("Location: /user/edit");
             exit();
         }
     }
