@@ -1,13 +1,10 @@
 <?php
 session_start();
 
-// Lógica para realizar o logout
 if (isset($_POST['logout'])) {
-    // Destroi a sessão
     session_unset();
     session_destroy();
 
-    // Redireciona para a página de login
     header('Location: /login');
     exit();
 }
@@ -41,7 +38,6 @@ if (isset($_POST['logout'])) {
                     <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
                     <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span>
                     
-                    <!-- Formulário de logout -->
                     <form action="/logout" method="post">
                         <button type="submit" name="logout" class="edit-btn">Logout</button>
                     </form>

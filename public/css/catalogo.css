@@ -8,28 +8,57 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #333;
+    padding: 3px 20px;
+    background-color: #6C5E9C;
+    border-radius: 15px;
     color: white;
+    width: 80%;
+    height: 54px;
+    margin: 25px auto;
 }
 
-header .logo img {
-    width: 100px;
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-top: 3px;
+    margin-left: 20px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-nav ul {
+.list-nav {
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 30px;
+    align-items: center;
+    font-size: 20px;
+    padding-top: 3px;
+    font-weight: 900;
+    cursor: pointer;
+    margin-top: 12px;
 }
 
-nav ul li {
-    display: inline;
-}
-
-nav ul li a {
-    color: white;
+.list-nav > li > a {
     text-decoration: none;
+    color: #000;
+    transition: 0.8s;
+}
+
+.list-nav > li > a:hover {
+    color: #fff;
+}
+
+.list-nav > li > a img {
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%; 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    margin-top: 8px;
+}
+
+.list-nav > li > a img:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
 }
 
 .search-bar {
@@ -45,9 +74,32 @@ nav ul li a {
     border: 1px solid #ccc;
 }
 
+.search-icon {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease;
+}
+
+.search-icon:hover {
+    opacity: 0.5;
+}
+
+#search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 2px;
+}
+
 .container {
     display: flex;
     padding: 20px;
+    gap: 20px;
 }
 
 aside {
@@ -107,4 +159,22 @@ main {
     font-size: 16px;
     color: #e74c3c;
     font-weight: bold;
+}
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px 15px; 
+    background-color: #6C5E9C; 
+    border-radius: 8px; 
+    transition: background-color 0.3s, color 0.3s;
+    width: 80%; 
+}
+
+.sidebar a:hover {
+    background-color: #4a3d79; 
+    color: #fff;   
 }
