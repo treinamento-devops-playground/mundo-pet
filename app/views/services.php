@@ -59,7 +59,7 @@
         <div class="card">
             <img src="../img/store.png">
             <div>
-                <a href="product">
+                <a href="catalog">
                     <h3>Lojinha</h3>
                     <img src="../img/icons/click.png">
                 </a>

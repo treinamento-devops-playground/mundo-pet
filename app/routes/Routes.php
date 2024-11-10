@@ -12,9 +12,10 @@ class Routes
         return [
             'get' => [
                 '/' => 'site\HomeController@show',
-                '/product' => 'site\ProductController@index',
+                '/catalog' => 'site\ProductController@index',
                 '/product/filter' => 'site\ProductController@filterByCategoryJson',
                 '/product/search' => 'site\ProductController@searchJson',
+                '/product/all' => 'site\ProductController@allProductsJson',
                 '/product/[0-9]+' => 'site\ProductController@show',
 
                 '/agendamentos/create' => 'site\AgendamentoController@create',

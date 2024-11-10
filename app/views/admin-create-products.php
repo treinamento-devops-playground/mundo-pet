@@ -143,13 +143,17 @@
                 <textarea id="description" name="description" rows="4" required></textarea>
 
                 <label for="price">Preço:</label>
-                <input type="number" id="price" name="price" step="0.01" required>
+                <input type="number" id="price" name="price" step="0.01" min="0" required>
 
                 <label for="category">Categoria:</label>
-                <input type="text" id="category" name="category" required>
+                <select id="category" name="category" required>
+                    <option value="petiscos">Petiscos</option>
+                    <option value="racao">Ração</option>
+                    <option value="acessorios">Acessorios</option>
+                </select>
 
                 <label for="stock">Estoque:</label>
-                <input type="number" id="stock" name="stock" required>
+                <input type="number" id="stock" name="stock" min="0" required>
 
                 <button type="submit" class="btn">Adicionar Produto</button>
             </form>
