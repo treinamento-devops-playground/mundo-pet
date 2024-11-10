@@ -11,13 +11,17 @@ body {
     background-color: #f4f4f4;
     justify-content: center;
     height: 100vh;
+    background-color: #E8E8E8;
+    background-image: url("../img/patas.png");
+    background-position: top right;
+    background-repeat: no-repeat;
 }
 
 .container {
     width: 100%;
-    max-width: 70%;
+    max-width: 60%;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;

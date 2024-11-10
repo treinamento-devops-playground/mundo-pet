@@ -1,26 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     background-color:#d9d9d9;
+    background-color: #E8E8E8;
+    background-image: url("../img/patas.png");
+    background-repeat: no-repeat;
 }
-.header {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1000px;
-    height: 54px;
-    background-color: #6C5E9C;
-    border-radius: 19px;
-    margin: 25px auto;
     padding: 3px 20px;
-}
-
-.logo img {
+    background-color: #6C5E9C;
+    border-radius: 15px;
+    color: white;
+    width: 80%;
+    height: 54px;
+    margin: 25px auto;
+  }
+  
+  .logo img {
+    width: 50px;
     height: 50px;
+    margin-top: 3px;
+    margin-left: 20px;
+    border-radius: 50%;
+    object-fit: cover;
 }
-
-.list-nav {
+  
+  .list-nav {
     list-style: none;
     display: flex;
     gap: 30px;
@@ -31,33 +42,29 @@ body {
     cursor: pointer;
     margin-top: 12px;
   }
-
-.nav a {
-    margin: 0 10px;
+  
+  .list-nav > li > a {
     text-decoration: none;
-}
-
-.title {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-  font-size: 15px;
-
-}
-
-.titulo {
-font-size: large;
-margin: 10px;
-color: black;
-
-}
-
-.user-icon img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
+    color: #000;
+    transition: 0.8s;
+  }
+  
+  .list-nav > li > a:hover {
+    color: #fff;
+  }
+  
+  .list-nav > li > a img {
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%; 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    margin-top: 8px;
+  }
+  
+  .list-nav > li > a img:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+  }
 
 .container {
     display: flex;
