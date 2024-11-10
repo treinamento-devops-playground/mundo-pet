@@ -20,7 +20,7 @@ class Routes
                 '/agendamentos/create' => 'site\AgendamentoController@create',
                 '/agendamentos/cancelar/[0-9]+' => 'site\AgendamentoController@cancelForm',
                 '/user/edit' => 'site\UserController@editProfile',
-                '/vis_agen' => 'site\AgendamentoController@vis_agen',
+                '/user/agendamentos' => 'site\AgendamentoController@vis_agen',
 
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
@@ -56,7 +56,7 @@ class Routes
 
                 '/update-profile' => 'site\UserController@updateProfile',
 
-                '/logout' => 'site\UserController@logout', 
+                '/logout' => 'site\UserController@logout',
             ],
         ];
     }
