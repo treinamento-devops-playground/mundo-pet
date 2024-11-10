@@ -17,6 +17,7 @@
         flex-direction: column;
         align-items: center;
         height: 100vh;
+        background-color: #E8E8E8;
     }
 
     header {

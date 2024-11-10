@@ -5,72 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-
-        .form-section {
-            width: 60%;
-            background-color: #f0f0f0;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .payment-section {
-            width: 35%;
-            background-color: #8c9eff;
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #333;
-            text-decoration: none;
-        }
-
-        .btn-finalizar {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .summary p {
-            margin: 5px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/cart-checkout.css">
+    
 </head>
 
 <body>
+    <header>
+        <div class="logo">
+            <img src="../img/logo.png" alt="Logo">
+        </div>
+        <ul class="list-nav">
+            <li class="title"><a href="/services">Serviços</a></li>
+            <li class="title"><a href="/product">Loja</a></li>
+            <li class="title"><a href="#">Contato</a></li>
+            <li><a href="/vis_agen"><img src="../img/icons/user.png" alt="Usuário"></a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Pesquisar produtos...">
+            <button id="search-btn">
+                <img src="../img/icons/lupa.png" alt="Pesquisar" class="search-icon">
+            </button>
+        </div>
+    </header>
     <div class="container">
         <div class="form-section">
             <h1>Volte ao carrinho</h1>
