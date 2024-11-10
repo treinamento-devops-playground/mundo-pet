@@ -15,7 +15,7 @@
         </div>
         <ul class="list-nav">
             <li class="title"><a href="/services">Serviços</a></li>
-            <li class="title"><a href="product">Loja</a></li>
+            <li class="title"><a href="/catalog">Loja</a></li>
             <li class="title"><a href="#">Contato</a></li>
             <li><a href="/vis_agen"><img src="../img/icons/user.png" alt="Usuário"></a></li>
             <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li> 
@@ -33,7 +33,7 @@
         <aside>
             <ul class="sidebar">
                 <li><a href="#" class="category" data-category="petiscos">Petiscos</a></li>
-                <li><a href="#" class="category" data-category="brinquedos">Brinquedos</a></li>
+                <li><a href="#" class="category" data-category="racao">Ração</a></li>
                 <li><a href="#" class="category" data-category="acessorios">Acessórios</a></li>
             </ul>
         </aside>
