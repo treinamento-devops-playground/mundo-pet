@@ -108,7 +108,7 @@ try {
 
 
     <div class="button-container">
-        <a href="/product" class="button continuar-btn">Continuar Comprando</a>
+        <a href="/catalog" class="button continuar-btn">Continuar Comprando</a>
         <a href="/checkout" class="button checkout-btn">Finalizar Compra</a>
     </div>
 
