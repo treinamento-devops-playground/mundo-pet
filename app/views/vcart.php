@@ -14,7 +14,6 @@ $userId = $_SESSION['user_id'];
 try {
     $pdo = Connection::getConnection();
 
-    // Consulta os produtos no carrinho para o usuário logado
     $stmt = $pdo->prepare(
         'SELECT 
             cart.id AS cart_item_id, 
@@ -30,7 +29,6 @@ try {
 
     $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Calcula o total
     $total = 0;
     foreach ($cartItems as $item) {
         $total += $item['price'] * $item['quantity'];
@@ -70,7 +68,8 @@ try {
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px;
             border-bottom: 1px solid #ddd;
             text-align: left;
@@ -127,10 +126,10 @@ try {
                             <td>R$ <?= number_format($item['price'], 2, ',', '.') ?></td>
                             <td>R$ <?= number_format($item['price'] * $item['quantity'], 2, ',', '.') ?></td>
                             <td>
-                            <form action="/cart/remove" method="POST">
-                            <input type="hidden" name="cart_id" value="<?= $item['cart_item_id'] ?>">
-                            <button type="submit" class="remove-btn">Remover</button>
-                            </form>
+                                <form action="/cart/remove" method="POST">
+                                    <input type="hidden" name="cart_id" value="<?= $item['cart_item_id'] ?>">
+                                    <button type="submit" class="remove-btn">Remover</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
