@@ -1,7 +1,13 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap'); 
+   
+   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #E8E8E8;
+    background-image: url("../img/patas.png");
+    background-position: top right;
+    background-repeat: no-repeat;
 }
 
 header {
@@ -96,92 +102,58 @@ header {
     margin-top: 2px;
 }
 
-.container {
-    display: flex;
-    padding: 20px;
-    gap: 20px;
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
 
-    padding-left: 140px;
-}
+        .form-section {
+            width: 60%;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-aside {
-    width: 20%;
-    align-self: flex-start;
-    align-items: center;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding-left: 22px;
-}
+        .payment-section {
+            width: 35%;
+            background-color: #8c9eff;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+        }
 
-aside ul {
-    list-style: none;
-    padding: 0;
-}
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
 
-aside ul li {
-    margin-bottom: 10px;
-}
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-main {
-    width: 80%;
-}
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #333;
+            text-decoration: none;
+        }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
+        .btn-finalizar {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
 
-.product-card {
-    border: 1px solid #ddd;
-    padding: 15px;
-    text-align: center;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
-.product-card a {
-    text-decoration: none;
-    color: #333;
-}
-
-.product-card img {
-    width: 100%;
-    height: auto;
-}
-
-.product-name {
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-.product-description {
-    font-size: 14px;
-    color: #666;
-    margin-top: 5px;
-}
-
-.product-price {
-    margin-top: 15px;
-    font-size: 16px;
-    color: #e74c3c;
-    font-weight: bold;
-}
-.sidebar a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    padding: 10px 15px; 
-    background-color: #6C5E9C; 
-    border-radius: 8px; 
-    transition: background-color 0.3s, color 0.3s;
-    width: 80%; 
-}
-
-.sidebar a:hover {
-    background-color: #4a3d79; 
-    color: #fff;   
-}
+        .summary p {
+            margin: 5px 0;
+        }

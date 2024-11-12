@@ -40,24 +40,28 @@ class AdminProductController extends BaseController
     public function edit($id)
     {
         $product = ProductModel::find($id);
-        return $this->view('admin/products/edit', ['product' => $product]);
+        if (!$product) {
+            header('Location: /admin/products?error=product_not_found');
+            exit();
+        }
+        return $this->view('admin-edit-products', ['product' => $product]);
     }
 
     public function update($id)
     {
-        $name = $_POST['nome'];
-        $description = $_POST['descricao'];
-        $price = $_POST['preco'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
         $info = $_POST['info'];
-        $category = $_POST['categoria'];
-        $estoque = $_POST['estoque'];
+        $category = $_POST['category'];
+        $estoque = $_POST['stock'];
 
         $success = ProductModel::update($id, $name, $description, $price, $info, $category, $estoque);
 
         if ($success) {
-            header('Location: /admin/products?success=Produto atualizado com sucesso');
+            header('Location: /admin/products?success=Produto editado com sucesso');
         } else {
-            return $this->view('admin/products/edit', ['error' => 'Erro ao atualizar produto']);
+            return $this->view('admin-edit-products', ['error' => 'Erro ao atualizar produto']);
         }
     }
 

@@ -17,7 +17,6 @@
         flex-direction: column;
         align-items: center;
         height: 100vh;
-        background-color: #E8E8E8;
     }
 
     header {
@@ -130,36 +129,33 @@
 <?php $this->start('admin-content'); ?>
 
 <body>
-    <main>
-        <div class="container">
-            <h1>Adicionar Produto</h1>
-            <?php if (isset($error)): ?>
-                <p class="error"><?= htmlspecialchars($error) ?></p>
-            <?php endif; ?>
-            <form method="POST" action="/admin/products/store">
-                <label for="name">Nome do Produto:</label>
-                <input type="text" id="name" name="name" required>
 
-                <label for="description">Descrição:</label>
-                <textarea id="description" name="description" rows="4" required></textarea>
+    <body>
+        <main>
+            <div class="container">
+                <h1>Editar Produto</h1>
+                <?php if (isset($error)): ?>
+                    <p class="error"><?= htmlspecialchars($error) ?></p>
+                <?php endif; ?>
+                <form method="post" action="/admin/products/update/<?= htmlspecialchars($product['id']) ?>">
+                    <label for="name">Nome do Produto:</label>
+                    <input type="text" id="name" name="name" required value="<?= htmlspecialchars($product['name']) ?>">
 
-                <label for="price">Preço:</label>
-                <input type="number" id="price" name="price" step="0.01" min="0" required>
+                    <label for="description">Descrição:</label>
+                    <textarea id="description" name="description" rows="4" required><?= htmlspecialchars($product['description']) ?></textarea>
 
-                <label for="category">Categoria:</label>
-                <select id="category" name="category" required>
-                    <option value="petiscos">Petiscos</option>
-                    <option value="racao">Ração</option>
-                    <option value="acessorios">Acessorios</option>
-                </select>
+                    <label for="price">Preço:</label>
+                    <input type="number" id="price" name="price" step="0.01" required value="<?= htmlspecialchars($product['price']) ?>">
 
-                <label for="stock">Estoque:</label>
-                <input type="number" id="stock" name="stock" min="0" required>
+                    <label for="category">Categoria:</label>
+                    <input type="text" id="category" name="category" required value="<?= htmlspecialchars($product['category']) ?>">
 
-                <button type="submit" class="btn">Adicionar Produto</button>
-            </form>
-        </div>
-    </main>
-</body>
+                    <label for="stock">Estoque:</label>
+                    <input type="number" id="stock" name="stock" required value="<?= htmlspecialchars($product['stock']) ?>">
 
-<?php $this->stop(); ?>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja editar este produto?')">Editar</button>
+                </form>
+            </div>
+        </main>
+    </body>
+    <?php $this->stop(); ?>

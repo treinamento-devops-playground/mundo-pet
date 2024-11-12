@@ -2,49 +2,55 @@
 
 namespace app\controllers\site;
 
-use app\database\models\ProductModel;
 use app\controllers\BaseController;
+use app\services\ProductService;
 
 class ProductController extends BaseController
 {
+    private ProductService $productService;
+
+    public function __construct()
+    {
+        $this->productService = new ProductService();
+    }
+
     public function index()
     {
-        $products = ProductModel::all();
-        return $this->view('catalog', ['products' => $products]);
+        return $this->view('catalog');
+    }
+
+    public function allProductsJson()
+    {
+        header('Content-Type: application/json');
+        $products = $this->productService->getAllProducts();
+        echo json_encode($products);
+        exit();
     }
 
     public function filterByCategoryJson()
     {
+        header('Content-Type: application/json');
         $category = $_GET['category'] ?? '';
-        $products = ProductModel::findByCategory($category);
-        return $this->json($products);
+        $products = $this->productService->getProductsByCategory($category);
+        echo json_encode($products);
+        exit();
     }
 
     public function searchJson()
     {
+        header('Content-Type: application/json');
         $searchTerm = $_GET['search'] ?? '';
-        $products = ProductModel::search($searchTerm);
-        return $this->json($products);
+        $products = $this->productService->searchProducts($searchTerm);
+        echo json_encode($products);
+        exit();
     }
 
     public function show($id)
     {
-        error_log("ID do produto: " . $id);
-
-        $product = ProductModel::find($id);
-
+        $product = $this->productService->getProductById((int)$id);
         if (!$product) {
-            error_log("Produto não encontrado para ID: " . $id);
             return $this->view('single-product', ['error' => 'Produto não encontrado']);
         }
-
         return $this->view('single-product', ['product' => $product]);
-    }
-
-    private function json($data)
-    {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit();
     }
 }

@@ -14,7 +14,6 @@ $userId = $_SESSION['user_id'];
 try {
     $pdo = Connection::getConnection();
 
-    // Consulta os produtos no carrinho para o usuário logado
     $stmt = $pdo->prepare(
         'SELECT 
             cart.id AS cart_item_id, 
@@ -30,7 +29,6 @@ try {
 
     $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Calcula o total
     $total = 0;
     foreach ($cartItems as $item) {
         $total += $item['price'] * $item['quantity'];
@@ -47,62 +45,27 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrinho de Compras</title>
-    <link rel="stylesheet" href="../css/catalogo.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .cart-container {
-            max-width: 800px;
-            margin: auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .total {
-            font-weight: bold;
-            text-align: right;
-            margin-top: 20px;
-        }
-
-        .remove-btn {
-            background-color: red;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .remove-btn:hover {
-            background-color: darkred;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/vcart.css">
 </head>
 
 <body>
+    <header>
+        <div class="logo">
+            <img src="../img/logo.png" alt="Logo">
+        </div>
+        <ul class="list-nav">
+            <li class="title"><a href="/services">Serviços</a></li>
+            <li class="title"><a href="/product">Loja</a></li>
+            <li class="title"><a href="#">Contato</a></li>
+            <li><a href="user/edit"><img src="../img/icons/user.png" alt="Usuário"></a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Pesquisar produtos...">
+            <button id="search-btn">
+                <img src="../img/icons/lupa.png" alt="Pesquisar" class="search-icon">
+            </button>
+        </div>
+    </header>
     <div class="cart-container">
         <h1>Carrinho de Compras</h1>
 
@@ -127,10 +90,10 @@ try {
                             <td>R$ <?= number_format($item['price'], 2, ',', '.') ?></td>
                             <td>R$ <?= number_format($item['price'] * $item['quantity'], 2, ',', '.') ?></td>
                             <td>
-                            <form action="/cart/remove" method="POST">
-                            <input type="hidden" name="cart_id" value="<?= $item['cart_item_id'] ?>">
-                            <button type="submit" class="remove-btn">Remover</button>
-                            </form>
+                                <form action="/cart/remove" method="POST">
+                                    <input type="hidden" name="cart_id" value="<?= $item['cart_item_id'] ?>">
+                                    <button type="submit" class="remove-btn">Remover</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -144,8 +107,11 @@ try {
     </div>
 
 
-    <a href="/product" class="back-link">Continuar Comprando</a>
-    <a href="/checkout" class="back-link">Checkout</a>
+    <div class="button-container">
+        <a href="/catalog" class="button continuar-btn">Continuar Comprando</a>
+        <a href="/checkout" class="button checkout-btn">Finalizar Compra</a>
+    </div>
+
 </body>
 
 </html>

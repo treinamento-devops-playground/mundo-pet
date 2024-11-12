@@ -33,147 +33,28 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($product['name']); ?> - Catálogo de Produtos</title>
-    <link rel="stylesheet" href="../css/catalogo.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-            color: #333;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-        }
-
-        header .logo img {
-            width: 120px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #FF9900;
-        }
-
-        .container {
-            display: flex;
-            padding: 40px;
-            justify-content: center;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .product-details {
-            max-width: 600px;
-            text-align: center;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            transition: transform 0.3s;
-        }
-
-        .product-details:hover {
-            transform: scale(1.02);
-        }
-
-        .product-image {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-name {
-            font-size: 28px;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-
-        .product-description {
-            font-size: 16px;
-            color: #666;
-            margin: 10px 0;
-            line-height: 1.5;
-        }
-
-        .product-price {
-            font-size: 22px;
-            color: #B12704;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        .product-stock {
-            font-size: 16px;
-            color: #555;
-            margin: 10px 0;
-        }
-
-        .back-link {
-            text-decoration: none;
-            color: #0073BB;
-            font-weight: bold;
-            margin-top: 20px;
-            display: inline-block;
-            transition: color 0.3s;
-        }
-
-        .back-link:hover {
-            color: #005B8C;
-        }
-
-        .add-to-cart-btn {
-            text-decoration: none;
-            background-color: #FF9900;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 20px;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-
-        .add-to-cart-btn:hover {
-            background-color: #E68A00;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/single-product.css">
+    
 </head>
 
 <body>
-    <header>
+<header>
         <div class="logo">
             <img src="../img/logo.png" alt="Logo">
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Loja</a></li>
-                <li><a href="#">Sobre</a></li>
-            </ul>
-        </nav>
+        <ul class="list-nav">
+            <li class="title"><a href="/services">Serviços</a></li>
+            <li class="title"><a href="/catalog">Loja</a></li>
+            <li class="title"><a href="#">Contato</a></li>
+            <li><a href="/vis_agen"><img src="../img/icons/user.png" alt="Usuário"></a></li>
+            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li> 
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Pesquisar produtos...">
+            <button id="search-btn">
+                <img src="../img/icons/lupa.png" alt="Pesquisar" class="search-icon">
+            </button>
+        </div>
     </header>
 
     <div class="container">
