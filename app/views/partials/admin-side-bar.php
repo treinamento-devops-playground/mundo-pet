@@ -51,8 +51,7 @@
         <h3>Administração</h3>
         <ul>
             <li><a href="/admin/agendamentos">Agendamentos</a></li>
-            <li><a href="/admin/usuarios">Usuários</a></li>
-            <li><a href="/admin/produtos">Produtos</a></li>
+            <li><a href="/admin/products">Produtos</a></li>
         </ul>
     </div>
 </body>

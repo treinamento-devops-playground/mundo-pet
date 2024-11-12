@@ -1,4 +1,5 @@
 app/api/products.db
 
 vendor/
+
 app/database/db.db
