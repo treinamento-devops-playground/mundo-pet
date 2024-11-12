@@ -75,7 +75,6 @@ class ProductModel
         return $product;
     }
 
-
     public static function update($id, $name, $description, $price, $info, $category, $stock)
     {
         $pdo = Connection::getConnection();
