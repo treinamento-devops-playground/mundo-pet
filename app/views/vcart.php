@@ -49,7 +49,7 @@ try {
 </head>
 
 <body>
-<header>
+    <header>
         <div class="logo">
             <img src="../img/logo.png" alt="Logo">
         </div>
@@ -90,10 +90,10 @@ try {
                             <td>R$ <?= number_format($item['price'], 2, ',', '.') ?></td>
                             <td>R$ <?= number_format($item['price'] * $item['quantity'], 2, ',', '.') ?></td>
                             <td>
-                            <form action="/cart/remove" method="POST">
-                            <input type="hidden" name="cart_id" value="<?= $item['cart_item_id'] ?>">
-                            <button type="submit" class="remove-btn">Remover</button>
-                            </form>
+                                <form action="/cart/remove" method="POST">
+                                    <input type="hidden" name="cart_id" value="<?= $item['cart_item_id'] ?>">
+                                    <button type="submit" class="remove-btn">Remover</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
