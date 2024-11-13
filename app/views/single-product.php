@@ -124,8 +124,6 @@ try {
                 </div>
                 <input type="hidden" name="rating" id="rating" required>
                 <br>
-                <label for="comment">Comentário:</label>
-                <textarea name="comment" id="comment" required></textarea>
                 <br>
                 <button type="submit">Enviar Avaliação</button>
             </form>
