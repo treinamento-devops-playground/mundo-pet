@@ -21,28 +21,23 @@ class ProductController extends BaseController
 
     public function allProductsJson()
     {
-        header('Content-Type: application/json');
         $products = $this->productService->getAllProducts();
-        echo json_encode($products);
-        exit();
+        return $this->jsonResponse($products);
     }
 
     public function filterByCategoryJson()
     {
-        header('Content-Type: application/json');
         $category = $_GET['category'] ?? '';
         $products = $this->productService->getProductsByCategory($category);
-        echo json_encode($products);
-        exit();
+        return $this->jsonResponse($products);
     }
 
     public function searchJson()
     {
-        header('Content-Type: application/json');
+
         $searchTerm = $_GET['search'] ?? '';
         $products = $this->productService->searchProducts($searchTerm);
-        echo json_encode($products);
-        exit();
+        return $this->jsonResponse($products);
     }
 
     public function show($id)
@@ -52,5 +47,13 @@ class ProductController extends BaseController
             return $this->view('single-product', ['error' => 'Produto não encontrado']);
         }
         return $this->view('single-product', ['product' => $product]);
+    }
+
+    private function jsonResponse($data, $statusCode = 200)
+    {
+        http_response_code($statusCode);
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
     }
 }
