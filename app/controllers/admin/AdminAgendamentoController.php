@@ -5,19 +5,27 @@ namespace app\controllers\admin;
 use app\database\models\AgendamentoModel;
 use core\Request;
 use app\controllers\BaseController;
+use app\services\AdminAgendamentoService;
 
 class AdminAgendamentoController extends BaseController
 {
+    private AdminAgendamentoService $agendamentoService;
+
+    public function __construct()
+    {
+        $this->agendamentoService = new AdminAgendamentoService();
+    }
+
     public function show()
     {
-        $agendamentos = AgendamentoModel::all();
+        $agendamentos = $this->agendamentoService->getAgendamentos();
         return $this->view('admin-agendamentos', ['agendamentos' => $agendamentos]);
     }
 
     public function edit($params)
     {
         $id = $params[0];
-        $agendamento = AgendamentoModel::find($id);
+        $agendamento = $this->agendamentoService->getAgendamentoById($id);
 
         if (!$agendamento) {
             return $this->jsonResponse(['error' => 'Agendamento não encontrado'], 404);
@@ -28,27 +36,22 @@ class AdminAgendamentoController extends BaseController
 
     public function update($params)
     {
-        $id = $params[0];
+        try {
+            $id = $params[0];
+            $data = json_decode(file_get_contents('php://input'), true);
 
-        if (!AgendamentoModel::find($id)) {
-            return $this->jsonResponse(['error' => 'Agendamento não encontrado'], 404);
-        }
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                return $this->jsonResponse(['error' => 'JSON inválido'], 400);
+            }
 
-        $data = json_decode(file_get_contents('php://input'), true);
+            $agendamento = $this->agendamentoService->updateAgendamento($id, $data);
 
-        if (empty($data['pet_type']) || empty($data['service_type']) || empty($data['date']) || empty($data['time'])) {
-            return $this->jsonResponse(['error' => 'Todos os campos são obrigatórios'], 400);
-        }
-
-        $updated = AgendamentoModel::update($id, $data);
-
-        if ($updated) {
             return $this->jsonResponse([
                 'message' => 'Agendamento atualizado com sucesso',
-                'agendamento' => AgendamentoModel::find($id)
+                'agendamento' => $agendamento
             ]);
-        } else {
-            return $this->jsonResponse(['error' => 'Erro ao atualizar o agendamento'], 500);
+        } catch (\Exception $e) {
+            return $this->jsonResponse(['error' => $e->getMessage()]);
         }
     }
 

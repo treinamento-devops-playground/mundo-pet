@@ -18,9 +18,9 @@
             <li class="title"><a href="/catalog">Loja</a></li>
             <li class="title"><a href="#">Contato</a></li>
             <li><a href="/vis_agen"><img src="../img/icons/user.png" alt="Usuário"></a></li>
-            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li> 
-            </ul>
-    
+            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li>
+        </ul>
+
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Pesquisar produtos...">
             <button id="search-btn">
