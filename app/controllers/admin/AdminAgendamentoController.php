@@ -30,7 +30,11 @@ class AdminAgendamentoController extends BaseController
     {
         $id = $params[0];
 
-        $data = Request::only(['pet_type', 'service_type', 'date', 'time']);
+        if (!AgendamentoModel::find($id)) {
+            return $this->jsonResponse(['error' => 'Agendamento não encontrado'], 404);
+        }
+
+        $data = json_decode(file_get_contents('php://input'), true);
 
         if (empty($data['pet_type']) || empty($data['service_type']) || empty($data['date']) || empty($data['time'])) {
             return $this->jsonResponse(['error' => 'Todos os campos são obrigatórios'], 400);
