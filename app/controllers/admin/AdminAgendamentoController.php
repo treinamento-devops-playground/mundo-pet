@@ -55,6 +55,22 @@ class AdminAgendamentoController extends BaseController
         }
     }
 
+    public function changeStatus()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return $this->jsonResponse(['error' => 'JSON inválido'], 400);
+        }
+
+        $agendamento = $this->agendamentoService->changeStatus($data['id'], $data['status']);
+
+        return $this->jsonResponse([
+            'message' => 'Status do agendamento alterado com sucesso',
+            'agendamento' => $agendamento
+        ]);
+    }
+
     private function jsonResponse($data, $statusCode = 200)
     {
         http_response_code($statusCode);

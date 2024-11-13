@@ -49,6 +49,20 @@ class AdminAgendamentoService
         return $this->agendamentoModel->update($id, $data);
     }
 
+    public function changeStatus($id, $status)
+    {
+        if (!is_numeric($id)) {
+            throw new \Exception('ID inválido');
+        }
+
+        $agendamento = $this->agendamentoModel->find($id);
+        if (!$agendamento) {
+            throw new \Exception('Agendamento não encontrado');
+        }
+
+        return $this->agendamentoModel->updateStatus($id, $status);
+    }
+
     private function isValidDate($date): bool
     {
         return (bool) strtotime($date);
