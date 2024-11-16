@@ -90,19 +90,19 @@
     <p>Tem certeza de que deseja cancelar o agendamento abaixo?</p>
 
     <ul>
-        <li><strong>Data:</strong> <?= htmlspecialchars(date('d/m/Y', strtotime($agendamento['date']))) ?></li>
-        <li><strong>Hora:</strong> <?= htmlspecialchars(date('H:i', strtotime($agendamento['time']))) ?></li>
-        <li><strong>Tipo de Pet:</strong> <?= htmlspecialchars($agendamento['pet_type']) ?></li>
-        <li><strong>Serviço:</strong> <?= htmlspecialchars($agendamento['service_type']) ?></li>
-        <?php if (isset($agendamento['status'])): ?>
-            <li><strong>Status:</strong> <?= htmlspecialchars($agendamento['status']) ?></li>
+        <li><strong>Data:</strong> <?= htmlspecialchars(date('d/m/Y', strtotime($agendamento->getDate()))) ?></li>
+        <li><strong>Hora:</strong> <?= htmlspecialchars(date('H:i', strtotime($agendamento->getTime()))) ?></li>
+        <li><strong>Tipo de Pet:</strong> <?= htmlspecialchars($agendamento->getPetType()) ?></li>
+        <li><strong>Serviço:</strong> <?= htmlspecialchars($agendamento->getServiceType()) ?></li>
+        <?php if ($agendamento->getStatus()): ?>
+            <li><strong>Status:</strong> <?= htmlspecialchars($agendamento->getStatus()) ?></li>
         <?php endif; ?>
-        <?php if (isset($agendamento['motivo_cancelamento'])): ?>
-            <li><strong>Motivo do Cancelamento:</strong> <?= htmlspecialchars($agendamento['motivo_cancelamento']) ?></li>
+        <?php if ($agendamento->getMotivoCancelamento()): ?>
+            <li><strong>Motivo do Cancelamento:</strong> <?= htmlspecialchars($agendamento->getMotivoCancelamento()) ?></li>
         <?php endif; ?>
     </ul>
 
-    <form action="/agendamentos/cancelar/confirmar/<?= htmlspecialchars($agendamento['id']) ?>" method="post">
+    <form action="/agendamentos/cancelar/confirmar/<?= htmlspecialchars($agendamento->getId()); ?>" method="post">
         <label for="motivo">Motivo do Cancelamento:</label>
         <textarea name="motivo" id="motivo" required></textarea>
         <button type="submit">Confirmar Cancelamento</button>
