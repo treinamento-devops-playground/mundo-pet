@@ -3,6 +3,7 @@
 namespace app\controllers\site;
 
 use app\controllers\BaseController;
+use app\services\email\CancellationEmail;
 use app\services\IAgendamentoService;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -97,7 +98,8 @@ class AgendamentoController extends BaseController
             $agendamento->setMotivoCancelamento($motivo);
             $this->agendamentoService->updateAgendamento($agendamento);
 
-            $this->enviarEmailCancelamento($userEmail, $motivo);
+            $email = new CancellationEmail();
+            $email->sendEmail($userEmail, ['motivo' => $motivo]);
 
             header("Location: /agendamentos/cancelar/$id?success=canceled");
             exit();
@@ -118,7 +120,7 @@ class AgendamentoController extends BaseController
 
         $user = $this->agendamentoService->getUserById($userId);
         if (!$user) {
-            return $this->view('user/login', ['error' => 'Usuário não encontrado.']);
+            return $this->view('/login', ['error' => 'Usuário não encontrado.']);
         }
 
         $appointments = $this->agendamentoService->getAgendamentosByUserId($userId);
@@ -127,40 +129,5 @@ class AgendamentoController extends BaseController
             'username' => $user['username'],
             'agendamentos' => $appointments
         ]);
-    }
-
-    private function enviarEmailCancelamento($email, $motivo)
-    {
-        require_once __DIR__ . '/../../../vendor/autoload.php';
-
-        $mail = new PHPMailer(true);
-
-        try {
-            $mail = new PHPMailer();
-            $mail->isSMTP();
-            $mail->Host = 'sandbox.smtp.mailtrap.io';
-            $mail->SMTPAuth = true;
-            $mail->Port = 2525;
-            $mail->Username = '71f21970161a51';
-            $mail->Password = '67d7c514be9767';
-
-            $mail->setFrom('no-reply@demomailtrap.com', 'MundoPet');
-            $mail->addAddress($email);
-
-            $mail->isHTML(true);
-            $mail->Subject = 'Confirmação de Cancelamento de Agendamento';
-            $mail->Body    = "
-                <h1>Agendamento Cancelado</h1>
-                <p>Seu agendamento foi cancelado com sucesso.</p>
-                <p><strong>Motivo do cancelamento:</strong> " . htmlspecialchars($motivo) . "</p>
-            ";
-            $mail->AltBody = 'Seu agendamento foi cancelado com sucesso. Motivo do cancelamento: ' . $motivo;
-
-            $mail->SMTPDebug = 2;
-            $mail->send();
-            echo 'Email enviado com sucesso!';
-        } catch (Exception $e) {
-            error_log("Erro ao enviar e-mail: {$mail->ErrorInfo}");
-        }
     }
 }

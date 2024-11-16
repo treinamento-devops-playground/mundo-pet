@@ -31,29 +31,23 @@ class AdminAgendamentoService implements IAdminAgendamentoService
         }
 
         $agendamento = $this->agendamentoRepository->find($id);
-        $agendamentoArray = $agendamento->toArray();
 
         if (!$agendamento) {
             throw new \Exception('Agendamento não encontrado');
         }
 
-        $petType = $agendamentoArray['pet_type'];
-        $serviceType = $agendamentoArray['pet_type'];
-        $date = $agendamentoArray['pet_type'];
-        $time = $agendamentoArray['pet_type'];
-
-        if (!$this->isValidDate($date)) {
+        if (!$this->isValidDate($data['date'])) {
             throw new \Exception('Data inválida');
         }
 
-        if (!$this->isValidTime($time)) {
+        if (!$this->isValidTime($data['time'])) {
             throw new \Exception('Hora inválida');
         }
 
-        $agendamento->setPetType($petType);
-        $agendamento->setServiceType($serviceType);
-        $agendamento->setDate($date);
-        $agendamento->setTime($time);
+        $agendamento->setPetType($data['pet_type']);
+        $agendamento->setServiceType($data['service_type']);
+        $agendamento->setDate($data['date']);
+        $agendamento->setTime($data['time']);
 
         $success = $this->agendamentoRepository->update($agendamento);
 
