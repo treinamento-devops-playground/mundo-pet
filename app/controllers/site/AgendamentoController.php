@@ -2,23 +2,23 @@
 
 namespace app\controllers\site;
 
-use app\database\models\AgendamentoModel;
 use app\controllers\BaseController;
+use app\services\IAgendamentoService;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use app\database\Connection;
-
-
 
 class AgendamentoController extends BaseController
 {
+    private $agendamentoService;
+
+    public function __construct(IAgendamentoService $agendamentoService)
+    {
+        $this->agendamentoService = $agendamentoService;
+    }
+
     public function create()
     {
-        try {
-            return $this->view('agendamentos/agendamentos-create');
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
+        return $this->view('agendamentos/agendamentos-create');
     }
 
     public function store()
@@ -31,32 +31,22 @@ class AgendamentoController extends BaseController
         }
 
         $userId = $_SESSION['user_id'];
-        $petType = $_POST['pet_type'];
-        $serviceType = $_POST['service_type'];
-        $date = $_POST['date'];
-        $time = $_POST['time'];
-
-        if (empty($petType) || empty($serviceType) || empty($date) || empty($time)) {
-            echo "Por favor, preencha todos os campos.";
-            return;
-        }
+        $data = [
+            'user_id' => $userId,
+            'pet_type' => $_POST['pet_type'] ?? null,
+            'service_type' => $_POST['service_type'] ?? null,
+            'date' => $_POST['date'] ?? null,
+            'time' => $_POST['time'] ?? null
+        ];
 
         try {
-            if (AgendamentoModel::isAvailable($userId, $date, $time, $serviceType)) {
-                if (AgendamentoModel::create($userId, $petType, $serviceType, $date, $time)) {
-                    header('Location: /agendamentos/create?success=store_success');
-                    return $this->view('agendamentos/agendamentos-create');
-                } else {
-                    header('Location: /agendamentos/create?error=store_error');
-                }
-            } else {
-                header('Location: /agendamentos/create?error=unavailable');
-            }
+            $this->agendamentoService->createAgendamento($data);
+            header('Location: /agendamentos/create?success=store_success');
+            exit();
         } catch (\Exception $e) {
             echo "Ocorreu um erro ao processar o agendamento: " . $e->getMessage();
         }
     }
-
 
     public function cancelForm($id)
     {
@@ -67,9 +57,9 @@ class AgendamentoController extends BaseController
             exit();
         }
 
-        $agendamento = AgendamentoModel::find($id);
+        $agendamento = $this->agendamentoService->getAgendamentoById($id);
 
-        if (!$agendamento || $agendamento['user_id'] != $_SESSION['user_id']) {
+        if (!$agendamento || $agendamento->getUserId() != $_SESSION['user_id']) {
             header("Location: /agendamentos?error=not_found");
             exit();
         }
@@ -95,22 +85,22 @@ class AgendamentoController extends BaseController
             exit();
         }
 
-        $agendamento = AgendamentoModel::find($id);
+        $agendamento = $this->agendamentoService->getAgendamentoById($id);
 
-        if (!$agendamento || $agendamento['user_id'] != $userId) {
+        if (!$agendamento || $agendamento->getUserId() != $userId) {
             header("Location: /agendamentos?error=not_found");
             exit();
         }
 
         try {
-            if (AgendamentoModel::cancel($id, $userId, $motivo)) {
-                $this->enviarEmailCancelamento($userEmail, $motivo);
-                header("Location: /agendamentos/cancelar/$id?success=canceled");
-                exit();
-            } else {
-                header("Location: /agendamentos/cancelar/$id?error=cancel_failed");
-                exit();
-            }
+            $agendamento->setStatus('cancelado');
+            $agendamento->setMotivoCancelamento($motivo);
+            $this->agendamentoService->updateAgendamento($agendamento);
+
+            $this->enviarEmailCancelamento($userEmail, $motivo);
+
+            header("Location: /agendamentos/cancelar/$id?success=canceled");
+            exit();
         } catch (\Exception $e) {
             header("Location: /agendamentos/cancelar/$id?error=exception");
             exit();
@@ -126,12 +116,12 @@ class AgendamentoController extends BaseController
             return $this->view('user/login', ['error' => 'Faça login']);
         }
 
-        $user = AgendamentoModel::getUserById($userId);
+        $user = $this->agendamentoService->getUserById($userId);
         if (!$user) {
             return $this->view('user/login', ['error' => 'Usuário não encontrado.']);
         }
 
-        $appointments = AgendamentoModel::getAgendamentosByUserId($userId);
+        $appointments = $this->agendamentoService->getAgendamentosByUserId($userId);
 
         return $this->view('vis_agen', [
             'username' => $user['username'],

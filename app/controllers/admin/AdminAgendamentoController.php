@@ -6,14 +6,15 @@ use app\database\models\AgendamentoModel;
 use core\Request;
 use app\controllers\BaseController;
 use app\services\AdminAgendamentoService;
+use app\services\IAdminAgendamentoService;
 
 class AdminAgendamentoController extends BaseController
 {
-    private AdminAgendamentoService $agendamentoService;
+    private IAdminAgendamentoService $agendamentoService;
 
-    public function __construct()
+    public function __construct(IAdminAgendamentoService $agendamentoService)
     {
-        $this->agendamentoService = new AdminAgendamentoService();
+        $this->agendamentoService = $agendamentoService;
     }
 
     public function show()
@@ -44,11 +45,11 @@ class AdminAgendamentoController extends BaseController
                 return $this->jsonResponse(['error' => 'JSON inválido'], 400);
             }
 
-            $agendamento = $this->agendamentoService->updateAgendamento($id, $data);
+            $agendamentoAtualizado = $this->agendamentoService->updateAgendamento($id, $data);
 
             return $this->jsonResponse([
                 'message' => 'Agendamento atualizado com sucesso',
-                'agendamento' => $agendamento
+                'agendamento' => $agendamentoAtualizado
             ]);
         } catch (\Exception $e) {
             return $this->jsonResponse(['error' => $e->getMessage()]);
