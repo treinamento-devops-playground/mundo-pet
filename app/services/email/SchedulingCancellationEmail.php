@@ -2,7 +2,7 @@
 
 namespace app\services\email;
 
-class CancellationEmail extends EmailTemplate
+class SchedulingCancellationEmail extends EmailTemplate
 {
     protected function getSubject(array $data): string
     {

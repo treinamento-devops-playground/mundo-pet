@@ -3,10 +3,8 @@
 namespace app\controllers\site;
 
 use app\controllers\BaseController;
-use app\services\email\CancellationEmail;
+use app\services\email\SchedulingCancellationEmail;
 use app\services\IAgendamentoService;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 class AgendamentoController extends BaseController
 {
@@ -98,7 +96,7 @@ class AgendamentoController extends BaseController
             $agendamento->setMotivoCancelamento($motivo);
             $this->agendamentoService->updateAgendamento($agendamento);
 
-            $email = new CancellationEmail();
+            $email = new SchedulingCancellationEmail();
             $email->sendEmail($userEmail, ['motivo' => $motivo]);
 
             header("Location: /agendamentos/cancelar/$id?success=canceled");
