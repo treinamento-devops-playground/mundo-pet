@@ -37,7 +37,7 @@ if (isset($_POST['logout'])) {
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
                     <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span>
-                    
+
                     <form action="/logout" method="post">
                         <button type="submit" name="logout" class="edit-btn">Logout</button>
                     </form>
@@ -50,12 +50,12 @@ if (isset($_POST['logout'])) {
                 <?php foreach ($agendamentos as $item): ?>
                     <div class="appointment">
                         <div class="titulo">
-                            <p> <?= htmlspecialchars($item['service_type']) ?></p>
-                            <p> <?= htmlspecialchars($item['date']) ?></p>
-                            <p>Horário: <?= htmlspecialchars($item['time']) ?></p>
+                            <p> <?= htmlspecialchars($item->getServiceType()); ?></p>
+                            <p> <?= htmlspecialchars($item->getDate()); ?></p>
+                            <p>Horário: <?= htmlspecialchars($item->getTime()); ?></p>
                         </div>
                         <div class="button-group">
-                            <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item['id']) ?>" class="cancel-link">✖</a></button>
+                            <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item->getId()); ?>" class="cancel-link">✖</a></button>
                         </div>
                     </div>
                 <?php endforeach; ?>
