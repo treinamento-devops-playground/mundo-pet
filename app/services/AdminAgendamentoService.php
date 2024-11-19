@@ -2,34 +2,36 @@
 
 namespace app\services;
 
+use app\database\repositories\IAgendamentoRepository;
 use app\database\models\AgendamentoModel;
 
-class AdminAgendamentoService
+class AdminAgendamentoService implements IAdminAgendamentoService
 {
-    private AgendamentoModel $agendamentoModel;
+    private $agendamentoRepository;
 
-    public function __construct()
+    public function __construct(IAgendamentoRepository $agendamentoRepository)
     {
-        $this->agendamentoModel = new AgendamentoModel();
+        $this->agendamentoRepository = $agendamentoRepository;
     }
 
     public function getAgendamentos()
     {
-        return $this->agendamentoModel->all();
+        return $this->agendamentoRepository->all();
     }
 
     public function getAgendamentoById($id)
     {
-        return $this->agendamentoModel->find($id);
+        return $this->agendamentoRepository->find($id);
     }
 
-    public function updateAgendamento($id, $data)
+    public function updateAgendamento($id, array $data)
     {
         if (!is_numeric($id)) {
             throw new \Exception('ID inválido');
         }
 
-        $agendamento = $this->agendamentoModel->find($id);
+        $agendamento = $this->agendamentoRepository->find($id);
+
         if (!$agendamento) {
             throw new \Exception('Agendamento não encontrado');
         }
@@ -42,11 +44,18 @@ class AdminAgendamentoService
             throw new \Exception('Hora inválida');
         }
 
-        /*if ($this->hasScheduleConflict($data['date'], $data['time'], $id)) {
-            throw new \Exception('Horário já ocupado');
-        }*/
+        $agendamento->setPetType($data['pet_type']);
+        $agendamento->setServiceType($data['service_type']);
+        $agendamento->setDate($data['date']);
+        $agendamento->setTime($data['time']);
 
-        return $this->agendamentoModel->update($id, $data);
+        $success = $this->agendamentoRepository->update($agendamento);
+
+        if ($success) {
+            return $agendamento;
+        } else {
+            throw new \Exception('Erro ao atualizar agendamento');
+        }
     }
 
     private function isValidDate($date): bool
@@ -58,8 +67,4 @@ class AdminAgendamentoService
     {
         return (bool) preg_match('/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/', $time);
     }
-
-    /*private function hasScheduleConflict($date, $time){
-        //depois tenho que criar a lógica para verificar os conflitos de horário de agendamento
-    }*/
 }

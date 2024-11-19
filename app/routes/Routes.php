@@ -2,9 +2,6 @@
 
 namespace app\routes;
 
-use app\controllers\site\AgendamentoController;
-use app\controllers\site\UserController;
-
 class Routes
 {
     public static function get()
