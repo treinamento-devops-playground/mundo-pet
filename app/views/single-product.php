@@ -130,7 +130,7 @@ try {
         </div>
     </div>
 
-    <a href="/product" class="back-link">Voltar ao Catálogo</a>
+    <a href="/catalog" class="back-link">Voltar ao Catálogo</a>
 
     <script src="../js/rating.js"></script>
 </body>

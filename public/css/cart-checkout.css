@@ -116,12 +116,19 @@ header {
         }
 
         .payment-section {
-            width: 35%;
+            width: 25%;
             background-color: #8c9eff;
             padding: 20px;
             border-radius: 10px;
             color: white;
         }
+
+        .payment-section .cards img {
+            width: 40px;    
+            height: auto; 
+            margin-right: 10px; 
+        }
+        
 
         h1 {
             font-size: 24px;
@@ -131,7 +138,7 @@ header {
         input {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin: 5px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
