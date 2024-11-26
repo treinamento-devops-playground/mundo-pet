@@ -28,9 +28,10 @@
         </div>
     </header>
     <div class="container">
-        <div class="form-section">
-            <h1>Volte ao carrinho</h1>
-            <form action="/checkout/process" method="POST">
+        <form action="/checkout/process" method="POST">
+            <!-- Informações do cliente -->
+            <div class="form-section">
+                <h1>Volte ao carrinho</h1>
                 <label for="name">Nome Completo</label>
                 <input type="text" id="name" name="name" required>
 
@@ -45,16 +46,16 @@
 
                 <label for="complement">Complemento</label>
                 <input type="text" id="complement" name="complement">
-            </form>
-        </div>
-
-        <div class="payment-section">
-            <h1>Pagamento</h1>
-            <div class="cards">
-                <img src="/img/mastercard.png" alt="MasterCard">
-                <img src="/img/visa.png" alt="Visa">
             </div>
-            <form action="/checkout/process" method="POST">
+
+            <!-- Informações do pagamento -->
+            <div class="payment-section">
+                <h1>Pagamento</h1>
+                <div class="cards">
+                    <img src="/img/mastercard.png" alt="MasterCard">
+                    <img src="/img/visa.png" alt="Visa">
+                </div>
+
                 <label for="card_name">Nome no cartão</label>
                 <input type="text" id="card_name" name="card_name" required>
 
@@ -66,7 +67,10 @@
 
                 <label for="cvv">CVV</label>
                 <input type="text" id="cvv" name="cvv" required>
+                
+                
 
+                <!-- Resumo do carrinho -->
                 <div class="summary">
                     <?php
                     $cartTotal = 0;
@@ -79,10 +83,10 @@
                     <p>Desconto: R$ 0,00</p>
                     <p>Total: R$ <?php echo number_format($cartTotal, 2, ',', '.'); ?></p>
                 </div>
-
+                
                 <button type="submit" class="btn-finalizar">Finalizar</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </body>
 
