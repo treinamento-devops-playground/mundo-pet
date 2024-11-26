@@ -113,7 +113,7 @@ class AgendamentoController extends BaseController
         $userId = $_SESSION['user_id'] ?? null;
 
         if (!$userId) {
-            return $this->view('user/login', ['error' => 'Faça login']);
+            return $this->view('/login', ['error' => 'Faça login']);
         }
 
         $user = $this->agendamentoService->getUserById($userId);
