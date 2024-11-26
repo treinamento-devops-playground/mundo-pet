@@ -1,45 +1,48 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\site;
 
 use app\database\models\ReviewModel;
+use PDOException;
 
 class ReviewController
 {
-    private $reviewModel;
-
-    public function __construct()
+    public function addReview()
     {
-        $this->reviewModel = new ReviewModel();
-    }
+        session_start(); 
 
-    // Método para adicionar avaliação
-    public function createReview($productId, $userId, $rating, $comment)
-    {
-        // Chama o método do Model para adicionar a avaliação
-        $isSaved = $this->reviewModel->addReview($productId, $userId, $rating, $comment);
-
-        // Verifica se a avaliação foi salva com sucesso
-        if ($isSaved) {
-            $_SESSION['review_success'] = 'Avaliação enviada com sucesso!';
-        } else {
-            $_SESSION['review_error'] = 'Erro ao enviar a avaliação. Tente novamente.';
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(400);
+            echo json_encode(["message" => "Usuário não autenticado"]);
+            exit();
         }
 
-        // Redireciona para a página do produto
-        header('Location: /product/' . $productId);  // Redirecionando para a página do produto
-        exit;
+        $data = json_decode(file_get_contents('php://input'), true);
+        $productId = $data['productId'];
+        $rating = $data['rating'];
+        $comment = $data['comment'];
+        $userId = $_SESSION['user_id']; 
+
+        if (empty($productId) || empty($rating) || empty($comment)) {
+            http_response_code(400);
+            echo json_encode(["message" => "Todos os campos são obrigatórios"]);
+            exit();
+        }
+
+        $result = ReviewModel::addReview($productId, $userId, $rating, $comment);
+
+        if ($result) {
+            echo json_encode(["message" => "Avaliação salva com sucesso!"]);
+        } else {
+            http_response_code(500);
+            echo json_encode(["message" => "Erro ao salvar a avaliação."]);
+        }
     }
 
-    // Método para exibir as avaliações de um produto
-    public function showReviews($productId)
+    // Método para retornar as avaliações de um produto
+    public function getProductReviews($productId)
     {
-        return $this->reviewModel->getReviewsByProductId($productId);
-    }
-
-    // Método para calcular a média das avaliações de um produto
-    public function getAverageRating($productId)
-    {
-        return $this->reviewModel->calculateAverageRating($productId);
+        $reviews = ReviewModel::getReviewsByProductId($productId);
+        echo json_encode($reviews);
     }
 }

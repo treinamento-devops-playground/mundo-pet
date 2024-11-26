@@ -2,51 +2,45 @@
 
 namespace app\database\models;
 
+use app\database\Connection;
 use PDO;
+use PDOException;
 
 class ReviewModel
 {
-    private $pdo;
-
-    public function __construct()
-    {
-        $dbPath = __DIR__ . '/../../database/db.db';
-        $dsn = 'sqlite:' . $dbPath;
-        $this->pdo = new PDO($dsn);
-    }
-
-    // Método para adicionar uma avaliação
-    public function addReview($productId, $userId, $rating, $comment)
+    // Função para adicionar uma avaliação
+    public static function addReview($productId, $userId, $rating, $comment)
     {
         try {
-            $stmt = $this->pdo->prepare('INSERT INTO reviews (product_id, user_id, rating, comment) VALUES (:product_id, :user_id, :rating, :comment)');
-            $stmt->bindParam(':product_id', $productId);
-            $stmt->bindParam(':user_id', $userId);
-            $stmt->bindParam(':rating', $rating);
-            $stmt->bindParam(':comment', $comment);
+            $pdo = Connection::getConnection();
+
+            $stmt = $pdo->prepare('INSERT INTO review (product_id, user_id, rating, comment, review_date) 
+                                   VALUES (:product_id, :user_id, :rating, :comment, CURRENT_TIMESTAMP)');
+            $stmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
+            $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
             $stmt->execute();
-            
-            return true; 
-        } catch (\Exception $e) {
-            return false; 
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
         }
     }
-    public function getReviewsByProductId($productId)
+
+    // Função para pegar avaliações de um produto
+    public static function getReviewsByProductId($productId)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM reviews WHERE product_id = :product_id');
-        $stmt->bindParam(':product_id', $productId);
-        $stmt->execute();
+        try {
+            $pdo = Connection::getConnection();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+            $stmt = $pdo->prepare('SELECT * FROM review WHERE product_id = :product_id');
+            $stmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
+            $stmt->execute();
 
-    public function calculateAverageRating($productId)
-    {
-        $stmt = $this->pdo->prepare('SELECT AVG(rating) as average_rating FROM reviews WHERE product_id = :product_id');
-        $stmt->bindParam(':product_id', $productId);
-        $stmt->execute();
-
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return round($result['average_rating'], 1);  
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
     }
 }

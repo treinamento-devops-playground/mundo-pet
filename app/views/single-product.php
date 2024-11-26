@@ -99,7 +99,7 @@ try {
                         <div class="review">
                             <div class="review-rating">
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <span class="star <?php echo $i <= $review['rating'] ? 'filled' : ''; ?>">&#9733;</span>
+                                    <span class="star previous <?php echo $i <= $review['rating'] ? 'filled' : ''; ?>">&#9733;</span>
                                 <?php endfor; ?>
                             </div>
                             <p class="review-comment"><?php echo nl2br(htmlspecialchars($review['comment'])); ?></p>
@@ -111,28 +111,101 @@ try {
                 <?php endif; ?>
             </div>
 
-            <!-- Formulário para adicionar avaliação -->
-            <form action="/product/<?php echo $product['id']; ?>/review" method="POST">
-                <h4>Deixe sua Avaliação</h4>
-                <label for="rating">Classificação:</label>
-                <div class="rating-stars">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
+            <!-- Formulário de avaliação -->
+            <div class="review-form">
+                <h4>Deixe sua avaliação</h4>
+                <div class="rating-stars" id="rating-stars">
+                    <span class="star current" data-value="1">&#9733;</span>
+                    <span class="star current" data-value="2">&#9733;</span>
+                    <span class="star current" data-value="3">&#9733;</span>
+                    <span class="star current" data-value="4">&#9733;</span>
+                    <span class="star current" data-value="5">&#9733;</span>
                 </div>
-                <input type="hidden" name="rating" id="rating" required>
-                <br>
-                <br>
-                <button type="submit">Enviar Avaliação</button>
-            </form>
+                <textarea id="review-comment" placeholder="Escreva seu comentário..."></textarea>
+                <button id="submit-review" class="submit-review-btn" data-product-id="<?php echo htmlspecialchars($product['id']); ?>">Enviar Avaliação</button>
+            </div>
         </div>
     </div>
 
     <a href="/catalog" class="back-link">Voltar ao Catálogo</a>
 
-    <script src="../js/rating.js"></script>
 </body>
 
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const starsCurrent = document.querySelectorAll('.star.current');
+        const starsPrevious = document.querySelectorAll('.star.previous');
+        const commentInput = document.getElementById('review-comment');
+        const submitButton = document.getElementById('submit-review');
+        const productId = submitButton.getAttribute('data-product-id');
+        let rating = 0;
+
+        function updateStars(starElements, rating) {
+            starElements.forEach(star => star.classList.remove('filled'));
+            for (let i = 0; i < rating; i++) {
+                starElements[i].classList.add('filled');
+            }
+        }
+
+        function setStars(savedRating) {
+            if (savedRating > 0) {
+                updateStars(starsPrevious, savedRating);
+            }
+        }
+
+        async function loadProductReviews() {
+            try {
+                const response = await fetch(`/product/reviews/${productId}`);
+                const reviews = await response.json();
+
+                if (reviews.length > 0) {
+                    const savedRating = reviews[0].rating;
+                    setStars(savedRating);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar avaliações:', error);
+            }
+        }
+
+        loadProductReviews();
+
+        starsCurrent.forEach(star => {
+            star.addEventListener('click', () => {
+                rating = parseInt(star.getAttribute('data-value'));
+                updateStars(starsCurrent, rating);
+            });
+        });
+
+        submitButton.addEventListener('click', async () => {
+            const comment = commentInput.value;
+
+            if (!rating || !comment) {
+                alert('Por favor, preencha a avaliação e o comentário.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/product/review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productId, rating, comment })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Avaliação enviada com sucesso!');
+                    location.reload();
+                } else {
+                    throw new Error(result.message || 'Erro ao enviar a avaliação.');
+                }
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    });
+</script>
