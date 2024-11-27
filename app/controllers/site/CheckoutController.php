@@ -3,16 +3,16 @@
 namespace app\controllers\site;
 
 use app\controllers\BaseController;
-use app\database\models\CheckoutModel;
-use app\database\models\CartModel;
+use app\services\CheckoutService;
+
 
 class CheckoutController extends BaseController
 {
-    private $checkoutModel;
+    private $checkoutService;
 
     public function __construct()
     {
-        $this->checkoutModel = new CheckoutModel();
+        $this->checkoutService = new CheckoutService();
     }
 
     public function show()
@@ -26,16 +26,12 @@ class CheckoutController extends BaseController
         $userId = $_SESSION['user_id'] ?? null;
 
         if (!$userId) {
-            header('Location: /login');
-            exit();
+            return $this->jsonResponse(['error' => 'usuario não autenticado'], 401);
         }
 
-        try {
-            $cartModel = new CartModel();
-            $cartTotal = $cartModel->getCartTotal($userId);
 
-            $data = [
-                'user_id' => $userId,
+        try {
+            $paymentData = [
                 'name' => $_POST['name'],
                 'address' => $_POST['address'],
                 'city' => $_POST['city'],
@@ -45,17 +41,33 @@ class CheckoutController extends BaseController
                 'card_number' => $_POST['card_number'],
                 'expiration_date' => $_POST['expiration_date'],
                 'cvv' => $_POST['cvv'],
-                'total_amount' => $cartTotal,
                 'discount' => $_POST['discount'] ?? 0,
-                'payment_status' => 'pending'
+                'email' => $_SESSION['email']
             ];
 
-            $this->checkoutModel->createCheckout($data);
+            /*if (empty($name) || empty($city) || empty($address) || empty($cardName) || empty($cardNumber) || empty($expirationDate) || empty($cvv)) {
+                return $this->jsonResponse(['error' => 'todos os campos são obrigatorios.']);
+            }*/
 
-            header("Location: /success");
+            $checkoutId = $this->checkoutService->processPayment($userId, $paymentData);
+
+            /*$email = new CheckoutConfimationEmail();
+            $email->sendEmail($_SESSION['email'], ['total' => $cartTotal]);
+            $email->sendEmail($_SESSION['email'], ['total' => $cartTotal, 'checkout_id' => $userId]);*/
+
+            header("Location: /catalog");
             exit();
         } catch (\Exception $e) {
-            $this->view('error', ['message' => $e->getMessage()]);
+            return $this->jsonResponse(['error' => 'Ocorreu um erro: ' . $e->getMessage()], 500);
         }
     }
+
+    protected function jsonResponse($data, $statusCode = 200)
+    {
+        header('Content-Type: application/json');
+        http_response_code($statusCode);
+        echo json_encode($data);
+        exit();
+    }
 }
+
