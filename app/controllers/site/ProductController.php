@@ -2,11 +2,9 @@
 
 namespace app\controllers\site;
 
-use app\database\Connection;
 use app\database\models\ProductModel;
 use app\services\ReviewService;
 use Exception;
-use PDO;
 
 class ProductController
 {
@@ -19,11 +17,12 @@ class ProductController
 
     public function index()
     {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->query("SELECT * FROM products");
-        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        require_once __DIR__ . '/../../views/catalog.php';
+        try {
+            $products = ProductModel::all();
+            require_once __DIR__ . '/../../views/catalog.php';
+        } catch (Exception $e) {
+            die("Erro ao carregar os produtos: " . $e->getMessage());
+        }
     }
 
     public function show()
@@ -37,36 +36,23 @@ class ProductController
         }
 
         try {
-            $pdo = Connection::getConnection();
-
-            $stmt = $pdo->prepare('SELECT * FROM products WHERE id = :id');
-            $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
-            $stmt->execute();
-
-            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            $product = ProductModel::find($productId);
 
             if (!$product) {
                 die("Produto não encontrado.");
             }
 
-            $reviewsStmt = $pdo->prepare('SELECT * FROM review WHERE product_id = :product_id');
-            $reviewsStmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
-            $reviewsStmt->execute();
-            $reviews = $reviewsStmt->fetchAll(PDO::FETCH_ASSOC);
-
+            $reviews = $this->reviewService->getProductReviews($productId);
             $totalReviews = count($reviews);
             $averageRating = 0;
 
             if ($totalReviews > 0) {
-                $totalRating = 0;
-                foreach ($reviews as $review) {
-                    $totalRating += $review['rating'];
-                }
+                $totalRating = array_sum(array_column($reviews, 'rating'));
                 $averageRating = $totalRating / $totalReviews;
             }
 
             require_once __DIR__ . '/../../views/single-product.php';
-        } catch (\PDOException $e) {
+        } catch (Exception $e) {
             die("Erro ao carregar o produto: " . $e->getMessage());
         }
     }
@@ -81,16 +67,9 @@ class ProductController
         }
 
         try {
-            $pdo = Connection::getConnection();
-
-            $stmt = $pdo->prepare('SELECT * FROM products WHERE category = :category');
-            $stmt->bindParam(':category', $category, PDO::PARAM_STR);
-            $stmt->execute();
-
-            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+            $products = ProductModel::findByCategory($category);
             echo json_encode($products);
-        } catch (\PDOException $e) {
+        } catch (Exception $e) {
             echo json_encode(['error' => 'Erro ao filtrar produtos: ' . $e->getMessage()]);
         }
     }
@@ -105,17 +84,9 @@ class ProductController
         }
 
         try {
-            $pdo = Connection::getConnection();
-
-            $stmt = $pdo->prepare('SELECT * FROM products WHERE name LIKE :query OR description LIKE :query');
-            $query = "%$query%";
-            $stmt->bindParam(':query', $query, PDO::PARAM_STR);
-            $stmt->execute();
-
-            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+            $products = ProductModel::search($query);
             echo json_encode($products);
-        } catch (\PDOException $e) {
+        } catch (Exception $e) {
             echo json_encode(['error' => 'Erro ao buscar produtos: ' . $e->getMessage()]);
         }
     }
@@ -123,17 +94,13 @@ class ProductController
     public function allProductsJson()
     {
         try {
-            $pdo = Connection::getConnection();
-
-            $stmt = $pdo->query('SELECT * FROM products');
-            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+            $products = ProductModel::all();
             echo json_encode($products);
-        } catch (\PDOException $e) {
+        } catch (Exception $e) {
             echo json_encode(['error' => 'Erro ao carregar os produtos: ' . $e->getMessage()]);
         }
     }
-   
+
     public function addReview()
     {
         $reviewController = new ReviewController();
