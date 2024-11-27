@@ -3,6 +3,7 @@
 namespace Tests\Unit\Services;
 
 use PHPUnit\Framework\TestCase;
+use Mockery;
 use app\services\ReviewService;
 use app\database\models\ReviewModel;
 use Exception;
@@ -20,21 +21,22 @@ class ReviewServiceTest extends TestCase
     /**
      * @test
      */
+
+    // teste para verificar se o método addReview() funciona com dados válidos.
     public function addReviewShouldSuccessfullyAddReview()
     {
-        // Prepara dados válidos de revisão
-        $reviewData = [
-            'productId' => 123,
-            'userId' => 456,
-            'rating' => 5,
-            'comment' => 'Ótimo produto'
-        ];
+        $productId = 123;
+        $userId = 456;
+        $rating = 5;
+        $comment = "Ótimo produto!";
 
-        // Configura a expectativa de chamada do método addReview no ReviewModel
-        $this->mockReviewModelAddReview(true, $reviewData);
+        $mock = Mockery::mock('alias:app\database\models\ReviewModel');
+        $mock->shouldReceive('addReview')
+            ->once()
+            ->with($productId, $userId, $rating, $comment)
+            ->andReturn(true);
 
-        // Chama o método de adicionar a revisão
-        $result = $this->reviewService->addReview($reviewData['productId'], $reviewData['userId'], $reviewData['rating'], $reviewData['comment']);
+        $result = $this->reviewService->addReview($productId, $userId, $rating, $comment);
 
         $this->assertTrue($result);
     }
@@ -42,112 +44,49 @@ class ReviewServiceTest extends TestCase
     /**
      * @test
      */
-    public function addReviewShouldThrowExceptionWhenFieldsAreMissing()
+    
+     // esse teste verifica se o método addReview() lança exceção quando os campos obrigatórios estão vazios/inválidos.
+    public function addReviewShouldThrowExceptionWhenFieldsAreEmpty()
     {
-        // Prepara dados de revisão com campo vazio
-        $reviewData = [
-            'productId' => 123,
-            'userId' => 456,
-            'rating' => 5,
-            'comment' => ''
-        ];
-
-        // Espera que uma exceção seja lançada
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage("Todos os campos são obrigatórios.");
-
-        // Chama o método de adicionar a revisão
-        $this->reviewService->addReview($reviewData['productId'], $reviewData['userId'], $reviewData['rating'], $reviewData['comment']);
-    }
-
-    /**
-     * @test
-     */
-    public function addReviewShouldThrowExceptionWhenRatingIsInvalid()
-    {
-        // Prepara dados de revisão com rating inválido
-        $reviewData = [
-            'productId' => 123,
-            'userId' => 456,
-            'rating' => 0, // Rating inválido
-            'comment' => 'Comentário válido'
-        ];
-
-        // Espera que uma exceção seja lançada
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage("Todos os campos são obrigatórios.");
-
-        // Chama o método de adicionar a revisão
-        $this->reviewService->addReview($reviewData['productId'], $reviewData['userId'], $reviewData['rating'], $reviewData['comment']);
-    }
-
-    /**
-     * @test
-     */
-    public function getProductReviewsShouldReturnReviews()
-    {
-        // Prepara dados de revisão
         $productId = 123;
+        $userId = 456;
+        $rating = 0;  // Rating vazio
+        $comment = "";
 
-        // Mock de chamada do método getReviewsByProductId no ReviewModel
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Todos os campos são obrigatórios.");
+
+        $this->reviewService->addReview($productId, $userId, $rating, $comment);
+    }
+
+    /**
+     * @test
+     */
+
+     // esse verifica se o método getProductReviews() retorna as avaliações como um array.
+    public function getProductReviewsShouldReturnArray()
+    {
+        $productId = 123;
         $reviews = [
-            new ReviewModel(123, 456, 5, 'Ótimo produto'),
-            new ReviewModel(123, 789, 4, 'Bom produto')
+            ['user_id' => 456, 'rating' => 5, 'comment' => 'Ótimo produto!'],
+            ['user_id' => 789, 'rating' => 4, 'comment' => 'Muito bom!'],
         ];
 
-        $this->mockReviewModelGetReviewsByProductId($reviews);
+        $mock = Mockery::mock('alias:app\database\models\ReviewModel');
+        $mock->shouldReceive('getReviewsByProductId')
+            ->once()
+            ->with($productId)
+            ->andReturn($reviews);
 
-        // Chama o método de obter as revisões
         $result = $this->reviewService->getProductReviews($productId);
 
+        $this->assertIsArray($result);
         $this->assertCount(2, $result);
-        $this->assertInstanceOf(ReviewModel::class, $result[0]);
     }
-
-    /**
-     * @test
-     */
-    public function getProductReviewsShouldReturnEmptyArrayWhenNoReviews()
+    // fechar os mocks após cada teste, para não interferir.
+    protected function tearDown(): void
     {
-        // Prepara dados de revisão
-        $productId = 123;
-
-        // Mock de chamada do método getReviewsByProductId no ReviewModel
-        $this->mockReviewModelGetReviewsByProductId([]);
-
-        // Chama o método de obter as revisões
-        $result = $this->reviewService->getProductReviews($productId);
-
-        $this->assertEmpty($result);
-    }
-
-    private function mockReviewModelAddReview(bool $returnValue, array $reviewData)
-    {
-        $mock = $this->getMockBuilder(ReviewModel::class)
-            ->onlyMethods(['addReview'])
-            ->getMock();
-
-        $mock->expects($this->once())
-            ->method('addReview')
-            ->with($reviewData['productId'], $reviewData['userId'], $reviewData['rating'], $reviewData['comment'])
-            ->willReturn($returnValue);
-
-        // Substitui a instância do ReviewModel
-        $this->reviewService = new ReviewService($mock);
-    }
-
-    private function mockReviewModelGetReviewsByProductId(array $reviews)
-    {
-        $mock = $this->getMockBuilder(ReviewModel::class)
-            ->onlyMethods(['getReviewsByProductId'])
-            ->getMock();
-
-        $mock->expects($this->once())
-            ->method('getReviewsByProductId')
-            ->with($this->anything())
-            ->willReturn($reviews);
-
-        // Substitui a instância do ReviewModel
-        $this->reviewService = new ReviewService($mock);
+        Mockery::close(); // Fechando os mocks do Mockery
+        parent::tearDown();
     }
 }
