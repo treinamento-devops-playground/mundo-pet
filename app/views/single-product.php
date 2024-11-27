@@ -166,7 +166,6 @@
             }
         });
 
-        // Definir o valor da avaliação ao clicar nas estrelas
         starsCurrent.forEach(star => {
             star.addEventListener('click', () => {
                 rating = parseInt(star.getAttribute('data-value'));
@@ -174,7 +173,6 @@
             });
         });
 
-        // Carregar as avaliações do produto ao carregar a página
         loadProductReviews();
     });
 </script>
