@@ -67,8 +67,8 @@ class AgendamentoRepository implements IAgendamentoRepository
         $stmt->bindValue(':date', $agendamento->getDate());
         $stmt->bindValue(':time', $agendamento->getTime());
         $stmt->bindValue(':status', $agendamento->getStatus());
-        $stmt->bindValue(':id', $agendamento->getId(), PDO::PARAM_INT);
         $stmt->bindValue(':motivo_cancelamento', $agendamento->getMotivoCancelamento());
+        $stmt->bindValue(':id', $agendamento->getId(), PDO::PARAM_INT);
 
         return $stmt->execute();
     }

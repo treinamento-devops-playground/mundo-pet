@@ -18,6 +18,10 @@
         "pimple/pimple": "^3.5"
     },
     "require-dev": {
+<<<<<<< HEAD
         "phpunit/phpunit": "*"
+=======
+        "phpunit/phpunit": "^11.4"
+>>>>>>> 44c8388ec677560648c2b4b9b6288c2fe364bf81
     }
 }
