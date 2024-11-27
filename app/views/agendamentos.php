@@ -1,4 +1,4 @@
-<?php $this->layout('base', ['title' => 'Editar Agendamento']); ?>
+<?php $this->layout('userbase', ['title' => 'Editar Agendamento']); ?>
 
 <?php $this->start('css'); ?>
 <link rel="stylesheet" href="../css/agendamento.css">
