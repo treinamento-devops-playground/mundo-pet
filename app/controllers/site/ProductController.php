@@ -2,58 +2,108 @@
 
 namespace app\controllers\site;
 
-use app\controllers\BaseController;
-use app\services\ProductService;
+use app\database\models\ProductModel;
+use app\services\ReviewService;
+use Exception;
 
-class ProductController extends BaseController
+class ProductController
 {
-    private ProductService $productService;
+    private $reviewService;
 
     public function __construct()
     {
-        $this->productService = new ProductService();
+        $this->reviewService = new ReviewService();
     }
 
     public function index()
     {
-        return $this->view('catalog');
+        try {
+            $products = ProductModel::all();
+            require_once __DIR__ . '/../../views/catalog.php';
+        } catch (Exception $e) {
+            die("Erro ao carregar os produtos: " . $e->getMessage());
+        }
     }
 
-    public function allProductsJson()
+    public function show()
     {
-        $products = $this->productService->getAllProducts();
-        return $this->jsonResponse($products);
+        $requestUri = $_SERVER['REQUEST_URI'];
+
+        if (preg_match('/\/product\/(\d+)$/', $requestUri, $matches)) {
+            $productId = intval($matches[1]);
+        } else {
+            die("ID do produto não especificado.");
+        }
+
+        try {
+            $product = ProductModel::find($productId);
+
+            if (!$product) {
+                die("Produto não encontrado.");
+            }
+
+            $reviews = $this->reviewService->getProductReviews($productId);
+            $totalReviews = count($reviews);
+            $averageRating = 0;
+
+            if ($totalReviews > 0) {
+                $totalRating = array_sum(array_column($reviews, 'rating'));
+                $averageRating = $totalRating / $totalReviews;
+            }
+
+            require_once __DIR__ . '/../../views/single-product.php';
+        } catch (Exception $e) {
+            die("Erro ao carregar o produto: " . $e->getMessage());
+        }
     }
 
     public function filterByCategoryJson()
     {
-        $category = $_GET['category'] ?? '';
-        $products = $this->productService->getProductsByCategory($category);
-        return $this->jsonResponse($products);
+        $category = $_GET['category'] ?? null;
+
+        if (!$category) {
+            echo json_encode(['error' => 'Categoria não especificada.']);
+            return;
+        }
+
+        try {
+            $products = ProductModel::findByCategory($category);
+            echo json_encode($products);
+        } catch (Exception $e) {
+            echo json_encode(['error' => 'Erro ao filtrar produtos: ' . $e->getMessage()]);
+        }
     }
 
     public function searchJson()
     {
+        $query = $_GET['query'] ?? null;
 
-        $searchTerm = $_GET['search'] ?? '';
-        $products = $this->productService->searchProducts($searchTerm);
-        return $this->jsonResponse($products);
-    }
-
-    public function show($id)
-    {
-        $product = $this->productService->getProductById((int)$id);
-        if (!$product) {
-            return $this->view('single-product', ['error' => 'Produto não encontrado']);
+        if (!$query) {
+            echo json_encode(['error' => 'Consulta de busca não especificada.']);
+            return;
         }
-        return $this->view('single-product', ['product' => $product]);
+
+        try {
+            $products = ProductModel::search($query);
+            echo json_encode($products);
+        } catch (Exception $e) {
+            echo json_encode(['error' => 'Erro ao buscar produtos: ' . $e->getMessage()]);
+        }
     }
 
-    private function jsonResponse($data, $statusCode = 200)
+    public function allProductsJson()
     {
-        http_response_code($statusCode);
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
+        try {
+            $products = ProductModel::all();
+            echo json_encode($products);
+        } catch (Exception $e) {
+            echo json_encode(['error' => 'Erro ao carregar os produtos: ' . $e->getMessage()]);
+        }
+    }
+
+    public function addReview()
+    {
+        $reviewController = new ReviewController();
+        $reviewController->addReview();
     }
 }

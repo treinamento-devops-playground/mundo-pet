@@ -16,9 +16,9 @@
         </div>
         <ul class="list-nav">
             <li class="title"><a href="/services">Serviços</a></li>
-            <li class="title"><a href="/product">Loja</a></li>
+            <li class="title"><a href="/catalog">Loja</a></li>
             <li class="title"><a href="#">Contato</a></li>
-            <li><a href="/vis_agen"><img src="../img/icons/user.png" alt="Usuário"></a></li>
+            <li><a href="/user/edit"><img src="../img/icons/user.png" alt="Usuário"></a></li>
         </ul>
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Pesquisar produtos...">
@@ -51,8 +51,8 @@
         <div class="payment-section">
             <h1>Pagamento</h1>
             <div class="cards">
-                <img src="/img/mastercard.png" alt="MasterCard">
-                <img src="/img/visa.png" alt="Visa">
+                <img src="/img/icons/mastercard.png" alt="MasterCard">
+                <img src="/img/icons/visa.png" alt="Visa">
             </div>
             <form action="/checkout/process" method="POST">
                 <label for="card_name">Nome no cartão</label>
