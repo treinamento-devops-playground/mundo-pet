@@ -104,29 +104,37 @@ header {
 
         .container {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Espaça os elementos igualmente */
+            align-items: flex-start; /* Alinha os itens ao topo */
             padding: 20px;
+            gap: 20px; /* Espaço entre as seções */
+            width: 90%; /* Ajusta a largura total */
+            margin: 0 auto; /* Centraliza o container */
+            flex-wrap: nowrap; /* Garante que os itens não quebrem para a próxima linha */
+        }
+        
+        .form-section, 
+        .payment-section {
+            background-color: #f0f0f0; /* Cor de fundo para diferenciar as seções */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .form-section {
-            width: 60%;
-            background-color: #f0f0f0;
-            padding: 20px;
-            border-radius: 10px;
+            flex: 3; /* Ocupa maior parte do espaço */
+            background-color: #f9f9f9; /* Cor de fundo clara */
         }
 
         .payment-section {
-            width: 25%;
-            background-color: #8c9eff;
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
+            flex: 1; /* Menor largura em comparação à form-section */
+            background-color: #8c9eff; /* Fundo da seção de pagamento */
+            color: white; /* Contraste para texto */
         }
 
         .payment-section .cards img {
-            width: 40px;    
-            height: auto; 
-            margin-right: 10px; 
+            width: 80px; /* Aumenta o tamanho das imagens dos cartões */
+            height: auto;
         }
         
 
@@ -152,15 +160,28 @@ header {
 
         .btn-finalizar {
             display: block;
-            width: 100%;
+            width: 100%; /* Ocupa a largura completa da seção de pagamento */
             padding: 15px;
             background-color: #333;
             color: white;
             text-align: center;
             border-radius: 5px;
             text-decoration: none;
+            margin-top: 20px;
         }
 
         .summary p {
             margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Empilha os elementos no layout vertical */
+                gap: 20px;
+            }
+        
+            .form-section, 
+            .payment-section {
+                width: 100%; /* Ocupa 100% da largura disponível */
+            }
         }
