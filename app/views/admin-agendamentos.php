@@ -21,12 +21,12 @@
                 <tbody>
                     <?php foreach ($agendamentos as $agendamento): ?>
                         <tr class="agendamento-item">
-                            <td><?= htmlspecialchars($agendamento['service_type']); ?></td>
-                            <td><?= htmlspecialchars($agendamento['date']); ?></td>
-                            <td><?= htmlspecialchars($agendamento['time']); ?></td>
+                            <td><?= htmlspecialchars($agendamento->getServiceType()); ?></td>
+                            <td><?= htmlspecialchars($agendamento->getDate()); ?></td>
+                            <td><?= htmlspecialchars($agendamento->getTime()); ?></td>
                             <td class="agendamento-actions">
-                                <a href="/admin/agendamentos/edit/<?= $agendamento['id']; ?>" class="edit-btn">Editar</a>
-                                <button class="delete-btn" onclick="confirmDelete(<?= $agendamento['id']; ?>)">&#10005;</button>
+                                <a href="/admin/agendamentos/edit/<?= $agendamento->getId(); ?>" class="edit-btn">Editar</a>
+                                <button class="delete-btn" onclick="confirmDelete(<?= $agendamento->getId(); ?>)">&#10005;</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
