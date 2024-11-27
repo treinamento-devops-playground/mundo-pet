@@ -71,4 +71,16 @@ class CartModel
             'user_id' => $userId
         ]);
     }
+
+    public function clearCart($userId)
+    {
+        $stmt = $this->pdo->prepare('
+            DELETE FROM cart
+            WHERE user_id = :user_id
+        ');
+
+        return $stmt->execute([
+            'user_id' => $userId
+        ]);
+    }
 }
