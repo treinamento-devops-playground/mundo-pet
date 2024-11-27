@@ -103,6 +103,19 @@ class Connection
                 );
             ";
 
+            $reviewTable = "
+            CREATE TABLE IF NOT EXISTS review (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                product_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+                comment TEXT,
+                review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (product_id) REFERENCES products(id),
+                FOREIGN KEY (user_id) REFERENCES users(id)
+            );
+        ";
+
             $scheduling_feedbackTable = "
                 CREATE TABLE IF NOT EXISTS scheduling_feedback (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -121,6 +134,7 @@ class Connection
                 $pdo->exec($productsTable);
                 $pdo->exec($cartsTable);
                 $pdo->exec($checkoutTable);
+                $pdo->exec($reviewTable);
                 $pdo->exec($scheduling_feedbackTable);
                 echo "Banco de dados e tabelas criados com sucesso.";
             } catch (PDOException $e) {

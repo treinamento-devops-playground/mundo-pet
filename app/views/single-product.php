@@ -1,31 +1,3 @@
-<?php
-$requestUri = $_SERVER['REQUEST_URI'];
-
-if (preg_match('/\/product\/(\d+)$/', $requestUri, $matches)) {
-    $productId = intval($matches[1]);
-} else {
-    die("ID do produto não especificado.");
-}
-
-try {
-    $dbPath = __DIR__ . '/../database/db.db';
-    $dsn = 'sqlite:' . $dbPath;
-    $pdo = new PDO($dsn);
-
-    $stmt = $pdo->prepare('SELECT * FROM products WHERE id = :id');
-    $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$product) {
-        die("Produto não encontrado.");
-    }
-} catch (PDOException $e) {
-    die("Não foi possível conectar ao banco de dados: " . $e->getMessage());
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -34,11 +6,10 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($product['name']); ?> - Catálogo de Produtos</title>
     <link rel="stylesheet" href="../css/single-product.css">
-    
 </head>
 
 <body>
-<header>
+    <header>
         <div class="logo">
             <img src="../img/logo.png" alt="Logo">
         </div>
@@ -47,7 +18,7 @@ try {
             <li class="title"><a href="/catalog">Loja</a></li>
             <li class="title"><a href="#">Contato</a></li>
             <li><a href="/vis_agen"><img src="../img/icons/user.png" alt="Usuário"></a></li>
-            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li> 
+            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li>
         </ul>
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Pesquisar produtos...">
@@ -70,9 +41,141 @@ try {
                 <button type="submit" class="add-to-cart-btn">Adicionar ao Carrinho</button>
             </form>
         </div>
+
+        <!-- Avaliações -->
+        <div class="product-reviews">
+            <h3>Avaliações</h3>
+            <div class="average-rating">
+                <span>Média de Avaliação: <span id="average-rating">Carregando...</span> / 5</span>
+            </div>
+            <div class="reviews-list" id="reviews-list">
+                <!-- As avaliações serão carregadas aqui -->
+            </div>
+
+            <!-- Formulário de avaliação -->
+            <div class="review-form">
+                <h4>Deixe sua avaliação</h4>
+                <div class="rating-stars" id="rating-stars">
+                    <span class="star current" data-value="1">&#9733;</span>
+                    <span class="star current" data-value="2">&#9733;</span>
+                    <span class="star current" data-value="3">&#9733;</span>
+                    <span class="star current" data-value="4">&#9733;</span>
+                    <span class="star current" data-value="5">&#9733;</span>
+                </div>
+                <textarea id="review-comment" placeholder="Escreva seu comentário..."></textarea>
+                <button id="submit-review" class="submit-review-btn" data-product-id="<?php echo htmlspecialchars($product['id']); ?>">Enviar Avaliação</button>
+            </div>
+        </div>
     </div>
 
-    <a href="/product" class="back-link">Voltar ao Catálogo</a>
+    <a href="/catalog" class="back-link">Voltar ao Catálogo</a>
+
 </body>
 
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const starsCurrent = document.querySelectorAll('.star.current');
+        const reviewsList = document.getElementById('reviews-list');
+        const averageRatingElem = document.getElementById('average-rating');
+        const commentInput = document.getElementById('review-comment');
+        const submitButton = document.getElementById('submit-review');
+        const productId = submitButton.getAttribute('data-product-id');
+        let rating = 0;
+
+        // Função para atualizar as estrelas
+        function updateStars(starElements, rating) {
+            starElements.forEach(star => star.classList.remove('filled'));
+            for (let i = 0; i < rating; i++) {
+                starElements[i].classList.add('filled');
+            }
+        }
+
+        // Carregar as avaliações do produto via API
+        async function loadProductReviews() {
+            try {
+                const response = await fetch(`/reviews/${productId}`);  // A URL correta para obter avaliações
+                const reviews = await response.json();
+                
+                if (reviews.length > 0) {
+                    let totalRating = 0;
+                    reviewsList.innerHTML = ''; // Limpar as avaliações existentes antes de adicionar as novas
+                    reviews.forEach(review => {
+                        const reviewElem = document.createElement('div');
+                        reviewElem.classList.add('review');
+                        reviewElem.innerHTML = `
+                            <div class="review-rating">${'&#9733;'.repeat(review.rating)}</div>
+                            <p class="review-comment">${review.comment}</p>
+                            <p class="review-date">${new Date(review.review_date).toLocaleDateString()}</p>
+                        `;
+                        reviewsList.appendChild(reviewElem);
+                        totalRating += review.rating;
+                    });
+                    const averageRating = totalRating / reviews.length;
+                    averageRatingElem.textContent = averageRating.toFixed(1);
+                } else {
+                    reviewsList.innerHTML = '<p class="no-reviews">Este produto ainda não tem avaliações.</p>';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar avaliações:', error);
+            }
+        }
+
+        // Enviar uma nova avaliação via API
+        submitButton.addEventListener('click', async () => {
+            const comment = commentInput.value;
+
+            if (!rating || !comment) {
+                alert('Por favor, preencha a avaliação e o comentário.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/product/review', {  // A URL correta para enviar a avaliação
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productId, rating, comment })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Avaliação enviada com sucesso!');
+
+                    // Adicionar a nova avaliação diretamente ao DOM
+                    const reviewElem = document.createElement('div');
+                    reviewElem.classList.add('review');
+                    reviewElem.innerHTML = `
+                        <div class="review-rating">${'&#9733;'.repeat(rating)}</div>
+                        <p class="review-comment">${comment}</p>
+                        <p class="review-date">${new Date().toLocaleDateString()}</p>
+                    `;
+                    reviewsList.prepend(reviewElem); // Adiciona no topo da lista de avaliações
+
+                    // Limpar o campo de comentário e reiniciar a classificação
+                    commentInput.value = '';
+                    updateStars(starsCurrent, 0); // Resetar estrelas
+                } else {
+                    throw new Error(result.message || 'Erro ao enviar a avaliação.');
+                }
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        // Definir o valor da avaliação ao clicar nas estrelas
+        starsCurrent.forEach(star => {
+            star.addEventListener('click', () => {
+                rating = parseInt(star.getAttribute('data-value'));
+                updateStars(starsCurrent, rating);
+            });
+        });
+
+        // Carregar as avaliações do produto ao carregar a página
+        loadProductReviews();
+    });
+</script>
+
