@@ -35,9 +35,12 @@ class Routes
 
                 '/checkout' => 'site\CheckoutController@show',
                 '/cart' => 'site\CartController@viewCart',
+
+                // Nova rota para pegar avaliações de um produto
+                '/reviews/[0-9]+' => 'site\ReviewController@getProductReviews', // GET para recuperar avaliações de um produto
             ],
             'post' => [
-                '/product/review' => 'site\ReviewController@addReview',
+                '/product/review' => 'site\ReviewController@addReview', // POST para adicionar avaliação
                 '/agendamentos/store' => 'site\AgendamentoController@store',
                 '/agendamentos/cancelar/confirmar/[0-9]+' => 'site\AgendamentoController@confirmCancel',
 
@@ -53,6 +56,7 @@ class Routes
                 '/cart/add' => 'site\CartController@addToCart',
                 '/cart/remove/[0-9]+' => 'site\CartController@removeFromCart',
                 
+
 
                 '/update-profile' => 'site\UserController@updateProfile',
                 '/logout' => 'site\UserController@logout',

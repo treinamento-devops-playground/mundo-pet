@@ -14,6 +14,7 @@ class ProductModel
         $this->db = Connection::getConnection();
     }
 
+    // Função para obter todos os produtos
     public static function all()
     {
         $pdo = Connection::getConnection();
@@ -21,6 +22,7 @@ class ProductModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Função para encontrar produtos por categoria
     public static function findByCategory($category)
     {
         $pdo = Connection::getConnection();
@@ -30,6 +32,7 @@ class ProductModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Função de pesquisa de produtos por nome ou descrição
     public static function search($searchTerm)
     {
         $pdo = Connection::getConnection();
@@ -40,6 +43,7 @@ class ProductModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Função para criar um novo produto
     public static function create($name, $description, $price, $info, $category, $stock)
     {
         $pdo = Connection::getConnection();
@@ -57,6 +61,7 @@ class ProductModel
         return $stmt->execute();
     }
 
+    // Função para buscar um produto pelo seu ID
     public static function find($id)
     {
         $pdo = Connection::getConnection();
@@ -75,6 +80,7 @@ class ProductModel
         return $product;
     }
 
+    // Função para atualizar um produto
     public static function update($id, $name, $description, $price, $info, $category, $stock)
     {
         $pdo = Connection::getConnection();
@@ -94,6 +100,7 @@ class ProductModel
         return $stmt->execute();
     }
 
+    // Função para excluir um produto
     public static function delete($id)
     {
         $pdo = Connection::getConnection();

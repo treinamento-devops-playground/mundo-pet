@@ -1,48 +1,3 @@
-<?php
-$requestUri = $_SERVER['REQUEST_URI'];
-
-if (preg_match('/\/product\/(\d+)$/', $requestUri, $matches)) {
-    $productId = intval($matches[1]);
-} else {
-    die("ID do produto não especificado.");
-}
-
-try {
-    $dbPath = __DIR__ . '/../database/db.db';
-    $dsn = 'sqlite:' . $dbPath;
-    $pdo = new PDO($dsn);
-
-    $stmt = $pdo->prepare('SELECT * FROM products WHERE id = :id');
-    $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$product) {
-        die("Produto não encontrado.");
-    }
-
-    // Consultando avaliações e média de avaliações
-    $reviewsStmt = $pdo->prepare('SELECT * FROM review WHERE product_id = :product_id');
-    $reviewsStmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
-    $reviewsStmt->execute();
-    $reviews = $reviewsStmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $totalReviews = count($reviews);
-    $averageRating = 0;
-
-    if ($totalReviews > 0) {
-        $totalRating = 0;
-        foreach ($reviews as $review) {
-            $totalRating += $review['rating'];
-        }
-        $averageRating = $totalRating / $totalReviews;
-    }
-} catch (PDOException $e) {
-    die("Não foi possível conectar ao banco de dados: " . $e->getMessage());
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -63,7 +18,7 @@ try {
             <li class="title"><a href="/catalog">Loja</a></li>
             <li class="title"><a href="#">Contato</a></li>
             <li><a href="/vis_agen"><img src="../img/icons/user.png" alt="Usuário"></a></li>
-            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li> 
+            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li>
         </ul>
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Pesquisar produtos...">
@@ -91,24 +46,10 @@ try {
         <div class="product-reviews">
             <h3>Avaliações</h3>
             <div class="average-rating">
-                <span>Média de Avaliação: <?php echo round($averageRating, 1); ?> / 5</span>
+                <span>Média de Avaliação: <span id="average-rating">Carregando...</span> / 5</span>
             </div>
-            <div class="reviews-list">
-                <?php if ($totalReviews > 0): ?>
-                    <?php foreach ($reviews as $review): ?>
-                        <div class="review">
-                            <div class="review-rating">
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <span class="star previous <?php echo $i <= $review['rating'] ? 'filled' : ''; ?>">&#9733;</span>
-                                <?php endfor; ?>
-                            </div>
-                            <p class="review-comment"><?php echo nl2br(htmlspecialchars($review['comment'])); ?></p>
-                            <p class="review-date"><?php echo date('d/m/Y', strtotime($review['review_date'])); ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p class="no-reviews">Este produto ainda não tem avaliações.</p>
-                <?php endif; ?>
+            <div class="reviews-list" id="reviews-list">
+                <!-- As avaliações serão carregadas aqui -->
             </div>
 
             <!-- Formulário de avaliação -->
@@ -136,12 +77,14 @@ try {
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const starsCurrent = document.querySelectorAll('.star.current');
-        const starsPrevious = document.querySelectorAll('.star.previous');
+        const reviewsList = document.getElementById('reviews-list');
+        const averageRatingElem = document.getElementById('average-rating');
         const commentInput = document.getElementById('review-comment');
         const submitButton = document.getElementById('submit-review');
         const productId = submitButton.getAttribute('data-product-id');
         let rating = 0;
 
+        // Função para atualizar as estrelas
         function updateStars(starElements, rating) {
             starElements.forEach(star => star.classList.remove('filled'));
             for (let i = 0; i < rating; i++) {
@@ -149,35 +92,37 @@ try {
             }
         }
 
-        function setStars(savedRating) {
-            if (savedRating > 0) {
-                updateStars(starsPrevious, savedRating);
-            }
-        }
-
+        // Carregar as avaliações do produto via API
         async function loadProductReviews() {
             try {
-                const response = await fetch(`/product/reviews/${productId}`);
+                const response = await fetch(`/reviews/${productId}`);  // A URL correta para obter avaliações
                 const reviews = await response.json();
-
+                
                 if (reviews.length > 0) {
-                    const savedRating = reviews[0].rating;
-                    setStars(savedRating);
+                    let totalRating = 0;
+                    reviewsList.innerHTML = ''; // Limpar as avaliações existentes antes de adicionar as novas
+                    reviews.forEach(review => {
+                        const reviewElem = document.createElement('div');
+                        reviewElem.classList.add('review');
+                        reviewElem.innerHTML = `
+                            <div class="review-rating">${'&#9733;'.repeat(review.rating)}</div>
+                            <p class="review-comment">${review.comment}</p>
+                            <p class="review-date">${new Date(review.review_date).toLocaleDateString()}</p>
+                        `;
+                        reviewsList.appendChild(reviewElem);
+                        totalRating += review.rating;
+                    });
+                    const averageRating = totalRating / reviews.length;
+                    averageRatingElem.textContent = averageRating.toFixed(1);
+                } else {
+                    reviewsList.innerHTML = '<p class="no-reviews">Este produto ainda não tem avaliações.</p>';
                 }
             } catch (error) {
                 console.error('Erro ao carregar avaliações:', error);
             }
         }
 
-        loadProductReviews();
-
-        starsCurrent.forEach(star => {
-            star.addEventListener('click', () => {
-                rating = parseInt(star.getAttribute('data-value'));
-                updateStars(starsCurrent, rating);
-            });
-        });
-
+        // Enviar uma nova avaliação via API
         submitButton.addEventListener('click', async () => {
             const comment = commentInput.value;
 
@@ -187,7 +132,7 @@ try {
             }
 
             try {
-                const response = await fetch('/product/review', {
+                const response = await fetch('/product/review', {  // A URL correta para enviar a avaliação
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -199,7 +144,20 @@ try {
 
                 if (response.ok) {
                     alert('Avaliação enviada com sucesso!');
-                    location.reload();
+
+                    // Adicionar a nova avaliação diretamente ao DOM
+                    const reviewElem = document.createElement('div');
+                    reviewElem.classList.add('review');
+                    reviewElem.innerHTML = `
+                        <div class="review-rating">${'&#9733;'.repeat(rating)}</div>
+                        <p class="review-comment">${comment}</p>
+                        <p class="review-date">${new Date().toLocaleDateString()}</p>
+                    `;
+                    reviewsList.prepend(reviewElem); // Adiciona no topo da lista de avaliações
+
+                    // Limpar o campo de comentário e reiniciar a classificação
+                    commentInput.value = '';
+                    updateStars(starsCurrent, 0); // Resetar estrelas
                 } else {
                     throw new Error(result.message || 'Erro ao enviar a avaliação.');
                 }
@@ -207,5 +165,17 @@ try {
                 alert(error.message);
             }
         });
+
+        // Definir o valor da avaliação ao clicar nas estrelas
+        starsCurrent.forEach(star => {
+            star.addEventListener('click', () => {
+                rating = parseInt(star.getAttribute('data-value'));
+                updateStars(starsCurrent, rating);
+            });
+        });
+
+        // Carregar as avaliações do produto ao carregar a página
+        loadProductReviews();
     });
 </script>
+

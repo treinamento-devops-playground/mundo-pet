@@ -3,14 +3,23 @@
 namespace app\controllers\site;
 
 use app\database\Connection;
+use app\database\models\ProductModel;
+use app\services\ReviewService;
+use Exception;
 use PDO;
 
 class ProductController
 {
+    private $reviewService;
+
+    public function __construct()
+    {
+        $this->reviewService = new ReviewService();
+    }
+
     public function index()
     {
         $pdo = Connection::getConnection();
-
         $stmt = $pdo->query("SELECT * FROM products");
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,7 +49,6 @@ class ProductController
                 die("Produto não encontrado.");
             }
 
-            // Consultando avaliações e média de avaliações
             $reviewsStmt = $pdo->prepare('SELECT * FROM review WHERE product_id = :product_id');
             $reviewsStmt->bindParam(':product_id', $productId, PDO::PARAM_INT);
             $reviewsStmt->execute();
@@ -124,5 +132,11 @@ class ProductController
         } catch (\PDOException $e) {
             echo json_encode(['error' => 'Erro ao carregar os produtos: ' . $e->getMessage()]);
         }
+    }
+   
+    public function addReview()
+    {
+        $reviewController = new ReviewController();
+        $reviewController->addReview();
     }
 }
