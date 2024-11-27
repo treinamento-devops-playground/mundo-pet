@@ -16,10 +16,8 @@ class SchedulingFeedbackServiceTest extends TestCase
     {
         parent::setUp();
 
-        // Cria um mock para o repositório de feedback
         $this->feedbackRepositoryMock = $this->createMock(ISchedulingFeedbackRepository::class);
 
-        // Instancia o serviço com o mock do repositório
         $this->service = new SchedulingFeedbackService($this->feedbackRepositoryMock);
     }
 
