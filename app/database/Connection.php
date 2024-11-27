@@ -116,6 +116,18 @@ class Connection
             );
         ";
 
+            $scheduling_feedbackTable = "
+                CREATE TABLE IF NOT EXISTS scheduling_feedback (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    scheduling_id INTEGER NOT NULL,
+                    user_id INTEGER NOT NULL,
+                    rating INTEGER NOT NULL,
+                    comment TEXT,
+                    FOREIGN KEY (scheduling_id) REFERENCES scheduling(id),
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+            ";
+
             try {
                 $pdo->exec($schedulingTable);
                 $pdo->exec($usersTable);
@@ -123,6 +135,7 @@ class Connection
                 $pdo->exec($cartsTable);
                 $pdo->exec($checkoutTable);
                 $pdo->exec($reviewTable);
+                $pdo->exec($scheduling_feedbackTable);
                 echo "Banco de dados e tabelas criados com sucesso.";
             } catch (PDOException $e) {
                 die('Erro ao criar tabelas: ' . $e->getMessage());

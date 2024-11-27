@@ -2,11 +2,8 @@
 
 namespace app\controllers\admin;
 
-use app\database\models\AgendamentoModel;
-use core\Request;
 use app\controllers\BaseController;
-use app\services\AdminAgendamentoService;
-use app\services\IAdminAgendamentoService;
+use app\services\contracts\IAdminAgendamentoService;
 
 class AdminAgendamentoController extends BaseController
 {
@@ -49,10 +46,18 @@ class AdminAgendamentoController extends BaseController
 
             return $this->jsonResponse([
                 'message' => 'Agendamento atualizado com sucesso',
-                'agendamento' => $agendamentoAtualizado
+                'agendamento' => [
+                    'id' => $agendamentoAtualizado->getId(),
+                    'user_id' => $agendamentoAtualizado->getUserId(),
+                    'pet_type' => $agendamentoAtualizado->getPetType(),
+                    'service_type' => $agendamentoAtualizado->getServiceType(),
+                    'date' => $agendamentoAtualizado->getDate(),
+                    'time' => $agendamentoAtualizado->getTime(),
+                    'status' => $agendamentoAtualizado->getStatus(),
+                ]
             ]);
         } catch (\Exception $e) {
-            return $this->jsonResponse(['error' => $e->getMessage()]);
+            return $this->jsonResponse(['error' => $e->getMessage()], 400);
         }
     }
 

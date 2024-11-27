@@ -2,11 +2,12 @@
 
 namespace app\controllers\site;
 
+use app\controllers\BaseController;
 use app\database\models\ProductModel;
 use app\services\ReviewService;
 use Exception;
 
-class ProductController
+class ProductController extends BaseController
 {
     private $reviewService;
 
@@ -17,12 +18,7 @@ class ProductController
 
     public function index()
     {
-        try {
-            $products = ProductModel::all();
-            require_once __DIR__ . '/../../views/catalog.php';
-        } catch (Exception $e) {
-            die("Erro ao carregar os produtos: " . $e->getMessage());
-        }
+        return $this->view('catalog');
     }
 
     public function show()
