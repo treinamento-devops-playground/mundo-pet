@@ -20,6 +20,8 @@ class Routes
                 '/user/edit' => 'site\UserController@editProfile',
                 '/user/agendamentos' => 'site\AgendamentoController@vis_agen',
 
+                '/scheduling-feedback/create/[0-9]+' => 'site\SchedulingFeedbackController@create',
+
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
                 '/services' => 'site\ServiceController@show',
@@ -31,29 +33,35 @@ class Routes
                 '/admin/products' => 'admin\AdminProductController@index',
                 '/admin/products/create' => 'admin\AdminProductController@create',
                 '/admin/products/edit/[0-9]+' => 'admin\AdminProductController@edit',
+                '/admin/products/delete/[0-9]+' => 'admin\AdminProductController@delete',
 
                 '/checkout' => 'site\CheckoutController@show',
+                '/cart' => 'site\CartController@viewCart',
+
+                // Nova rota para pegar avaliações de um produto
+                '/reviews/[0-9]+' => 'site\ReviewController@getProductReviews', // GET para recuperar avaliações de um produto
             ],
             'post' => [
+                '/product/review' => 'site\ReviewController@addReview', // POST para adicionar avaliação
                 '/agendamentos/store' => 'site\AgendamentoController@store',
                 '/agendamentos/cancelar/confirmar/[0-9]+' => 'site\AgendamentoController@confirmCancel',
+                'api/scheduling-feedback/store' => 'site\SchedulingFeedbackController@store',
 
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
 
                 '/admin/agendamentos/update/[0-9]+' => 'admin\AdminAgendamentoController@update',
-
                 '/admin/products/store' => 'admin\AdminProductController@store',
                 '/admin/products/update/[0-9]+' => 'admin\AdminProductController@update',
-                '/admin/products/delete/[0-9]+' => 'admin\AdminProductController@delete',
-
+                
                 '/checkout/process' => 'site\CheckoutController@processPayment',
 
                 '/cart/add' => 'site\CartController@addToCart',
-                '/cart/remove' => 'site\CartController@removeFromCart',
+                '/cart/remove/[0-9]+' => 'site\CartController@removeFromCart',
+                
+
 
                 '/update-profile' => 'site\UserController@updateProfile',
-
                 '/logout' => 'site\UserController@logout',
             ],
         ];

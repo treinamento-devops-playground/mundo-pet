@@ -20,6 +20,13 @@
             <label for="time" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Hora:</label>
             <input type="time" id="time" name="time" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
         </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" id="status" class="form-control">
+                <option value="ativo" <?= $agendamento->getStatus() == 'ativo' ? 'selected' : '' ?>>Ativo</option>
+                <option value="cancelado" <?= $agendamento->getStatus() == 'cancelado' ? 'selected' : '' ?>>Cancelado</option>
+                <option value="concluído" <?= $agendamento->getStatus() == 'concluído' ? 'selected' : '' ?>>Concluído</option>
+        </div>
         <div class="form-group" style="margin-bottom: 15px;">
             <button type="submit" style="width: 100%; padding: 10px; background-color: #6B6EAF; color: #fff; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; transition: background-color 0.3s;">Salvar</button>
         </div>
@@ -39,6 +46,7 @@
         document.getElementById('service_type').value = "<?= htmlspecialchars($agendamento->getServiceType()); ?>";
         document.getElementById('date').value = "<?= htmlspecialchars($agendamento->getDate()); ?>";
         document.getElementById('time').value = "<?= htmlspecialchars($agendamento->getTime()); ?>";
+        document.getElementById('status').value = "<?= htmlspecialchars($agendamento->getStatus()); ?>";
     });
 
     async function updateAgendamento(event) {
@@ -49,6 +57,7 @@
             service_type: document.getElementById('service_type').value,
             date: document.getElementById('date').value,
             time: document.getElementById('time').value,
+            status: document.getElementById('status').value,
         };
 
         try {

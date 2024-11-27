@@ -1,6 +1,6 @@
 <?php
 
-namespace app\services;
+namespace app\services\contracts;
 
 use app\database\models\AgendamentoModel;
 

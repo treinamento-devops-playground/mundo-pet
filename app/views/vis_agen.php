@@ -57,6 +57,9 @@ if (isset($_POST['logout'])) {
                         <div class="button-group">
                             <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item->getId()); ?>" class="cancel-link">✖</a></button>
                         </div>
+                        <?php if ($item->getStatus() == 'concluído'): ?>
+                            <a href="/scheduling-feedback/create/<?= htmlspecialchars($item->getId()); ?>"><button>Dar feedback</button></a>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
