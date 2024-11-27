@@ -2,19 +2,38 @@
 
 namespace app\database\models;
 
-use PDO;
-use app\database\Connection;
-
 class SchedulingFeedbackModel
 {
-    public static function create($schedulingId, $userId, $rating, $comment)
+    private int $schedulingId;
+    private int $userId;
+    private int $rating;
+    private ?string $comment;
+
+    public function __construct(int $schedulingId, int $userId, int $rating, ?string $comment)
     {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare("INSERT INTO scheduling_feedback (scheduling_id, user_id, rating, comment) VALUES (:scheduling_id, :user_id, :rating, :comment)");
-        $stmt->bindValue(':scheduling_id', $schedulingId);
-        $stmt->bindValue(':user_id', $userId);
-        $stmt->bindValue(':rating', $rating);
-        $stmt->bindValue(':comment', $comment);
-        $stmt->execute();
+        $this->schedulingId = $schedulingId;
+        $this->userId = $userId;
+        $this->rating = $rating;
+        $this->comment = $comment;
+    }
+
+    public function getSchedulingId(): int
+    {
+        return $this->schedulingId;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function getRating(): int
+    {
+        return $this->rating;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
     }
 }

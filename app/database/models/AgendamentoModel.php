@@ -111,17 +111,4 @@ class AgendamentoModel
             'motivo_cancelamento' => $this->motivoCancelamento
         ];
     }
-
-    public static function updateStatus($id, $userId)
-    {
-        $pdo = Connection::getConnection();
-
-        $sql = "UPDATE scheduling SET status = 'finalizado' WHERE id = :id AND user_id = :user_id";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-
-        return $stmt->execute();
-    }
 }

@@ -2,11 +2,8 @@
 
 namespace app\controllers\admin;
 
-use app\database\models\AgendamentoModel;
-use core\Request;
 use app\controllers\BaseController;
-use app\services\AdminAgendamentoService;
-use app\services\IAdminAgendamentoService;
+use app\services\contracts\IAdminAgendamentoService;
 
 class AdminAgendamentoController extends BaseController
 {
@@ -49,27 +46,19 @@ class AdminAgendamentoController extends BaseController
 
             return $this->jsonResponse([
                 'message' => 'Agendamento atualizado com sucesso',
-                'agendamento' => $agendamentoAtualizado
+                'agendamento' => [
+                    'id' => $agendamentoAtualizado->getId(),
+                    'user_id' => $agendamentoAtualizado->getUserId(),
+                    'pet_type' => $agendamentoAtualizado->getPetType(),
+                    'service_type' => $agendamentoAtualizado->getServiceType(),
+                    'date' => $agendamentoAtualizado->getDate(),
+                    'time' => $agendamentoAtualizado->getTime(),
+                    'status' => $agendamentoAtualizado->getStatus(),
+                ]
             ]);
         } catch (\Exception $e) {
-            return $this->jsonResponse(['error' => $e->getMessage()]);
+            return $this->jsonResponse(['error' => $e->getMessage()], 400);
         }
-    }
-
-    public function changeStatus()
-    {
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return $this->jsonResponse(['error' => 'JSON inválido'], 400);
-        }
-
-        $agendamento = $this->agendamentoService->changeStatus($data['id'], $data['status']);
-
-        return $this->jsonResponse([
-            'message' => 'Status do agendamento alterado com sucesso',
-            'agendamento' => $agendamento
-        ]);
     }
 
     private function jsonResponse($data, $statusCode = 200)

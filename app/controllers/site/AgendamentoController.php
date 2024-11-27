@@ -4,7 +4,7 @@ namespace app\controllers\site;
 
 use app\controllers\BaseController;
 use app\services\email\SchedulingCancellationEmail;
-use app\services\IAgendamentoService;
+use app\services\contracts\IAgendamentoService;
 
 class AgendamentoController extends BaseController
 {

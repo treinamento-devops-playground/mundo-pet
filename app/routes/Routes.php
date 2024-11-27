@@ -20,6 +20,8 @@ class Routes
                 '/user/edit' => 'site\UserController@editProfile',
                 '/user/agendamentos' => 'site\AgendamentoController@vis_agen',
 
+                '/scheduling-feedback/create/[0-9]+' => 'site\SchedulingFeedbackController@create',
+
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',
                 '/services' => 'site\ServiceController@show',
@@ -37,6 +39,7 @@ class Routes
             'post' => [
                 '/agendamentos/store' => 'site\AgendamentoController@store',
                 '/agendamentos/cancelar/confirmar/[0-9]+' => 'site\AgendamentoController@confirmCancel',
+                'api/scheduling-feedback/store' => 'site\SchedulingFeedbackController@store',
 
                 '/login' => 'site\UserController@login',
                 '/register' => 'site\UserController@register',

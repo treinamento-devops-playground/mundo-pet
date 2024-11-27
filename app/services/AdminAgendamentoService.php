@@ -2,6 +2,7 @@
 
 namespace app\services;
 
+use app\services\contracts\IAdminAgendamentoService;
 use app\database\repositories\IAgendamentoRepository;
 use app\database\models\AgendamentoModel;
 
@@ -36,18 +37,39 @@ class AdminAgendamentoService implements IAdminAgendamentoService
             throw new \Exception('Agendamento não encontrado');
         }
 
-        if (!$this->isValidDate($data['date'])) {
+        if (isset($data['date']) && !$this->isValidDate($data['date'])) {
             throw new \Exception('Data inválida');
         }
 
-        if (!$this->isValidTime($data['time'])) {
+        if (isset($data['time']) && !$this->isValidTime($data['time'])) {
             throw new \Exception('Hora inválida');
         }
 
-        $agendamento->setPetType($data['pet_type']);
-        $agendamento->setServiceType($data['service_type']);
-        $agendamento->setDate($data['date']);
-        $agendamento->setTime($data['time']);
+        if (isset($data['pet_type'])) {
+            $agendamento->setPetType($data['pet_type']);
+        }
+
+        if (isset($data['service_type'])) {
+            $agendamento->setServiceType($data['service_type']);
+        }
+
+        if (isset($data['date'])) {
+            $agendamento->setDate($data['date']);
+        }
+
+        if (isset($data['time'])) {
+            $agendamento->setTime($data['time']);
+        }
+
+        if (isset($data['status'])) {
+            $validStatuses = ['ativo', 'cancelado', 'concluído'];
+
+            if (!in_array($data['status'], $validStatuses)) {
+                throw new \Exception('Status inválido');
+            }
+
+            $agendamento->setStatus($data['status']);
+        }
 
         $success = $this->agendamentoRepository->update($agendamento);
 
@@ -56,20 +78,6 @@ class AdminAgendamentoService implements IAdminAgendamentoService
         } else {
             throw new \Exception('Erro ao atualizar agendamento');
         }
-    }
-
-    public function changeStatus($id, $status)
-    {
-        if (!is_numeric($id)) {
-            throw new \Exception('ID inválido');
-        }
-
-        $agendamento = $this->agendamentoModel->find($id);
-        if (!$agendamento) {
-            throw new \Exception('Agendamento não encontrado');
-        }
-
-        return $this->agendamentoModel->updateStatus($id, $status);
     }
 
     private function isValidDate($date): bool

@@ -2,6 +2,7 @@
 
 namespace app\services;
 
+use app\services\contracts\IAgendamentoService;
 use app\database\repositories\IAgendamentoRepository;
 use app\database\models\AgendamentoModel;
 
