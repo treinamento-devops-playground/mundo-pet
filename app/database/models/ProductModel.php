@@ -7,13 +7,6 @@ use app\database\Connection;
 
 class ProductModel
 {
-    private $db;
-
-    public function __construct()
-    {
-        $this->db = Connection::getConnection();
-    }
-
     public static function all()
     {
         $pdo = Connection::getConnection();
@@ -25,7 +18,7 @@ class ProductModel
     {
         $pdo = Connection::getConnection();
         $stmt = $pdo->prepare("SELECT * FROM products WHERE category = :category");
-        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':category', $category, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -35,9 +28,18 @@ class ProductModel
         $pdo = Connection::getConnection();
         $stmt = $pdo->prepare("SELECT * FROM products WHERE name LIKE :searchTerm OR description LIKE :searchTerm");
         $term = "%" . $searchTerm . "%";
-        $stmt->bindParam(':searchTerm', $term);
+        $stmt->bindParam(':searchTerm', $term, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function find($id)
+    {
+        $pdo = Connection::getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function create($name, $description, $price, $info, $category, $stock)
@@ -53,28 +55,8 @@ class ProductModel
         $stmt->bindParam(':info', $info);
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':stock', $stock);
-
         return $stmt->execute();
     }
-
-    public static function find($id)
-    {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-        error_log("Consultando produto com ID: " . $id);
-
-        $stmt->execute();
-        $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$product) {
-            error_log("Produto não encontrado para ID: " . $id);
-        }
-
-        return $product;
-    }
-
 
     public static function update($id, $name, $description, $price, $info, $category, $stock)
     {
@@ -91,7 +73,6 @@ class ProductModel
         $stmt->bindParam(':info', $info);
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':stock', $stock);
-
         return $stmt->execute();
     }
 
@@ -99,7 +80,7 @@ class ProductModel
     {
         $pdo = Connection::getConnection();
         $stmt = $pdo->prepare("DELETE FROM products WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
 }

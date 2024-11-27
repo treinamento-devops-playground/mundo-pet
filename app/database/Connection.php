@@ -103,12 +103,26 @@ class Connection
                 );
             ";
 
+            $reviewTable = "
+            CREATE TABLE IF NOT EXISTS review (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                product_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+                comment TEXT,
+                review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (product_id) REFERENCES products(id),
+                FOREIGN KEY (user_id) REFERENCES users(id)
+            );
+        ";
+
             try {
                 $pdo->exec($schedulingTable);
                 $pdo->exec($usersTable);
                 $pdo->exec($productsTable);
                 $pdo->exec($cartsTable);
                 $pdo->exec($checkoutTable);
+                $pdo->exec($reviewTable);
                 echo "Banco de dados e tabelas criados com sucesso.";
             } catch (PDOException $e) {
                 die('Erro ao criar tabelas: ' . $e->getMessage());
