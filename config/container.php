@@ -24,4 +24,16 @@ $container['app\controllers\site\AgendamentoController'] = function ($c) {
     return new \app\controllers\site\AgendamentoController($c['IAgendamentoService']);
 };
 
+$container['ISchedulingFeedbackRepository'] = function ($c) {
+    return new \app\database\repositories\SchedulingFeedbackRepository();
+};
+
+$container['ISchedulingFeedbackService'] = function ($c) {
+    return new \app\services\SchedulingFeedbackService($c['ISchedulingFeedbackRepository']);
+};
+
+$container['app\controllers\site\SchedulingFeedbackController'] = function ($c) {
+    return new \app\controllers\site\SchedulingFeedbackController($c['ISchedulingFeedbackService']);
+};
+
 return $container;
