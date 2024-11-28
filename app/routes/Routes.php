@@ -42,7 +42,7 @@ class Routes
                 '/reviews/[0-9]+' => 'site\ReviewController@getProductReviews', // GET para recuperar avaliações de um produto
             ],
             'post' => [
-                '/product/review' => 'site\ReviewController@addReview', // POST para adicionar avaliação
+                '/product/review' => 'site\ReviewController@addReview', 
                 '/agendamentos/store' => 'site\AgendamentoController@store',
                 '/agendamentos/cancelar/confirmar/[0-9]+' => 'site\AgendamentoController@confirmCancel',
                 'api/scheduling-feedback/store' => 'site\SchedulingFeedbackController@store',

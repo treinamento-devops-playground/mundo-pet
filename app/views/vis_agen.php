@@ -22,8 +22,8 @@ if (isset($_POST['logout'])) {
 </head>
 
 <body>
-    <div id="nav-bar">
-        <?php $this->insert('partials/nav-bar'); ?>
+    <div id="usernav-bar">
+        <?php $this->insert('partials/usernav-bar'); ?>
     </div>
 
     <div class="container">
