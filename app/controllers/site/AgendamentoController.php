@@ -30,12 +30,19 @@ class AgendamentoController extends BaseController
         }
 
         $userId = $_SESSION['user_id'];
+        $time = $_POST['time'] ?? null;
+
+        if ($time < '08:00' || $time > '18:00') {
+            header("Location: /agendamentos/create?error=invalid_time");
+            exit();
+        }
+
         $data = [
             'user_id' => $userId,
             'pet_type' => $_POST['pet_type'] ?? null,
             'service_type' => $_POST['service_type'] ?? null,
             'date' => $_POST['date'] ?? null,
-            'time' => $_POST['time'] ?? null
+            'time' => $time
         ];
 
         try {
@@ -43,7 +50,8 @@ class AgendamentoController extends BaseController
             header('Location: /agendamentos/create?success=store_success');
             exit();
         } catch (\Exception $e) {
-            echo "Ocorreu um erro ao processar o agendamento: " . $e->getMessage();
+            header('Location: /agendamentos/create?error=exception');
+            exit();
         }
     }
 
