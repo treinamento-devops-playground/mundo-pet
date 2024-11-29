@@ -16,7 +16,10 @@ class AdminAgendamentoController extends BaseController
 
     public function show()
     {
+        // Recupera os agendamentos com o nome do usuário já incluído
         $agendamentos = $this->agendamentoService->getAgendamentos();
+
+        // Passa os agendamentos para a view
         return $this->view('admin-agendamentos', ['agendamentos' => $agendamentos]);
     }
 

@@ -2,6 +2,8 @@
 
 namespace app\database\models;
 
+use app\database\Connection;
+
 class AgendamentoModel
 {
     private $id;
@@ -12,6 +14,7 @@ class AgendamentoModel
     private $time;
     private $status;
     private $motivoCancelamento;
+    private $db; 
 
     public function __construct($userId, $petType, $serviceType, $date, $time)
     {
@@ -21,6 +24,7 @@ class AgendamentoModel
         $this->date = $date;
         $this->time = $time;
         $this->status = 'ativo';
+        $this->db = Connection::getConnection();
     }
 
     public function getId()
@@ -110,5 +114,16 @@ class AgendamentoModel
             'status' => $this->status,
             'motivo_cancelamento' => $this->motivoCancelamento
         ];
+    }
+
+    public function getUserName()
+    {
+        $query = "SELECT username FROM users WHERE id = :userId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $this->userId, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $result ? $result['username'] : 'Usuário Desconhecido';
     }
 }
