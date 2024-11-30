@@ -22,8 +22,8 @@ if (isset($_POST['logout'])) {
 </head>
 
 <body>
-    <div id="nav-bar">
-        <?php $this->insert('partials/nav-bar'); ?>
+    <div id="usernav-bar">
+        <?php $this->insert('partials/usernav-bar'); ?>
     </div>
 
     <div class="container">
@@ -50,9 +50,10 @@ if (isset($_POST['logout'])) {
                 <?php foreach ($agendamentos as $item): ?>
                     <div class="appointment">
                         <div class="titulo">
-                            <p> <?= htmlspecialchars($item->getServiceType()); ?></p>
-                            <p> <?= htmlspecialchars($item->getDate()); ?></p>
-                            <p>Horário: <?= htmlspecialchars($item->getTime()); ?></p>
+                            <p><strong>Agendado por:</strong> <?= htmlspecialchars($item->getUserName()); ?></p> <!-- Exibe o nome do usuário -->
+                            <p><strong>Serviço:</strong> <?= htmlspecialchars($item->getServiceType()); ?></p>
+                            <p><strong>Data:</strong> <?= htmlspecialchars($item->getDate()); ?></p>
+                            <p><strong>Horário:</strong> <?= htmlspecialchars($item->getTime()); ?></p>
                         </div>
                         <div class="button-group">
                             <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item->getId()); ?>" class="cancel-link">✖</a></button>

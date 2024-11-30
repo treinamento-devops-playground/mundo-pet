@@ -12,6 +12,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Nome do Usuário</th>  
                         <th>Serviço</th>
                         <th>Data</th>
                         <th>Hora</th>
@@ -21,6 +22,7 @@
                 <tbody>
                     <?php foreach ($agendamentos as $agendamento): ?>
                         <tr class="agendamento-item">
+                            <td><?= htmlspecialchars($agendamento->getUserName()); ?></td>  
                             <td><?= htmlspecialchars($agendamento->getServiceType()); ?></td>
                             <td><?= htmlspecialchars($agendamento->getDate()); ?></td>
                             <td><?= htmlspecialchars($agendamento->getTime()); ?></td>

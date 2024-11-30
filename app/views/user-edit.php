@@ -16,7 +16,7 @@ if (!$user) {
 }
 ?>
 
-<?php $this->layout('base', ['title' => 'Editar Perfil']) ?>
+<?php $this->layout('userbase', ['title' => 'Editar Perfil']) ?>
 
 <?php $this->start('css') ?>
 <link rel="stylesheet" href="../css/servicos.css">

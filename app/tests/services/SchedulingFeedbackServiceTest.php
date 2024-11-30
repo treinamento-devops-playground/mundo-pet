@@ -23,10 +23,10 @@ class SchedulingFeedbackServiceTest extends TestCase
 
     /**
      * @test
+     * Testa se o método createFeedback do serviço está criando um feedback corretamente
      */
     public function createFeedbackShouldSuccessfullyCreateFeedback()
     {
-        // Prepara dados válidos de feedback
         $feedbackData = [
             'scheduling_id' => 123,
             'user_id' => 456,
@@ -34,7 +34,6 @@ class SchedulingFeedbackServiceTest extends TestCase
             'comment' => 'Excelente serviço'
         ];
 
-        // Configura expectativa de chamada do método create no repositório
         $this->feedbackRepositoryMock
             ->expects($this->once())
             ->method('create')
@@ -47,16 +46,15 @@ class SchedulingFeedbackServiceTest extends TestCase
                 return true;
             }));
 
-        // Chama o método de criação de feedback
         $this->service->createFeedback($feedbackData);
     }
 
     /**
      * @test
+     * Testa se o método createFeedback do serviço está lançando uma exceção quando o comentário está vazio
      */
     public function createFeedbackShouldThrowExceptionWhenCommentIsEmpty()
     {
-        // Prepara dados de feedback com comentário vazio
         $feedbackData = [
             'scheduling_id' => 123,
             'user_id' => 456,
@@ -64,50 +62,44 @@ class SchedulingFeedbackServiceTest extends TestCase
             'comment' => ''
         ];
 
-        // Configura expectativa de que o repositório não será chamado
         $this->feedbackRepositoryMock
             ->expects($this->never())
             ->method('create');
 
-        // Espera que uma exceção seja lançada
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Por favor, preencha a avaliação");
 
-        // Chama o método de criação de feedback
         $this->service->createFeedback($feedbackData);
     }
 
     /**
      * @test
+     * Testa se o método createFeedback do serviço está lançando uma exceção quando o comentário está faltando
      */
     public function createFeedbackShouldThrowExceptionWhenCommentIsMissing()
     {
-        // Prepara dados de feedback sem comentário
         $feedbackData = [
             'scheduling_id' => 123,
             'user_id' => 456,
             'rating' => 5
         ];
 
-        // Configura expectativa de que o repositório não será chamado
         $this->feedbackRepositoryMock
             ->expects($this->never())
             ->method('create');
 
-        // Espera que uma exceção seja lançada
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Por favor, preencha a avaliação");
 
-        // Chama o método de criação de feedback
         $this->service->createFeedback($feedbackData);
     }
 
     /**
      * @test
+     * Testa se o método createFeedback do serviço está lidando com exceções lançadas pelo repositório
      */
     public function createFeedbackShouldHandleRepositoryException()
     {
-        // Prepara dados válidos de feedback
         $feedbackData = [
             'scheduling_id' => 123,
             'user_id' => 456,
@@ -115,17 +107,14 @@ class SchedulingFeedbackServiceTest extends TestCase
             'comment' => 'Excelente serviço'
         ];
 
-        // Configura o repositório para lançar uma exceção
         $this->feedbackRepositoryMock
             ->expects($this->once())
             ->method('create')
             ->willThrowException(new \Exception("Erro ao salvar feedback"));
 
-        // Espera que a exceção do repositório seja propagada
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Erro ao salvar feedback");
 
-        // Chama o método de criação de feedback
         $this->service->createFeedback($feedbackData);
     }
 
@@ -135,7 +124,7 @@ class SchedulingFeedbackServiceTest extends TestCase
      */
     public function createFeedbackWithMinimumRequiredFields()
     {
-        // Prepara dados mínimos de feedback
+
         $feedbackData = [
             'scheduling_id' => 123,
             'user_id' => 456,
@@ -143,7 +132,6 @@ class SchedulingFeedbackServiceTest extends TestCase
             'comment' => 'Feedback simples'
         ];
 
-        // Configura expectativa de chamada do método create no repositório
         $this->feedbackRepositoryMock
             ->expects($this->once())
             ->method('create')
@@ -152,7 +140,6 @@ class SchedulingFeedbackServiceTest extends TestCase
                 return true;
             }));
 
-        // Chama o método de criação de feedback
         $this->service->createFeedback($feedbackData);
     }
 }

@@ -1,7 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #E8E8E8;
+    background-image: url("../img/patas.png");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+
 }
 
 header {
