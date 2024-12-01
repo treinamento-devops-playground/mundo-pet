@@ -31,8 +31,8 @@ abstract class EmailTemplate
         $this->mail->Host = 'sandbox.smtp.mailtrap.io';
         $this->mail->SMTPAuth = true;
         $this->mail->Port = 2525;
-        $this->mail->Username = '71f21970161a51';
-        $this->mail->Password = '67d7c514be9767';
+        $this->mail->Username = '23f55dc1000d65';
+        $this->mail->Password = '381dab61129c4b';
     }
 
     protected function prepareEmail(string $recipientEmail, array $data): void
