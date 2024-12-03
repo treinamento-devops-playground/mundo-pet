@@ -57,7 +57,7 @@ class Routes
                 '/checkout/process' => 'site\CheckoutController@processPayment',
 
                 '/cart/add' => 'site\CartController@addToCart',
-                '/cart/remove/[0-9]+' => 'site\CartController@removeFromCart',
+                '/cart/remove' => 'site\CartController@removeFromCart',
                 
 
 

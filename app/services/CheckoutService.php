@@ -24,11 +24,15 @@ class CheckoutService
     {
         try{
             $cartTotal = $this->cartModel->getCartTotal($userId);
+
+            $discountData = $this->cartModel->applyDiscount($cartTotal);
+            $totalAmountWithDiscount = $discountData['totalAmountWithDiscount'];
+            $totalDiscount = $discountData['totalDiscount'];
+
+
             if($cartTotal == 0){
                 throw new Exception("carrinho vazio.");
             }
-
-            $totalAmount = $this->calculateTotalAmount($cartTotal, $paymentData['discount']);
 
             $checkoutData = [
                     'user_id' => $userId,
@@ -41,18 +45,17 @@ class CheckoutService
                     'card_number' => $paymentData['card_number'],
                     'expiration_date' => $paymentData['expiration_date'],
                     'cvv' => $paymentData['cvv'],
-                    'total_amount' => $totalAmount,
-                    'discount' => $paymentData['discount'],
+                    'total_amount' => $totalAmountWithDiscount,
+                    'discount' => $totalDiscount,
                     'payment_status' => 'pending'
             ];
 
             $checkoutId = $this->checkoutModel->createCheckout($checkoutData);
 
             $this->cartModel->clearCart($userId);
-
             
             $this->emailService->sendEmail($paymentData['email'], [
-                'total' => $totalAmount,
+                'total' => $totalAmountWithDiscount,
                 'checkout_id' => $checkoutId
             ]);
 

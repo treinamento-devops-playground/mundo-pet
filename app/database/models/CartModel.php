@@ -29,6 +29,25 @@ class CartModel
 
         // Retorna o total, ou 0 se não houver produtos
         return $result['total'] !== null ? (float)$result['total'] : 0.0;
+
+        return $this->applyDiscount($cartTotal);
+    }
+
+    public function applyDiscount($cartTotal)
+    {
+        if ($cartTotal > 200) {
+            $discount = 2; // Calcula 2% do valor total
+        }
+
+        $totalDiscount = $cartTotal * ($discount / 100);
+
+    // Calcula o total com desconto
+        $totalAmountWithDiscount = $cartTotal - $totalDiscount;
+
+        return[
+            'totalAmountWithDiscount' => $totalAmountWithDiscount,
+            'totalDiscount' => $totalDiscount,
+        ];
     }
 
     public function getCartItems($userId)
