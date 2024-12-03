@@ -1,7 +1,7 @@
 <?php $this->layout('admin-base', ['title' => 'Lista de Agendamentos']); ?>
 
 <?php $this->start('css'); ?>
-<link rel="stylesheet" href="../css/adminAgendamentos.css">
+<link rel="stylesheet" href="/css/adminAgendamentos.css">
 <?php $this->stop(); ?>
 
 <?php $this->start('admin-content'); ?>
@@ -12,7 +12,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nome do Usuário</th>  
+                        <th>Nome do Usuário</th>
                         <th>Serviço</th>
                         <th>Data</th>
                         <th>Hora</th>
@@ -22,13 +22,17 @@
                 <tbody>
                     <?php foreach ($agendamentos as $agendamento): ?>
                         <tr class="agendamento-item">
-                            <td><?= htmlspecialchars($agendamento->getUserName()); ?></td>  
+                            <td><?= htmlspecialchars($agendamento->getUserName()); ?></td>
                             <td><?= htmlspecialchars($agendamento->getServiceType()); ?></td>
                             <td><?= htmlspecialchars($agendamento->getDate()); ?></td>
                             <td><?= htmlspecialchars($agendamento->getTime()); ?></td>
                             <td class="agendamento-actions">
                                 <a href="/admin/agendamentos/edit/<?= $agendamento->getId(); ?>" class="edit-btn">Editar</a>
-                                <button class="delete-btn" onclick="confirmDelete(<?= $agendamento->getId(); ?>)">&#10005;</button>
+                                
+                                <!-- Formulário para exclusão -->
+                                <form action="/admin/agendamentos/delete/<?= $agendamento->getId(); ?>" method="POST" style="display: inline;">
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Tem certeza que deseja excluir este agendamento?')">&#10005;</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -45,11 +49,4 @@
 <?php $this->stop(); ?>
 
 <?php $this->start('js'); ?>
-<script>
-    function confirmDelete(agendamentoId) {
-        if (confirm('Tem certeza que deseja excluir este agendamento?')) {
-            window.location.href = '/agendamentos/delete/' + agendamentoId;
-        }
-    }
-</script>
 <?php $this->stop(); ?>

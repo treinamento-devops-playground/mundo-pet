@@ -36,9 +36,12 @@ if (!$user) {
     </section>
 
     <div class="container">
-        <aside class="sidebar">
+            <aside class="sidebar">
             <a href="/user/edit"><button>Meu Perfil</button></a>
             <a href="/user/agendamentos"><button>Agendamentos</button></a>
+            <form action="/logout" method="post" style="margin-top: 15px;">
+                <button type="submit" name="logout" class="logout-btn">Logout</button>
+            </form>
         </aside>
 
         <form method="POST" action="/update-profile" class="form-content">
