@@ -38,8 +38,7 @@ class Routes
                 '/checkout' => 'site\CheckoutController@show',
                 '/cart' => 'site\CartController@viewCart',
 
-                // Nova rota para pegar avaliações de um produto
-                '/reviews/[0-9]+' => 'site\ReviewController@getProductReviews', // GET para recuperar avaliações de um produto
+                '/reviews/[0-9]+' => 'site\ReviewController@getProductReviews',
             ],
             'post' => [
                 '/product/review' => 'site\ReviewController@addReview', 
@@ -53,6 +52,7 @@ class Routes
                 '/admin/agendamentos/update/[0-9]+' => 'admin\AdminAgendamentoController@update',
                 '/admin/products/store' => 'admin\AdminProductController@store',
                 '/admin/products/update/[0-9]+' => 'admin\AdminProductController@update',
+                '/admin/products/delete/[0-9]+' => 'admin\AdminProductController@delete',
                 
                 '/checkout/process' => 'site\CheckoutController@processPayment',
 
