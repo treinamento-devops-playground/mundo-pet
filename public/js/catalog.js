@@ -2,6 +2,11 @@ function displayProducts(products) {
     const productGrid = document.getElementById('product-grid');
     productGrid.innerHTML = '';
 
+    if (products.length === 0) {
+        productGrid.innerHTML = '<p>Nenhum produto encontrado.</p>';
+        return;
+    }
+
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
@@ -20,17 +25,30 @@ function displayProducts(products) {
 
 function fetchProducts(filterType, filterValue) {
     const xhr = new XMLHttpRequest();
-    const url = `/product/search`;
+    let url;
+
+    if (filterType === 'filter') {
+        url = `/product/filter?category=${encodeURIComponent(filterValue)}`;
+    } else if (filterType === 'search') {
+        url = `/product/search?search=${encodeURIComponent(filterValue)}`;
+    } else {
+        url = `/product/all`;
+    }
+
     xhr.open('GET', url, true);
     xhr.onload = function () {
         if (this.status === 200) {
             const products = JSON.parse(this.responseText);
             displayProducts(products);
+        } else {
+            console.error('Erro ao buscar produtos:', this.statusText);
         }
+    };
+    xhr.onerror = function () {
+        console.error('Erro de rede ao buscar produtos.');
     };
     xhr.send();
 }
-
 
 document.querySelectorAll('.category').forEach(categoryLink => {
     categoryLink.addEventListener('click', function (e) {

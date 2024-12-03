@@ -47,7 +47,7 @@ RF13 - Sistema de Feedback dos Serviços
 1. Como um cliente, quero poder criar uma conta no sistema para acessar os produtos e serviços oferecidos pelo petshop, registrando minhas informações pessoais, como nome, e-mail, telefone e endereço, para agilizar futuras compras e agendamentos. Para isso, na tela de login devo clicar em "Cadastre-se" logo abaixo do botão "Login". Ao clicar irá abrir o formulário de cadastro, no qual devo preencher todos os dados para concluir o cadastro.
  
 Protótipo de Tela:
- ![Tela de Login Usuário](./prototipos/cadastro.png)
+ (./prototipos/cadastro.png)
 
 **RF02 - Login do Usuário e Administrador**
 1. Como um cliente cadastrado, quero poder acessar a plataforma utilizando meu e-mail e senha, para gerenciar minha conta e utilizar os serviços do petshop. Para isso, devo preencher os campos e-mail e senha com os dados cadastrados.
@@ -57,13 +57,13 @@ Protótipo de Tela:
 3. Como um administrador, quero entrar no sistema usando minhas credenciais administrativas, para gerenciar o catálogo de produtos, serviços e usuários. Para isso, devo clicar em "Administrador" abaixo de "Esqueci minha senha" que irá alterar o login de usuário para administrador.
  
 Protótipo de Tela: 
- ![Tela de Login Usuário](./prototipos/login.png)
+(./prototipos/login.png)
 
 **RF03 - Catálogo de Serviços**
 1. Como um cliente logado, quero poder visualizar o catálogo completo de serviços oferecidos pelo petshop, para que eu possa escolher o que desejo comprar ou agendar. Para isso, na tela principal, devo ter acesso a uma lista organizada com descrições e imagens dos serviços. 
 
 Protótipo de Tela:
- ![Tela de Login Usuário](./prototipos/serviços.png)
+(./prototipos/serviços.png)
 
 **RF04 - Agendamento de Serviços**
 1. Como um cliente Logado, quero poder agendar serviços do petshop que estão listados no catálogo, para isso, devo selecionar o serviço desejado, escolher uma data e horário disponíveis, e confirmar o agendamento
@@ -218,6 +218,7 @@ RF06 - Pagamento Online
 *Features:*
 
 5. Implementar uma funcionalidade de checkout para finalizar a compra dos produtos.
+[Link para o Relatório](Relatorio.md)
 
 ---
 
@@ -249,7 +250,7 @@ RF11 - Gerenciamento dos agendamentos pelo usuário
 4. Permitir o usuário cancelar um agendamento dentro da area de gerenciamento de consultas marcadas
 
 5. Notificações por E-mail: Enviar um e-mail de notificação aos usuários após o cancelamento de suas consultas, constando o motivo do cancelamento.
-
+[Link para o Relatório](Relatorio.md)
 ---
 
 ### Iteração 5: Notificações e Feedback dos Serviços
@@ -272,3 +273,4 @@ Como usuário quero poder consumir os produtos com melhor qualidade e poder envi
 1. **Avaliação de Serviços**: Permitir que o usuário avalie os serviços do petshop após a realização de um agendamento, facilitando o acesso ao feedback de clientes na página de cada serviço.
 3. **Visualização de Avaliações nos produtos**: Exibir avaliações de clientes para ajudar novos usuários a tomar decisões informadas sobre os produtos da loja.
 4. **Lógica de comentários das avaliações dos produtos**: Criar a lógica para que o as avialiações persistam no sistema com o relacionamento de entidades correto.
+[Link para o Relatório](Relatorio.md)

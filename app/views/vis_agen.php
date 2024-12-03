@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+
+    header('Location: /login');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +22,8 @@ session_start();
 </head>
 
 <body>
-    <div id="nav-bar">
-        <?php $this->insert('partials/nav-bar'); ?>
+    <div id="usernav-bar">
+        <?php $this->insert('partials/usernav-bar'); ?>
     </div>
 
     <div class="container">
@@ -29,7 +37,10 @@ session_start();
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <img src="../img/icons/user.png" alt="Foto do usuário" class="user-avatar">
                     <span class="user-name"><?= htmlspecialchars($_SESSION['email']) ?></span>
-                    <button class="edit-btn">Logout</button>
+
+                    <form action="/logout" method="post">
+                        <button type="submit" name="logout" class="edit-btn">Logout</button>
+                    </form>
                 <?php else: ?>
                     <p>Você não está logado.</p>
                 <?php endif; ?>
@@ -39,14 +50,17 @@ session_start();
                 <?php foreach ($agendamentos as $item): ?>
                     <div class="appointment">
                         <div class="titulo">
-                            <p> <?= htmlspecialchars($item['service_type']) ?></p>
-                            <p> <?= htmlspecialchars($item['date']) ?></p>
-                            <p>Horário: <?= htmlspecialchars($item['time']) ?></p>
+                            <p><strong>Agendado por:</strong> <?= htmlspecialchars($item->getUserName()); ?></p> <!-- Exibe o nome do usuário -->
+                            <p><strong>Serviço:</strong> <?= htmlspecialchars($item->getServiceType()); ?></p>
+                            <p><strong>Data:</strong> <?= htmlspecialchars($item->getDate()); ?></p>
+                            <p><strong>Horário:</strong> <?= htmlspecialchars($item->getTime()); ?></p>
                         </div>
                         <div class="button-group">
-                            <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item['id']) ?>" class="cancel-link">✖</a></button>
-
+                            <button class="delete-btn"><a href="/agendamentos/cancelar/<?= htmlspecialchars($item->getId()); ?>" class="cancel-link">✖</a></button>
                         </div>
+                        <?php if ($item->getStatus() == 'concluído'): ?>
+                            <a href="/scheduling-feedback/create/<?= htmlspecialchars($item->getId()); ?>"><button>Dar feedback</button></a>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>

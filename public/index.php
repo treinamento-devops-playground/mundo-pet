@@ -18,8 +18,10 @@ $dotenv->load();
 // dd($_SERVER);
 // dd(RequestType::get());
 
+$container = require __DIR__ . '/../config/container.php';
+
 try {
-  Router::run();
+  Router::run($container);
 } catch (Exception $e) {
 
   echo "Ocorreu um erro: " . $e->getMessage();

@@ -1,4 +1,4 @@
-<?php $this->layout('base', ['title' => 'Mundo Pet Home']) ?>
+<?php $this->layout('userbase', ['title' => 'Mundo Pet Home']) ?>
 
 <?php $this->start('css') ?>
 <link rel="stylesheet" href="./css/index.css">

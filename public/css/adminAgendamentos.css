@@ -13,8 +13,8 @@ body {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh; /* Garante que o corpo tenha no mínimo a altura da tela */
+    overflow: auto; /* Habilita rolagem caso o conteúdo exceda a altura */
 }
 
 .header {
@@ -45,13 +45,14 @@ body {
     display: flex;
     flex-direction: column;
     row-gap: 30px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding: 20px; /* Adiciona espaçamento nas bordas */
 }
 
 h2 {
     font-size: 24px;
-    color: #333;
+    color: #333; 
     margin-bottom: 20px;
     text-align: center;
 }
@@ -63,11 +64,12 @@ h2 {
 .table {
     width: 100%;
     border-collapse: collapse; 
+    margin-bottom: 30px; /* Dá um espaçamento entre a tabela e os botões abaixo */
 }
 
 thead th {
     background-color: #6B6EAF;
-    color: #fff;
+    color: #000000;
     padding: 10px;
     text-align: left;
     font-weight: bold;
@@ -78,12 +80,13 @@ tbody tr {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f1f1f1; 
+    background-color: #ebebeb; 
 }
 
 tbody td {
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #000000;
+    color: #000; 
 }
 
 .agendamento-actions {
@@ -96,15 +99,17 @@ tbody td {
     margin: 0 5px; 
 }
 
-.add-agendamento {
+.add-agendamento,
+.edit-agendamento {
     text-align: center; 
     margin-top: 20px; 
 }
 
-.add-agendamento-btn {
+.add-agendamento-btn,
+.edit-btn {  
     background-color: #4F5B93;
     color: white;
-    padding: 10px 15px;
+    padding: 7px 12px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -112,8 +117,31 @@ tbody td {
     text-decoration: none;
 }
 
-.add-agendamento-btn:hover {
+.add-agendamento-btn:hover,
+.edit-btn:hover {  
     background-color: #5a4a84;
+    color: white;
+}
+
+.delete-btn {
+    background-color: rgba(230, 0, 0, 0.87);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+}
+
+.delete-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.delete-btn:hover {
+    background-color: #c40000;
 }
 
 @media (max-width: 1024px) {
@@ -125,5 +153,13 @@ tbody td {
 @media (max-width: 768px) {
     h2 {
         font-size: 22px;
+    }
+
+    .table, .add-agendamento-btn, .edit-btn {
+        width: 100%; 
+    }
+
+    .add-agendamento, .edit-agendamento {
+        width: 100%; 
     }
 }

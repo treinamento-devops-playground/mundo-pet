@@ -2,102 +2,128 @@
 
 namespace app\database\models;
 
-use PDO;
 use app\database\Connection;
 
 class AgendamentoModel
 {
-    public static function create($userId, $petType, $serviceType, $date, $time)
+    private $id;
+    private $userId;
+    private $petType;
+    private $serviceType;
+    private $date;
+    private $time;
+    private $status;
+    private $motivoCancelamento;
+    private $db; 
+
+    public function __construct($userId, $petType, $serviceType, $date, $time)
     {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare('INSERT INTO scheduling (user_id, pet_type, service_type, date, time) 
-                               VALUES (:user_id, :pet_type, :service_type, :date, :time)');
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->bindParam(':pet_type', $petType);
-        $stmt->bindParam(':service_type', $serviceType);
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':time', $time);
-        return $stmt->execute();
+        $this->userId = $userId;
+        $this->petType = $petType;
+        $this->serviceType = $serviceType;
+        $this->date = $date;
+        $this->time = $time;
+        $this->status = 'ativo';
+        $this->db = Connection::getConnection();
     }
 
-    public static function isAvailable($userId, $date, $time, $serviceType)
+    public function getId()
     {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare('SELECT * FROM scheduling WHERE user_id = :user_id AND date = :date AND time = :time AND service_type = :service_type');
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':time', $time);
-        $stmt->bindParam(':service_type', $serviceType);
+        return $this->id;
+    }
+
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    public function getPetType()
+    {
+        return $this->petType;
+    }
+
+    public function getServiceType()
+    {
+        return $this->serviceType;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function getMotivoCancelamento()
+    {
+        return $this->motivoCancelamento;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setMotivoCancelamento($motivoCancelamento)
+    {
+        $this->motivoCancelamento = $motivoCancelamento;
+    }
+
+    public function setPetType($petType)
+    {
+        $this->petType = $petType;
+    }
+
+    public function setServiceType($serviceType)
+    {
+        $this->serviceType = $serviceType;
+    }
+
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'user_id' => $this->userId,
+            'pet_type' => $this->petType,
+            'service_type' => $this->serviceType,
+            'date' => $this->date,
+            'time' => $this->time,
+            'status' => $this->status,
+            'motivo_cancelamento' => $this->motivoCancelamento
+        ];
+    }
+
+    public function getUserName()
+    {
+        $query = "SELECT username FROM users WHERE id = :userId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $this->userId, \PDO::PARAM_INT);
         $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return $stmt->rowCount() === 0;
-    }
-
-    public static function find($id)
-    {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare('SELECT * FROM scheduling WHERE id = :id');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public static function getUserById($userId)
-    {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare('SELECT username FROM users WHERE id = :user_id');
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public static function getAgendamentosByUserId($userId)
-    {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare(
-            'SELECT  
-                scheduling.id,
-                scheduling.service_type,
-                scheduling.date,
-                scheduling.time
-            FROM scheduling
-            WHERE scheduling.user_id = :user_id'
-        );
-        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function update($id, $data)
-    {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->prepare('UPDATE scheduling SET pet_type = :pet_type, service_type = :service_type, date = :date, time = :time WHERE id = :id');
-        $stmt->bindParam(':pet_type', $data['pet_type']);
-        $stmt->bindParam(':service_type', $data['service_type']);
-        $stmt->bindParam(':date', $data['date']);
-        $stmt->bindParam(':time', $data['time']);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        return $stmt->execute();
-    }
-
-    public static function all()
-    {
-        $pdo = Connection::getConnection();
-        $stmt = $pdo->query('SELECT * FROM scheduling');
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function cancel($id, $userId, $motivo)
-    {
-        $pdo = Connection::getConnection();
-
-        $sql = "UPDATE scheduling SET status = 'cancelado', motivo_cancelamento = :motivo WHERE id = :id AND user_id = :user_id";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':motivo', $motivo, PDO::PARAM_STR);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-
-        return $stmt->execute();
+        return $result ? $result['username'] : 'Usuário Desconhecido';
     }
 }

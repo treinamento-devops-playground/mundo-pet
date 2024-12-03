@@ -136,7 +136,7 @@
                             <td><?php echo htmlspecialchars($product['name']); ?></td>
                             <td>R$ <?php echo number_format($product['price'], 2, ',', '.'); ?></td>
                             <td><?php echo htmlspecialchars($product['category']); ?></td>
-                            <td><?php echo htmlspecialchars($product['estoque']); ?></td>
+                            <td><?php echo htmlspecialchars($product['stock']); ?></td>
                             <td>
                                 <a href="/admin/products/edit/<?php echo $product['id']; ?>" class="btn">Editar</a>
                                 <form action="/admin/products/delete/<?php echo $product['id']; ?>" method="POST" style="display:inline;">

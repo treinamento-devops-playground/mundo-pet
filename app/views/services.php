@@ -1,5 +1,4 @@
-<?php $this->layout('base', ['title' => 'Serviços Mundo Pet']) ?>
-
+<?php $this->layout('userbase', ['title' => 'Serviços Mundo Pet']) ?>
 <?php $this->start('css') ?>
 <link rel="stylesheet" href="../css/servicos.css">
 <?php $this->stop() ?>
@@ -59,7 +58,7 @@
         <div class="card">
             <img src="../img/store.png">
             <div>
-                <a href="product">
+                <a href="catalog">
                     <h3>Lojinha</h3>
                     <img src="../img/icons/click.png">
                 </a>

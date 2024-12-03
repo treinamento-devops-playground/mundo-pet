@@ -7,11 +7,13 @@
 <?php $this->start('admin-content'); ?>
 <div class="user-section">
     <div class="profile-pic">
-        <img src="../img/icons/user.png" alt="Foto do administrador">
+        <img src="../img/icons/admin.png" alt="Foto do administrador">
     </div>
     <div class="user-info">
         <h2>Administrador</h2>
-        <a href="logout.php" class="logout-btn">Logout</a>
+        <form action="/logout" method="post">
+                        <button type="submit" name="logout" class="edit-btn">Logout</button>
+                    </form>
     </div>
 </div>
 

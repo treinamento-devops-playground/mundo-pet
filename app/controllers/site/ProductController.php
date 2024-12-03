@@ -2,49 +2,104 @@
 
 namespace app\controllers\site;
 
-use app\database\models\ProductModel;
 use app\controllers\BaseController;
+use app\database\models\ProductModel;
+use app\services\ReviewService;
+use Exception;
 
 class ProductController extends BaseController
 {
+    private $reviewService;
+
+    public function __construct()
+    {
+        $this->reviewService = new ReviewService();
+    }
+
     public function index()
     {
-        $products = ProductModel::all();
-        return $this->view('catalog', ['products' => $products]);
+        return $this->view('catalog');
+    }
+
+    public function show()
+    {
+        $requestUri = $_SERVER['REQUEST_URI'];
+
+        if (preg_match('/\/product\/(\d+)$/', $requestUri, $matches)) {
+            $productId = intval($matches[1]);
+        } else {
+            die("ID do produto não especificado.");
+        }
+
+        try {
+            $product = ProductModel::find($productId);
+
+            if (!$product) {
+                die("Produto não encontrado.");
+            }
+
+            $reviews = $this->reviewService->getProductReviews($productId);
+            $totalReviews = count($reviews);
+            $averageRating = 0;
+
+            if ($totalReviews > 0) {
+                $totalRating = array_sum(array_column($reviews, 'rating'));
+                $averageRating = $totalRating / $totalReviews;
+            }
+
+            require_once __DIR__ . '/../../views/single-product.php';
+        } catch (Exception $e) {
+            die("Erro ao carregar o produto: " . $e->getMessage());
+        }
     }
 
     public function filterByCategoryJson()
     {
-        $category = $_GET['category'] ?? '';
-        $products = ProductModel::findByCategory($category);
-        return $this->json($products);
+        $category = $_GET['category'] ?? null;
+
+        if (!$category) {
+            echo json_encode(['error' => 'Categoria não especificada.']);
+            return;
+        }
+
+        try {
+            $products = ProductModel::findByCategory($category);
+            echo json_encode($products);
+        } catch (Exception $e) {
+            echo json_encode(['error' => 'Erro ao filtrar produtos: ' . $e->getMessage()]);
+        }
     }
 
     public function searchJson()
     {
-        $searchTerm = $_GET['search'] ?? '';
-        $products = ProductModel::search($searchTerm);
-        return $this->json($products);
-    }
+        $query = $_GET['query'] ?? null;
 
-    public function show($id)
-    {
-        error_log("ID do produto: " . $id);
-
-        $product = ProductModel::find($id);
-
-        if (!$product) {
-            error_log("Produto não encontrado para ID: " . $id);
-            return $this->view('single-product', ['error' => 'Produto não encontrado']);
+        if (!$query) {
+            echo json_encode(['error' => 'Consulta de busca não especificada.']);
+            return;
         }
 
-        return $this->view('single-product', ['product' => $product]);
+        try {
+            $products = ProductModel::search($query);
+            echo json_encode($products);
+        } catch (Exception $e) {
+            echo json_encode(['error' => 'Erro ao buscar produtos: ' . $e->getMessage()]);
+        }
     }
 
-    private function json($data)
+    public function allProductsJson()
     {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit();
+        try {
+            $products = ProductModel::all();
+            echo json_encode($products);
+        } catch (Exception $e) {
+            echo json_encode(['error' => 'Erro ao carregar os produtos: ' . $e->getMessage()]);
+        }
+    }
+
+    public function addReview()
+    {
+        $reviewController = new ReviewController();
+        $reviewController->addReview();
     }
 }

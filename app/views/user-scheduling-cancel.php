@@ -1,10 +1,10 @@
-<?php $this->layout('base', ['title' => 'Cancelar Agendamento']); ?>
+<?php $this->layout('userbase', ['title' => 'Cancelar Agendamento']); ?>
 
 <?php $this->start('css'); ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
-    .container {
+    .cancel-agendamento-container {
         width: 100%;
         max-width: 70%;
         background-color: #fff;
@@ -13,50 +13,51 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: flex;
         justify-content: center;
-        top: 50%;
-        left: 50%;
         flex-direction: column;
+        margin: 50px auto;
+        font-family: 'Roboto', sans-serif;
     }
 
-    h1 {
+    .cancel-agendamento-container h1 {
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
     }
 
-    p {
+    .cancel-agendamento-container p {
         font-size: 16px;
         margin-bottom: 20px;
         color: #666;
     }
 
-    ul {
+    .cancel-agendamento-container ul {
         list-style: none;
         margin-bottom: 20px;
+        padding: 0;
     }
 
-    ul li {
+    .cancel-agendamento-container ul li {
         font-size: 16px;
         margin-bottom: 10px;
         color: #333;
     }
 
-    ul li strong {
+    .cancel-agendamento-container ul li strong {
         font-weight: 700;
     }
 
-    form {
+    .cancel-agendamento-container form {
         display: flex;
         flex-direction: column;
     }
 
-    form label {
+    .cancel-agendamento-container form label {
         font-weight: 500;
         color: #333;
         margin-bottom: 5px;
     }
 
-    form textarea {
+    .cancel-agendamento-container form textarea {
         width: 100%;
         padding: 10px;
         border: 1px solid #ccc;
@@ -66,7 +67,7 @@
         margin-bottom: 15px;
     }
 
-    form button {
+    .cancel-agendamento-container form button {
         width: 100%;
         padding: 10px;
         background-color: #d9534f;
@@ -78,31 +79,32 @@
         transition: background-color 0.3s;
     }
 
-    form button:hover {
+    .cancel-agendamento-container form button:hover {
         background-color: #c9302c;
     }
+    
 </style>
 <?php $this->stop(); ?>
 
 <?php $this->start('main-content'); ?>
-<div class="container">
+<div class="cancel-agendamento-container">
     <h1>Cancelar Agendamento</h1>
     <p>Tem certeza de que deseja cancelar o agendamento abaixo?</p>
 
     <ul>
-        <li><strong>Data:</strong> <?= htmlspecialchars(date('d/m/Y', strtotime($agendamento['date']))) ?></li>
-        <li><strong>Hora:</strong> <?= htmlspecialchars(date('H:i', strtotime($agendamento['time']))) ?></li>
-        <li><strong>Tipo de Pet:</strong> <?= htmlspecialchars($agendamento['pet_type']) ?></li>
-        <li><strong>Serviço:</strong> <?= htmlspecialchars($agendamento['service_type']) ?></li>
-        <?php if (isset($agendamento['status'])): ?>
-            <li><strong>Status:</strong> <?= htmlspecialchars($agendamento['status']) ?></li>
+        <li><strong>Data:</strong> <?= htmlspecialchars(date('d/m/Y', strtotime($agendamento->getDate()))) ?></li>
+        <li><strong>Hora:</strong> <?= htmlspecialchars(date('H:i', strtotime($agendamento->getTime()))) ?></li>
+        <li><strong>Tipo de Pet:</strong> <?= htmlspecialchars($agendamento->getPetType()) ?></li>
+        <li><strong>Serviço:</strong> <?= htmlspecialchars($agendamento->getServiceType()) ?></li>
+        <?php if ($agendamento->getStatus()): ?>
+            <li><strong>Status:</strong> <?= htmlspecialchars($agendamento->getStatus()) ?></li>
         <?php endif; ?>
-        <?php if (isset($agendamento['motivo_cancelamento'])): ?>
-            <li><strong>Motivo do Cancelamento:</strong> <?= htmlspecialchars($agendamento['motivo_cancelamento']) ?></li>
+        <?php if ($agendamento->getMotivoCancelamento()): ?>
+            <li><strong>Motivo do Cancelamento:</strong> <?= htmlspecialchars($agendamento->getMotivoCancelamento()) ?></li>
         <?php endif; ?>
     </ul>
 
-    <form action="/agendamentos/cancelar/confirmar/<?= htmlspecialchars($agendamento['id']) ?>" method="post">
+    <form action="/agendamentos/cancelar/confirmar/<?= htmlspecialchars($agendamento->getId()); ?>" method="post">
         <label for="motivo">Motivo do Cancelamento:</label>
         <textarea name="motivo" id="motivo" required></textarea>
         <button type="submit">Confirmar Cancelamento</button>

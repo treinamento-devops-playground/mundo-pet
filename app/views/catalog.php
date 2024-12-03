@@ -6,22 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Produtos</title>
     <link rel="stylesheet" href="../css/catalogo.css">
-    <style>
-        .sidebar a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            display: block;
-            padding: 2px;
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #f0f0f0;
-            color: #555;
-        }
-    </style>
 </head>
 
 <body>
@@ -29,16 +13,19 @@
         <div class="logo">
             <img src="../img/logo.png" alt="Logo">
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Loja</a></li>
-                <li><a href="#">Sobre</a></li>
-            </ul>
-        </nav>
+        <ul class="list-nav">
+            <li class="title"><a href="/services">Serviços</a></li>
+            <li class="title"><a href="/catalog">Loja</a></li>
+            <li class="title"><a href="#">Contato</a></li>
+            <li><a href="user/edit"><img src="../img/icons/user.png" alt="Usuário"></a></li>
+            <li><a href="/vcart"><img src="../img/icons/cart.png" alt="Carrinho"></a></li>
+        </ul>
+
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Pesquisar produtos...">
-            <button id="search-btn">Pesquisar</button>
+            <button id="search-btn">
+                <img src="../img/icons/lupa.png" alt="Pesquisar" class="search-icon">
+            </button>
         </div>
     </header>
 
@@ -46,14 +33,13 @@
         <aside>
             <ul class="sidebar">
                 <li><a href="#" class="category" data-category="petiscos">Petiscos</a></li>
-                <li><a href="#" class="category" data-category="brinquedos">Brinquedos</a></li>
+                <li><a href="#" class="category" data-category="racao">Ração</a></li>
                 <li><a href="#" class="category" data-category="acessorios">Acessórios</a></li>
             </ul>
         </aside>
 
         <main>
             <div class="product-grid" id="product-grid">
-
             </div>
         </main>
     </div>
