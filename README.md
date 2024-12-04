@@ -274,3 +274,14 @@ Como usuário quero poder consumir os produtos com melhor qualidade e poder envi
 3. **Visualização de Avaliações nos produtos**: Exibir avaliações de clientes para ajudar novos usuários a tomar decisões informadas sobre os produtos da loja.
 4. **Lógica de comentários das avaliações dos produtos**: Criar a lógica para que o as avialiações persistam no sistema com o relacionamento de entidades correto.
 [Link para o Relatório](Relatorio.md)
+
+### Links Úteis: 
+[Apresentação](https://www.canva.com/design/DAGYMffPSoE/OmJMecqRrYGDTgJ5syIy-Q/edit?utm_content=DAGYMffPSoE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+[Vídeo](https://drive.google.com/file/d/1e2QaS47GcUVcWMk1mvdlwnTXXLsJD-pB/view?usp=sharing) 
+
+### Passos para utilização: 
+- Clone o repositório: git clone <URL_DO_REPOSITÓRIO>
+- Instale as dependências com o Composer: composer install
+- Suba os containers com o Docker: docker-compose up --build
+- Acesse o sistema: 
