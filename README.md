@@ -280,8 +280,10 @@ Como usuário quero poder consumir os produtos com melhor qualidade e poder envi
 
 [Vídeo](https://drive.google.com/file/d/1e2QaS47GcUVcWMk1mvdlwnTXXLsJD-pB/view?usp=sharing) 
 
+[Landing Page](https://lauroolim.github.io/mundo-pet-page/)
+
 ### Passos para utilização: 
 - Clone o repositório: git clone <URL_DO_REPOSITÓRIO>
 - Instale as dependências com o Composer: composer install
 - Suba os containers com o Docker: docker-compose up --build
-- Acesse o sistema: 
+- Acesse o sistema: Abra o navegador e acesse: http://localhost8000.
